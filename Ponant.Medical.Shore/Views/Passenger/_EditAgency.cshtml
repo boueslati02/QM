@@ -1,0 +1,106 @@
+﻿
+@model Ponant.Medical.Shore.Models.EditAgencyPassengerViewModel
+
+@{
+    ViewBag.Title = "Edit passenger";
+}
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@ViewBag.Title @String.Concat(Model.FirstName, " ", Model.LastName)</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("_EditAgency", "Passenger", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "frmEdit",
+                    //OnSuccess = "modal('modalEdit')",
+                    //OnFailure = "modal('modalEdit')"
+                    OnSuccess = "modalNew(data, 'modalEdit', 'frmEdit')",
+                    OnFailure = "modalNew(data, 'modalEdit', 'frmEdit')"
+                }, new { @id = "formPassengerEdit", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.PassengerId, new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.CruiseId, new { @class = "form-control" })
+                    @Html.HiddenFor(model => model.BookingId, new { @class = "form-control" })
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.BookingNumber, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9 displayField">
+                            @Html.DisplayFor(model => model.BookingNumber, new { @class = "form-control" })
+                            @Html.HiddenFor(model => model.BookingNumber, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.BookingNumber, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    if (ViewBag.Civilities != null)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Civility, htmlAttributes: new { @class = "control-label col-md-3" })
+                            <div class="col-md-9">
+                                @if (ViewBag.Civilities != null)
+                                {
+                                    @Html.DropDownListFor(model => model.Civility, ViewBag.Civilities as List<SelectListItem>, "", new { @class = "form-control", @id = "changeValuesPassengerEdit" })
+                                    @Html.ValidationMessageFor(model => model.Civility, "", new { @class = "text-danger" })
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.LastName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.UsualName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.UsualName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.UsualName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.FirstName, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-3" })
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Email, new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="col-md-12 form-group">
+                        <div class="col-md-8 col-md-offset-3">
+                            @Html.CheckBoxFor(model => model.ReSendSurvey, new { })
+                            @Html.LabelFor(model => model.ReSendSurvey, new { @class = "checkboxLabel" })
+                        </div>
+                        <div class="col-md-9">
+                            @Html.ValidationMessageFor(model => model.ReSendSurvey, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                        <input type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

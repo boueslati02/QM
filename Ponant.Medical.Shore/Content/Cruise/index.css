@@ -1,0 +1,34 @@
+﻿
+select {
+    width: 70% !important;
+}
+
+.form-group {
+    text-align: right;
+}
+
+.form-inline .form-group {
+    margin-right: 0px;
+}
+
+#indexSecondRow {
+    margin-top: 10px;
+}
+
+#searchCruiseIndexButton {
+    width: auto;
+}
+
+.col-action-icon{
+    min-width : 60px;
+    width : 60px;
+    max-width : 60px;
+}
+
+#cruiseType {
+    width: 65% !important;
+}
+
+#cruiseShip {
+    width: 65% !important;
+}

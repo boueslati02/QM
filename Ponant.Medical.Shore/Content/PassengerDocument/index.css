@@ -1,0 +1,10 @@
+﻿
+#labInfo {
+    margin-top: 20px;
+}
+
+.col-action-icon{
+    min-width : 30px;
+    width : 30px;
+    max-width : 30px;
+}

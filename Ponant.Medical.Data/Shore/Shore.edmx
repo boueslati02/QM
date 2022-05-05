@@ -1,0 +1,2652 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Ponant.Medical.ShoreModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="Number" Type="int" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AgencyAccessRight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAgency" Type="int" Nullable="false" />
+          <Property Name="CruiseCode" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="BookingNumber" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="Cruises" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLanguage" Type="int" Nullable="false" />
+          <Property Name="IdAgency" Type="int" Nullable="false" />
+          <Property Name="IdOffice" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="32" />
+          <Property Name="IsGroup" Type="bit" Nullable="false" />
+          <Property Name="IdSurveyLanguage" Type="int" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingActivity">
+          <Key>
+            <PropertyRef Name="IdBooking" />
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdActivity" />
+          </Key>
+          <Property Name="IdBooking" Type="int" Nullable="false" />
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdActivity" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BookingCruisePassenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdBooking" Type="int" Nullable="false" />
+          <Property Name="IdCruise" Type="int" Nullable="false" />
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="CabinNumber" Type="varchar" MaxLength="8" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Cruise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdTypeCruise" Type="int" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="IdDestination" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="SailingDate" Type="datetime" Nullable="false" />
+          <Property Name="SailingLengthDays" Type="int" Nullable="false" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="Extract" Type="varchar" MaxLength="32" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CruiseCriterion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSurvey" Type="int" Nullable="false" />
+          <Property Name="IdCruiseType" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Cruise" Type="varchar" MaxLength="130" />
+          <Property Name="Length" Type="int" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+          <Property Name="Activity" Type="varchar" MaxLength="130" />
+        </EntityType>
+        <EntityType Name="CruiseCriterionDestination">
+          <Key>
+            <PropertyRef Name="IdCruiseCriterion" />
+            <PropertyRef Name="IdDestination" />
+          </Key>
+          <Property Name="IdCruiseCriterion" Type="int" Nullable="false" />
+          <Property Name="IdDestination" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CruiseCriterionShip">
+          <Key>
+            <PropertyRef Name="IdCruiseCriterion" />
+            <PropertyRef Name="IdShip" />
+          </Key>
+          <Property Name="IdCruiseCriterion" Type="int" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Email" Type="varchar" MaxLength="128" />
+          <Property Name="Message" Type="varchar(max)" />
+          <Property Name="ReceiptDate" Type="datetime" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdInformation" />
+          </Key>
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdInformation" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdSurvey" Type="int" Nullable="false" />
+          <Property Name="IdLanguage" Type="int" Nullable="false" />
+          <Property Name="IndividualSurveyFileName" Type="varchar" MaxLength="64" />
+          <Property Name="GroupSurveyFileName" Type="varchar" MaxLength="64" />
+          <Property Name="IndividualSurveyMail" Type="varchar" MaxLength="64" />
+          <Property Name="GroupSurveyMail" Type="varchar" MaxLength="64" />
+          <Property Name="IndividualAdditionalMail" Type="varchar" MaxLength="64" />
+          <Property Name="GroupAdditionalMail" Type="varchar" MaxLength="64" />
+          <Property Name="IsDefault" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+          <Property Name="IndividualAutomaticResponse" Type="varchar" MaxLength="64" />
+          <Property Name="GroupAutomaticResponse" Type="varchar" MaxLength="64" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Booking" Type="int" />
+          <Property Name="Details" Type="varchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdLovType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="32" />
+          <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LovType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="IdAdvice" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IdTitle" Type="int" Nullable="false" />
+          <Property Name="Number" Type="int" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" />
+          <Property Name="BirthDate" Type="datetime" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="32" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="IsEmailUpdated" Type="bit" Nullable="false" />
+          <Property Name="IsEmailValid" Type="bit" />
+          <Property Name="SentDate" Type="datetime" />
+          <Property Name="SentCount" Type="int" Nullable="false" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="Doctor" Type="varchar" MaxLength="64" />
+          <Property Name="TreatmentDate" Type="datetime" />
+          <Property Name="Review" Type="varchar" MaxLength="256" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+          <Property Name="AutoAttachment" Type="bit" />
+          <Property Name="UsualName" Type="varchar" MaxLength="64" />
+          <Property Name="Token" Type="varchar" MaxLength="36" />
+          <Property Name="IsDownloaded" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reminder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="Length" Type="int" Nullable="false" />
+          <Property Name="Enabled" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="MedicalAdvice" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vAgencyAccessRight' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vAgencyAccessRight">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAgency" />
+            <PropertyRef Name="AgencyName" />
+            <PropertyRef Name="CruiseCode" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="BookingNumber" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdAgency" Type="int" Nullable="false" />
+          <Property Name="AgencyName" Type="varchar" MaxLength="97" Nullable="false" />
+          <Property Name="CruiseCode" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="BookingNumber" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vAssignment' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vAssignment">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdShip" />
+            <PropertyRef Name="Ship" />
+            <PropertyRef Name="Cruises" />
+            <PropertyRef Name="Deadline" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="Ship" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Cruises" Type="varchar" MaxLength="8000" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vCriteria' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vCriteria">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Order" Type="int" Nullable="false" />
+          <Property Name="CruiseType" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Destination" Type="nvarchar(max)" />
+          <Property Name="Ship" Type="nvarchar(max)" />
+          <Property Name="Length" Type="int" />
+          <Property Name="Cruise" Type="varchar" MaxLength="130" />
+          <Property Name="Activity" Type="varchar" MaxLength="130" />
+          <Property Name="Survey" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vCruiseBoard' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vCruiseBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="SailingDate" Type="datetime" Nullable="false" />
+          <Property Name="SailingLengthDays" Type="int" Nullable="false" />
+          <Property Name="NbPassenger" Type="int" Nullable="false" />
+          <Property Name="NbQMAvailable" Type="int" Nullable="false" />
+          <Property Name="NbQMDone" Type="int" Nullable="false" />
+          <Property Name="NbQMNotAvailable" Type="int" Nullable="false" />
+          <Property Name="NbQMReceive" Type="int" Nullable="false" />
+          <Property Name="NbQMValidate" Type="int" Nullable="false" />
+          <Property Name="NbQMWaiting" Type="int" Nullable="false" />
+          <Property Name="NbQMRefused" Type="int" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" />
+          <Property Name="IdShipAssigned" Type="int" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vCruiseShore' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vCruiseShore">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="16" Nullable="false" />
+          <Property Name="IdTypeCruise" Type="int" />
+          <Property Name="TypeCruise" Type="varchar" MaxLength="128" />
+          <Property Name="DateDeparture" Type="datetime" Nullable="false" />
+          <Property Name="IdDestination" Type="int" />
+          <Property Name="Destination" Type="varchar" MaxLength="128" />
+          <Property Name="IdShip" Type="int" />
+          <Property Name="Ship" Type="varchar" MaxLength="128" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="Agency" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vPassengerBoard' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vPassengerBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAdvice" />
+            <PropertyRef Name="IdStatus" />
+            <PropertyRef Name="IsExtract" />
+            <PropertyRef Name="IsDownloaded" />
+            <PropertyRef Name="IdCruise" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" />
+          <Property Name="UsualName" Type="varchar" MaxLength="64" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="IdAdvice" Type="int" Nullable="false" />
+          <Property Name="Review" Type="varchar" MaxLength="256" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="IsDownloaded" Type="bit" Nullable="false" />
+          <Property Name="Doctor" Type="nvarchar" MaxLength="32" />
+          <Property Name="IdCruise" Type="int" Nullable="false" />
+          <Property Name="ReceiptDate" Type="datetime" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vPassengerShore' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vPassengerShore">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailUpdated" />
+            <PropertyRef Name="IdStatus" />
+            <PropertyRef Name="NbSent" />
+            <PropertyRef Name="IdAdvice" />
+            <PropertyRef Name="IsEnabled" />
+            <PropertyRef Name="IsExtract" />
+            <PropertyRef Name="IsDownloaded" />
+            <PropertyRef Name="BookingNumber" />
+            <PropertyRef Name="BookingOffice" />
+            <PropertyRef Name="BookingIdOffice" />
+            <PropertyRef Name="IdBooking" />
+            <PropertyRef Name="IsGroup" />
+            <PropertyRef Name="IdCruise" />
+            <PropertyRef Name="CruiseCode" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Civility" Type="varchar" MaxLength="128" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="64" />
+          <Property Name="EmailUpdated" Type="bit" Nullable="false" />
+          <Property Name="ValidEmail" Type="bit" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="32" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="QMStatus" Type="varchar" MaxLength="128" />
+          <Property Name="SendingDate" Type="datetime" />
+          <Property Name="ReceiptDate" Type="datetime" />
+          <Property Name="NbSent" Type="int" Nullable="false" />
+          <Property Name="IdAdvice" Type="int" Nullable="false" />
+          <Property Name="Advice" Type="varchar" MaxLength="128" />
+          <Property Name="DoctorId" Type="varchar" MaxLength="64" />
+          <Property Name="Doctor" Type="nvarchar" MaxLength="32" />
+          <Property Name="TreatmentDate" Type="datetime" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="Review" Type="varchar" MaxLength="256" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="AutoAttachment" Type="bit" />
+          <Property Name="UsualName" Type="varchar" MaxLength="64" />
+          <Property Name="IsDownloaded" Type="bit" Nullable="false" />
+          <Property Name="BookingAgency" Type="varchar" MaxLength="64" />
+          <Property Name="BookingNumber" Type="int" Nullable="false" />
+          <Property Name="BookingOffice" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="BookingIdOffice" Type="int" Nullable="false" />
+          <Property Name="IdBooking" Type="int" Nullable="false" />
+          <Property Name="GroupName" Type="varchar" MaxLength="32" />
+          <Property Name="IsGroup" Type="bit" Nullable="false" />
+          <Property Name="IdCruise" Type="int" Nullable="false" />
+          <Property Name="CruiseCode" Type="varchar" MaxLength="16" Nullable="false" />
+        </EntityType>
+        <!--Erreurs détectées durant la génération :
+avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vSurvey' n'a pas de clé primaire définie. La clé a été déduite et la définition a été créée en tant que table/vue en lecture seule.-->
+        <EntityType Name="vSurvey">
+          <Key>
+            <PropertyRef Name="Id" />
+            
+            
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="NbIndividualSurveys" Type="int" />
+          <Property Name="NbGroupSurveys" Type="int" />
+          <Property Name="Languages" Type="nvarchar(max)" />
+          <Property Name="NbIndividualSurveyMail" Type="int" />
+          <Property Name="NbGroupSurveyMail" Type="int" />
+          <Property Name="MedicalAdvice" Type="bit" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_AgencyAccessRight_Agency">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="AgencyAccessRight" Type="Self.AgencyAccessRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgencyAccessRight">
+              <PropertyRef Name="IdAgency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_Agency">
+          <End Role="Agency" Type="Self.Agency" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdAgency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_LovLanguage">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_LovOffice">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Booking" Type="Self.Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdOffice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingActivity_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="BookingActivity" Type="Self.BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdBooking" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingActivity_LovActivity">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="BookingActivity" Type="Self.BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingActivity_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="BookingActivity" Type="Self.BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingCruisePassenger_Booking">
+          <End Role="Booking" Type="Self.Booking" Multiplicity="1" />
+          <End Role="BookingCruisePassenger" Type="Self.BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdBooking" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingCruisePassenger_Cruise">
+          <End Role="Cruise" Type="Self.Cruise" Multiplicity="1" />
+          <End Role="BookingCruisePassenger" Type="Self.BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cruise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdCruise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingCruisePassenger_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="BookingCruisePassenger" Type="Self.BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovDestination">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Cruise" Type="Self.Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdDestination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovShip">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Cruise" Type="Self.Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovTypeCruise">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Cruise" Type="Self.Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdTypeCruise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterion_LovCruiseType">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="CruiseCriterion" Type="Self.CruiseCriterion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterion">
+              <PropertyRef Name="IdCruiseType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterion_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="CruiseCriterion" Type="Self.CruiseCriterion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterion">
+              <PropertyRef Name="IdSurvey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionDestination_CruiseCriterion">
+          <End Role="CruiseCriterion" Type="Self.CruiseCriterion" Multiplicity="1" />
+          <End Role="CruiseCriterionDestination" Type="Self.CruiseCriterionDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CruiseCriterion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionDestination">
+              <PropertyRef Name="IdCruiseCriterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionDestination_LovDestination">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="CruiseCriterionDestination" Type="Self.CruiseCriterionDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionDestination">
+              <PropertyRef Name="IdDestination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionShip_CruiseCriterion">
+          <End Role="CruiseCriterion" Type="Self.CruiseCriterion" Multiplicity="1" />
+          <End Role="CruiseCriterionShip" Type="Self.CruiseCriterionShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CruiseCriterion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionShip">
+              <PropertyRef Name="IdCruiseCriterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionShip_LovShip">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="CruiseCriterionShip" Type="Self.CruiseCriterionShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionShip">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_LovStatus">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_LovDocumentType">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdInformation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_IdShip">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Assignment" Type="Self.Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_LovLanguage">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Language" Type="Self.Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="IdLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Language" Type="Self.Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="IdSurvey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lov_LovType">
+          <End Role="LovType" Type="Self.LovType" Multiplicity="1" />
+          <End Role="Lov" Type="Self.Lov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LovType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lov">
+              <PropertyRef Name="IdLovType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovAdvice">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdAdvice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovStatus">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovTitle">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PonantMedicalShoreModelStoreContainer">
+          <EntitySet Name="Agency" EntityType="Self.Agency" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="AgencyAccessRight" EntityType="Self.AgencyAccessRight" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Assignment" EntityType="Self.Assignment" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Booking" EntityType="Self.Booking" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingActivity" EntityType="Self.BookingActivity" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BookingCruisePassenger" EntityType="Self.BookingCruisePassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cruise" EntityType="Self.Cruise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CruiseCriterion" EntityType="Self.CruiseCriterion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CruiseCriterionDestination" EntityType="Self.CruiseCriterionDestination" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CruiseCriterionShip" EntityType="Self.CruiseCriterionShip" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information" EntityType="Self.Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Language" EntityType="Self.Language" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lov" EntityType="Self.Lov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LovType" EntityType="Self.LovType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passenger" EntityType="Self.Passenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Reminder" EntityType="Self.Reminder" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Survey" EntityType="Self.Survey" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="vAgencyAccessRight" EntityType="Self.vAgencyAccessRight" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vAgencyAccessRight].[Id] AS [Id], 
+    [vAgencyAccessRight].[IdAgency] AS [IdAgency], 
+    [vAgencyAccessRight].[AgencyName] AS [AgencyName], 
+    [vAgencyAccessRight].[CruiseCode] AS [CruiseCode], 
+    [vAgencyAccessRight].[GroupName] AS [GroupName], 
+    [vAgencyAccessRight].[BookingNumber] AS [BookingNumber]
+    FROM [dbo].[vAgencyAccessRight] AS [vAgencyAccessRight]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vAssignment" EntityType="Self.vAssignment" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vAssignment].[Id] AS [Id], 
+    [vAssignment].[IdShip] AS [IdShip], 
+    [vAssignment].[Ship] AS [Ship], 
+    [vAssignment].[Cruises] AS [Cruises], 
+    [vAssignment].[Deadline] AS [Deadline]
+    FROM [dbo].[vAssignment] AS [vAssignment]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vCriteria" EntityType="Self.vCriteria" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vCriteria].[Id] AS [Id], 
+    [vCriteria].[Order] AS [Order], 
+    [vCriteria].[CruiseType] AS [CruiseType], 
+    [vCriteria].[Destination] AS [Destination], 
+    [vCriteria].[Ship] AS [Ship], 
+    [vCriteria].[Length] AS [Length], 
+    [vCriteria].[Cruise] AS [Cruise], 
+    [vCriteria].[Activity] AS [Activity], 
+    [vCriteria].[Survey] AS [Survey], 
+    [vCriteria].[ModificationDate] AS [ModificationDate]
+    FROM [dbo].[vCriteria] AS [vCriteria]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vCruiseBoard" EntityType="Self.vCruiseBoard" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vCruiseBoard].[Id] AS [Id], 
+    [vCruiseBoard].[Code] AS [Code], 
+    [vCruiseBoard].[SailingDate] AS [SailingDate], 
+    [vCruiseBoard].[SailingLengthDays] AS [SailingLengthDays], 
+    [vCruiseBoard].[NbPassenger] AS [NbPassenger], 
+    [vCruiseBoard].[NbQMAvailable] AS [NbQMAvailable], 
+    [vCruiseBoard].[NbQMDone] AS [NbQMDone], 
+    [vCruiseBoard].[NbQMNotAvailable] AS [NbQMNotAvailable], 
+    [vCruiseBoard].[NbQMReceive] AS [NbQMReceive], 
+    [vCruiseBoard].[NbQMValidate] AS [NbQMValidate], 
+    [vCruiseBoard].[NbQMWaiting] AS [NbQMWaiting], 
+    [vCruiseBoard].[NbQMRefused] AS [NbQMRefused], 
+    [vCruiseBoard].[IdShip] AS [IdShip], 
+    [vCruiseBoard].[Deadline] AS [Deadline], 
+    [vCruiseBoard].[IdShipAssigned] AS [IdShipAssigned]
+    FROM [dbo].[vCruiseBoard] AS [vCruiseBoard]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vCruiseShore" EntityType="Self.vCruiseShore" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vCruiseShore].[Id] AS [Id], 
+    [vCruiseShore].[Code] AS [Code], 
+    [vCruiseShore].[IdTypeCruise] AS [IdTypeCruise], 
+    [vCruiseShore].[TypeCruise] AS [TypeCruise], 
+    [vCruiseShore].[DateDeparture] AS [DateDeparture], 
+    [vCruiseShore].[IdDestination] AS [IdDestination], 
+    [vCruiseShore].[Destination] AS [Destination], 
+    [vCruiseShore].[IdShip] AS [IdShip], 
+    [vCruiseShore].[Ship] AS [Ship], 
+    [vCruiseShore].[IsExtract] AS [IsExtract], 
+    [vCruiseShore].[Agency] AS [Agency]
+    FROM [dbo].[vCruiseShore] AS [vCruiseShore]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vPassengerBoard" EntityType="Self.vPassengerBoard" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vPassengerBoard].[Id] AS [Id], 
+    [vPassengerBoard].[LastName] AS [LastName], 
+    [vPassengerBoard].[UsualName] AS [UsualName], 
+    [vPassengerBoard].[FirstName] AS [FirstName], 
+    [vPassengerBoard].[Email] AS [Email], 
+    [vPassengerBoard].[IdAdvice] AS [IdAdvice], 
+    [vPassengerBoard].[Review] AS [Review], 
+    [vPassengerBoard].[IdStatus] AS [IdStatus], 
+    [vPassengerBoard].[IsExtract] AS [IsExtract], 
+    [vPassengerBoard].[IsDownloaded] AS [IsDownloaded], 
+    [vPassengerBoard].[Doctor] AS [Doctor], 
+    [vPassengerBoard].[IdCruise] AS [IdCruise], 
+    [vPassengerBoard].[ReceiptDate] AS [ReceiptDate]
+    FROM [dbo].[vPassengerBoard] AS [vPassengerBoard]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vPassengerShore" EntityType="Self.vPassengerShore" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vPassengerShore].[Id] AS [Id], 
+    [vPassengerShore].[Civility] AS [Civility], 
+    [vPassengerShore].[LastName] AS [LastName], 
+    [vPassengerShore].[FirstName] AS [FirstName], 
+    [vPassengerShore].[Email] AS [Email], 
+    [vPassengerShore].[EmailUpdated] AS [EmailUpdated], 
+    [vPassengerShore].[ValidEmail] AS [ValidEmail], 
+    [vPassengerShore].[PhoneNumber] AS [PhoneNumber], 
+    [vPassengerShore].[IdStatus] AS [IdStatus], 
+    [vPassengerShore].[QMStatus] AS [QMStatus], 
+    [vPassengerShore].[SendingDate] AS [SendingDate], 
+    [vPassengerShore].[ReceiptDate] AS [ReceiptDate], 
+    [vPassengerShore].[NbSent] AS [NbSent], 
+    [vPassengerShore].[IdAdvice] AS [IdAdvice], 
+    [vPassengerShore].[Advice] AS [Advice], 
+    [vPassengerShore].[DoctorId] AS [DoctorId], 
+    [vPassengerShore].[Doctor] AS [Doctor], 
+    [vPassengerShore].[TreatmentDate] AS [TreatmentDate], 
+    [vPassengerShore].[IsEnabled] AS [IsEnabled], 
+    [vPassengerShore].[Review] AS [Review], 
+    [vPassengerShore].[IsExtract] AS [IsExtract], 
+    [vPassengerShore].[AutoAttachment] AS [AutoAttachment], 
+    [vPassengerShore].[UsualName] AS [UsualName], 
+    [vPassengerShore].[IsDownloaded] AS [IsDownloaded], 
+    [vPassengerShore].[BookingAgency] AS [BookingAgency], 
+    [vPassengerShore].[BookingNumber] AS [BookingNumber], 
+    [vPassengerShore].[BookingOffice] AS [BookingOffice], 
+    [vPassengerShore].[BookingIdOffice] AS [BookingIdOffice], 
+    [vPassengerShore].[IdBooking] AS [IdBooking], 
+    [vPassengerShore].[GroupName] AS [GroupName], 
+    [vPassengerShore].[IsGroup] AS [IsGroup], 
+    [vPassengerShore].[IdCruise] AS [IdCruise], 
+    [vPassengerShore].[CruiseCode] AS [CruiseCode]
+    FROM [dbo].[vPassengerShore] AS [vPassengerShore]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="vSurvey" EntityType="Self.vSurvey" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [vSurvey].[Id] AS [Id], 
+    [vSurvey].[Name] AS [Name], 
+    [vSurvey].[NbIndividualSurveys] AS [NbIndividualSurveys], 
+    [vSurvey].[NbGroupSurveys] AS [NbGroupSurveys], 
+    [vSurvey].[Languages] AS [Languages], 
+    [vSurvey].[NbIndividualSurveyMail] AS [NbIndividualSurveyMail], 
+    [vSurvey].[NbGroupSurveyMail] AS [NbGroupSurveyMail], 
+    [vSurvey].[MedicalAdvice] AS [MedicalAdvice]
+    FROM [dbo].[vSurvey] AS [vSurvey]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_AgencyAccessRight_Agency" Association="Self.FK_AgencyAccessRight_Agency">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="AgencyAccessRight" EntitySet="AgencyAccessRight" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_Agency" Association="Self.FK_Booking_Agency">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_LovLanguage" Association="Self.FK_Booking_LovLanguage">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_LovOffice" Association="Self.FK_Booking_LovOffice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingActivity_Booking" Association="Self.FK_BookingActivity_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingActivity_LovActivity" Association="Self.FK_BookingActivity_LovActivity">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingActivity_Passenger" Association="Self.FK_BookingActivity_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingCruisePassenger_Booking" Association="Self.FK_BookingCruisePassenger_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingCruisePassenger_Cruise" Association="Self.FK_BookingCruisePassenger_Cruise">
+            <End Role="Cruise" EntitySet="Cruise" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingCruisePassenger_Passenger" Association="Self.FK_BookingCruisePassenger_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovDestination" Association="Self.FK_Cruise_LovDestination">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovShip" Association="Self.FK_Cruise_LovShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovTypeCruise" Association="Self.FK_Cruise_LovTypeCruise">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterion_LovCruiseType" Association="Self.FK_CruiseCriterion_LovCruiseType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterion_Survey" Association="Self.FK_CruiseCriterion_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionDestination_CruiseCriterion" Association="Self.FK_CruiseCriterionDestination_CruiseCriterion">
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+            <End Role="CruiseCriterionDestination" EntitySet="CruiseCriterionDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionDestination_LovDestination" Association="Self.FK_CruiseCriterionDestination_LovDestination">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterionDestination" EntitySet="CruiseCriterionDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionShip_CruiseCriterion" Association="Self.FK_CruiseCriterionShip_CruiseCriterion">
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+            <End Role="CruiseCriterionShip" EntitySet="CruiseCriterionShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionShip_LovShip" Association="Self.FK_CruiseCriterionShip_LovShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterionShip" EntitySet="CruiseCriterionShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_LovStatus" Association="Self.FK_Document_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_Passenger" Association="Self.FK_Document_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_LovDocumentType" Association="Self.FK_DocumentType_LovDocumentType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_Passenger" Association="Self.FK_DocumentType_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_IdShip" Association="Self.FK_IdShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_LovLanguage" Association="Self.FK_Language_LovLanguage">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Language" EntitySet="Language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_Survey" Association="Self.FK_Language_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="Language" EntitySet="Language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lov_LovType" Association="Self.FK_Lov_LovType">
+            <End Role="LovType" EntitySet="LovType" />
+            <End Role="Lov" EntitySet="Lov" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovAdvice" Association="Self.FK_Passenger_LovAdvice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovStatus" Association="Self.FK_Passenger_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovTitle" Association="Self.FK_Passenger_LovTitle">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Ponant.Medical.ShoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Agency">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Booking" Relationship="Ponant.Medical.ShoreModel.FK_Booking_Agency" FromRole="Agency" ToRole="Booking" />
+          <NavigationProperty Name="AgencyAccessRight" Relationship="Ponant.Medical.ShoreModel.FK_AgencyAccessRight_Agency" FromRole="Agency" ToRole="AgencyAccessRight" />
+          <Property Name="Number" Type="Int32" />
+        </EntityType>
+        <EntityType Name="CruiseCriterionDestination">
+          <Key>
+            <PropertyRef Name="IdCruiseCriterion" />
+            <PropertyRef Name="IdDestination" />
+          </Key>
+          <Property Name="IdCruiseCriterion" Type="Int32" Nullable="false" />
+          <Property Name="IdDestination" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LovDestination" Relationship="Self.FK_CruiseCriterionDestination_LovDestination" FromRole="CruiseCriterionDestination" ToRole="Lov" />
+          <NavigationProperty Name="CruiseCriterion" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterionDestination_CruiseCriterion" FromRole="CruiseCriterionDestination" ToRole="CruiseCriterion" />
+        </EntityType>
+        <EntityType Name="CruiseCriterionShip">
+          <Key>
+            <PropertyRef Name="IdCruiseCriterion" />
+            <PropertyRef Name="IdShip" />
+          </Key>
+          <Property Name="IdCruiseCriterion" Type="Int32" Nullable="false" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LovShip" Relationship="Self.FK_CruiseCriterionShip_LovShip" FromRole="CruiseCriterionShip" ToRole="Lov" />
+          <NavigationProperty Name="CruiseCriterion" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterionShip_CruiseCriterion" FromRole="CruiseCriterionShip" ToRole="CruiseCriterion" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="FileName" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Message" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="ReceiptDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LovStatus" Relationship="Self.FK_Document_LovStatus" FromRole="Document" ToRole="Lov" />
+          <NavigationProperty Name="Passenger" Relationship="Ponant.Medical.ShoreModel.FK_Document_Passenger" FromRole="Document" ToRole="Passenger" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdInformation" />
+          </Key>
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <Property Name="IdInformation" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LovDocumentType" Relationship="Self.FK_DocumentType_LovDocumentType" FromRole="Information" ToRole="Lov" />
+          <NavigationProperty Name="Passenger" Relationship="Ponant.Medical.ShoreModel.FK_DocumentType_Passenger" FromRole="Information" ToRole="Passenger" />
+        </EntityType>
+        <EntityType Name="Language">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdSurvey" Type="Int32" Nullable="false" />
+          <Property Name="IdLanguage" Type="Int32" Nullable="false" />
+          <Property Name="IndividualSurveyMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="GroupSurveyMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="IsDefault" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="LovLanguage" Relationship="Self.FK_Language_LovLanguage" FromRole="Language" ToRole="Lov" />
+          <NavigationProperty Name="Survey" Relationship="Self.FK_Language_Survey" FromRole="Language" ToRole="Survey" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IndividualSurveyFileName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="GroupSurveyFileName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IndividualAutomaticResponse" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="GroupAutomaticResponse" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IndividualAdditionalMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="GroupAdditionalMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Level" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Type" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Action" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Booking" Type="Int32" />
+          <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLovType" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CruiseCriterionDestination" Relationship="Self.FK_CruiseCriterionDestination_LovDestination" FromRole="Lov" ToRole="CruiseCriterionDestination" />
+          <NavigationProperty Name="CruiseCriterionShip" Relationship="Self.FK_CruiseCriterionShip_LovShip" FromRole="Lov" ToRole="CruiseCriterionShip" />
+          <NavigationProperty Name="Document" Relationship="Self.FK_Document_LovStatus" FromRole="Lov" ToRole="Document" />
+          <NavigationProperty Name="Information" Relationship="Self.FK_DocumentType_LovDocumentType" FromRole="Lov" ToRole="Information" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_Language_LovLanguage" FromRole="Lov" ToRole="Language" />
+          <NavigationProperty Name="LovType" Relationship="Self.FK_Lov_LovType" FromRole="Lov" ToRole="LovType" />
+          <NavigationProperty Name="CruiseCriterion" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterion_LovCruiseType" FromRole="Lov" ToRole="CruiseCriterion" />
+          <NavigationProperty Name="Booking" Relationship="Ponant.Medical.ShoreModel.FK_Booking_LovLanguage" FromRole="Lov" ToRole="Booking" />
+          <NavigationProperty Name="BookingActivity" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_LovActivity" FromRole="Lov" ToRole="BookingActivity" />
+          <NavigationProperty Name="Passenger" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovAdvice" FromRole="Lov" ToRole="Passenger" />
+          <NavigationProperty Name="Passenger1" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovStatus" FromRole="Lov" ToRole="Passenger" />
+          <NavigationProperty Name="Passenger2" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovTitle" FromRole="Lov" ToRole="Passenger" />
+          <NavigationProperty Name="Booking1" Relationship="Ponant.Medical.ShoreModel.FK_Booking_LovOffice" FromRole="Lov" ToRole="Booking" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cruise" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovDestination" FromRole="Lov" ToRole="Cruise" />
+          <NavigationProperty Name="Cruise1" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovShip" FromRole="Lov" ToRole="Cruise" />
+          <NavigationProperty Name="Cruise2" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovTypeCruise" FromRole="Lov" ToRole="Cruise" />
+          <NavigationProperty Name="Assignment" Relationship="Ponant.Medical.ShoreModel.FK_IdShip" FromRole="Lov" ToRole="Assignment" />
+        </EntityType>
+        <EntityType Name="LovType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Lov" Relationship="Self.FK_Lov_LovType" FromRole="LovType" ToRole="Lov" />
+        </EntityType>
+        <EntityType Name="Reminder">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="Length" Type="Int32" Nullable="false" />
+          <Property Name="Enabled" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <EntityType Name="Survey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="MedicalAdvice" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Language" Relationship="Self.FK_Language_Survey" FromRole="Survey" ToRole="Language" />
+          <NavigationProperty Name="CruiseCriterion" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterion_Survey" FromRole="Survey" ToRole="CruiseCriterion" />
+        </EntityType>
+        <Association Name="FK_CruiseCriterionDestination_LovDestination">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="CruiseCriterionDestination" Type="Self.CruiseCriterionDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionDestination">
+              <PropertyRef Name="IdDestination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionShip_LovShip">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="CruiseCriterionShip" Type="Self.CruiseCriterionShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionShip">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_LovStatus">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_LovDocumentType">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdInformation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_LovLanguage">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Language" Type="Self.Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="IdLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Language_Survey">
+          <End Role="Survey" Type="Self.Survey" Multiplicity="1" />
+          <End Role="Language" Type="Self.Language" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Language">
+              <PropertyRef Name="IdSurvey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lov_LovType">
+          <End Role="LovType" Type="Self.LovType" Multiplicity="1" />
+          <End Role="Lov" Type="Self.Lov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LovType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lov">
+              <PropertyRef Name="IdLovType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ShoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Agency" EntityType="Self.Agency" />
+          <EntitySet Name="CruiseCriterionDestination" EntityType="Self.CruiseCriterionDestination" />
+          <EntitySet Name="CruiseCriterionShip" EntityType="Self.CruiseCriterionShip" />
+          <EntitySet Name="Document" EntityType="Self.Document" />
+          <EntitySet Name="Information" EntityType="Self.Information" />
+          <EntitySet Name="Language" EntityType="Self.Language" />
+          <EntitySet Name="Log" EntityType="Self.Log" />
+          <EntitySet Name="Lov" EntityType="Self.Lov" />
+          <EntitySet Name="LovType" EntityType="Self.LovType" />
+          <EntitySet Name="Reminder" EntityType="Self.Reminder" />
+          <EntitySet Name="Survey" EntityType="Self.Survey" />
+          <AssociationSet Name="FK_CruiseCriterionDestination_LovDestination" Association="Self.FK_CruiseCriterionDestination_LovDestination">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterionDestination" EntitySet="CruiseCriterionDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionShip_LovShip" Association="Self.FK_CruiseCriterionShip_LovShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterionShip" EntitySet="CruiseCriterionShip" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_LovStatus" Association="Self.FK_Document_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_LovDocumentType" Association="Self.FK_DocumentType_LovDocumentType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_LovLanguage" Association="Self.FK_Language_LovLanguage">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Language" EntitySet="Language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Language_Survey" Association="Self.FK_Language_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="Language" EntitySet="Language" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lov_LovType" Association="Self.FK_Lov_LovType">
+            <End Role="LovType" EntitySet="LovType" />
+            <End Role="Lov" EntitySet="Lov" />
+          </AssociationSet>
+          <EntitySet Name="CruiseCriterion" EntityType="Ponant.Medical.ShoreModel.CruiseCriterion" />
+          <AssociationSet Name="FK_CruiseCriterion_Survey" Association="Ponant.Medical.ShoreModel.FK_CruiseCriterion_Survey">
+            <End Role="Survey" EntitySet="Survey" />
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionDestination_CruiseCriterion" Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionDestination_CruiseCriterion">
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+            <End Role="CruiseCriterionDestination" EntitySet="CruiseCriterionDestination" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruiseCriterionShip_CruiseCriterion" Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionShip_CruiseCriterion">
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+            <End Role="CruiseCriterionShip" EntitySet="CruiseCriterionShip" />
+          </AssociationSet>
+          <EntitySet Name="vCriteria" EntityType="Ponant.Medical.ShoreModel.vCriteria" />
+          <AssociationSet Name="FK_CruiseCriterion_LovCruiseType" Association="Ponant.Medical.ShoreModel.FK_CruiseCriterion_LovCruiseType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="CruiseCriterion" EntitySet="CruiseCriterion" />
+          </AssociationSet>
+          <EntitySet Name="Booking" EntityType="Ponant.Medical.ShoreModel.Booking" />
+          <EntitySet Name="BookingActivity" EntityType="Ponant.Medical.ShoreModel.BookingActivity" />
+          <AssociationSet Name="FK_Booking_Agency" Association="Ponant.Medical.ShoreModel.FK_Booking_Agency">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Booking_LovLanguage" Association="Ponant.Medical.ShoreModel.FK_Booking_LovLanguage">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingActivity_Booking" Association="Ponant.Medical.ShoreModel.FK_BookingActivity_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingActivity_LovActivity" Association="Ponant.Medical.ShoreModel.FK_BookingActivity_LovActivity">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <EntitySet Name="Passenger" EntityType="Ponant.Medical.ShoreModel.Passenger" />
+          <AssociationSet Name="FK_Document_Passenger" Association="Ponant.Medical.ShoreModel.FK_Document_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_Passenger" Association="Ponant.Medical.ShoreModel.FK_DocumentType_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovAdvice" Association="Ponant.Medical.ShoreModel.FK_Passenger_LovAdvice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovStatus" Association="Ponant.Medical.ShoreModel.FK_Passenger_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovTitle" Association="Ponant.Medical.ShoreModel.FK_Passenger_LovTitle">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <EntitySet Name="vSurvey" EntityType="Ponant.Medical.ShoreModel.vSurvey" />
+          <EntitySet Name="vCruiseShore" EntityType="Ponant.Medical.ShoreModel.vCruiseShore" />
+          <AssociationSet Name="FK_Booking_LovOffice" Association="Ponant.Medical.ShoreModel.FK_Booking_LovOffice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Booking" EntitySet="Booking" />
+          </AssociationSet>
+          <EntitySet Name="vCruiseBoard" EntityType="Ponant.Medical.ShoreModel.vCruiseBoard" />
+          <AssociationSet Name="FK_BookingActivity_Passenger" Association="Ponant.Medical.ShoreModel.FK_BookingActivity_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="BookingActivity" EntitySet="BookingActivity" />
+          </AssociationSet>
+          <EntitySet Name="BookingCruisePassenger" EntityType="Ponant.Medical.ShoreModel.BookingCruisePassenger" />
+          <AssociationSet Name="FK_BookingCruisePassenger_Booking" Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Booking">
+            <End Role="Booking" EntitySet="Booking" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BookingCruisePassenger_Passenger" Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <EntitySet Name="Cruise" EntityType="Ponant.Medical.ShoreModel.Cruise" />
+          <AssociationSet Name="FK_BookingCruisePassenger_Cruise" Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Cruise">
+            <End Role="Cruise" EntitySet="Cruise" />
+            <End Role="BookingCruisePassenger" EntitySet="BookingCruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovDestination" Association="Ponant.Medical.ShoreModel.FK_Cruise_LovDestination">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovShip" Association="Ponant.Medical.ShoreModel.FK_Cruise_LovShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_LovTypeCruise" Association="Ponant.Medical.ShoreModel.FK_Cruise_LovTypeCruise">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+          <EntitySet Name="AgencyAccessRight" EntityType="Ponant.Medical.ShoreModel.AgencyAccessRight" />
+          <AssociationSet Name="FK_AgencyAccessRight_Agency" Association="Ponant.Medical.ShoreModel.FK_AgencyAccessRight_Agency">
+            <End Role="Agency" EntitySet="Agency" />
+            <End Role="AgencyAccessRight" EntitySet="AgencyAccessRight" />
+          </AssociationSet>
+          <EntitySet Name="vAgencyAccessRight" EntityType="Ponant.Medical.ShoreModel.vAgencyAccessRight" />
+          <EntitySet Name="vPassengerBoard" EntityType="Ponant.Medical.ShoreModel.vPassengerBoard" />
+          <EntitySet Name="vPassengerShore" EntityType="Ponant.Medical.ShoreModel.vPassengerShore" />
+          <EntitySet Name="Assignment" EntityType="Ponant.Medical.ShoreModel.Assignment" />
+          <AssociationSet Name="FK_IdShip" Association="Ponant.Medical.ShoreModel.FK_IdShip">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Assignment" EntitySet="Assignment" />
+          </AssociationSet>
+          <EntitySet Name="vAssignment" EntityType="Ponant.Medical.ShoreModel.vAssignment" />
+          </EntityContainer>
+        <EntityType Name="CruiseCriterion">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdSurvey" Type="Int32" Nullable="false" />
+          <Property Name="IdCruiseType" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="Cruise" Type="String" MaxLength="130" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="Length" Type="Int32" Nullable="true" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Survey" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterion_Survey" FromRole="CruiseCriterion" ToRole="Survey" />
+          <NavigationProperty Name="CruiseCriterionDestination" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterionDestination_CruiseCriterion" FromRole="CruiseCriterion" ToRole="CruiseCriterionDestination" />
+          <NavigationProperty Name="CruiseCriterionShip" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterionShip_CruiseCriterion" FromRole="CruiseCriterion" ToRole="CruiseCriterionShip" />
+          <NavigationProperty Name="LovCruiseType" Relationship="Ponant.Medical.ShoreModel.FK_CruiseCriterion_LovCruiseType" FromRole="CruiseCriterion" ToRole="Lov" />
+          <Property Name="Activity" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_CruiseCriterion_Survey">
+          <End Type="Ponant.Medical.ShoreModel.Survey" Role="Survey" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterion" Role="CruiseCriterion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Survey">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterion">
+              <PropertyRef Name="IdSurvey" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionDestination_CruiseCriterion">
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterion" Role="CruiseCriterion" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterionDestination" Role="CruiseCriterionDestination" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CruiseCriterion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionDestination">
+              <PropertyRef Name="IdCruiseCriterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruiseCriterionShip_CruiseCriterion">
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterion" Role="CruiseCriterion" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterionShip" Role="CruiseCriterionShip" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CruiseCriterion">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterionShip">
+              <PropertyRef Name="IdCruiseCriterion" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vCriteria">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <Property Name="CruiseType" Type="String" MaxLength="128" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Destination" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Ship" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Length" Type="Int32" />
+          <Property Name="Cruise" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
+          <Property Name="Activity" Type="String" MaxLength="130" FixedLength="false" Unicode="false" />
+          <Property Name="Survey" Type="String" MaxLength="64" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+        </EntityType>
+        <Association Name="FK_CruiseCriterion_LovCruiseType">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.CruiseCriterion" Role="CruiseCriterion" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruiseCriterion">
+              <PropertyRef Name="IdCruiseType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Booking">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdLanguage" Type="Int32" Nullable="false" />
+          <Property Name="IdAgency" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Agency" Relationship="Ponant.Medical.ShoreModel.FK_Booking_Agency" FromRole="Booking" ToRole="Agency" />
+          <NavigationProperty Name="LovLanguage" Relationship="Ponant.Medical.ShoreModel.FK_Booking_LovLanguage" FromRole="Booking" ToRole="Lov" />
+          <NavigationProperty Name="BookingActivity" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_Booking" FromRole="Booking" ToRole="BookingActivity" />
+          <Property Name="IdOffice" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="LovOffice" Relationship="Ponant.Medical.ShoreModel.FK_Booking_LovOffice" FromRole="Booking" ToRole="Lov" />
+          <Property Name="GroupName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" Nullable="true" />
+          <Property Name="IsGroup" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="BookingCruisePassenger" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Booking" FromRole="Booking" ToRole="BookingCruisePassenger" />
+          <Property Name="IdSurveyLanguage" Type="Int32" />
+        </EntityType>
+        <EntityType Name="BookingActivity">
+          <Key>
+            <PropertyRef Name="IdBooking" />
+            <PropertyRef Name="IdActivity" />
+            <PropertyRef Name="IdPassenger" />
+          </Key>
+          <Property Name="IdBooking" Type="Int32" Nullable="false" />
+          <Property Name="IdActivity" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Booking" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_Booking" FromRole="BookingActivity" ToRole="Booking" />
+          <NavigationProperty Name="LovActivity" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_LovActivity" FromRole="BookingActivity" ToRole="Lov" />
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Passenger" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_Passenger" FromRole="BookingActivity" ToRole="Passenger" />
+        </EntityType>
+        <Association Name="FK_Booking_Agency">
+          <End Type="Ponant.Medical.ShoreModel.Agency" Role="Agency" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdAgency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Booking_LovLanguage">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdLanguage" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingActivity_Booking">
+          <End Type="Ponant.Medical.ShoreModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingActivity" Role="BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdBooking" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingActivity_LovActivity">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingActivity" Role="BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdActivity" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAdvice" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="IdTitle" Type="Int32" Nullable="false" />
+          <Property Name="Number" Type="Int32" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="BirthDate" Type="DateTime" Precision="3" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IsEmailUpdated" Type="Boolean" Nullable="false" />
+          <Property Name="IsEmailValid" Type="Boolean" />
+          <Property Name="SentDate" Type="DateTime" Precision="3" />
+          <Property Name="SentCount" Type="Int32" Nullable="false" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+          <Property Name="Doctor" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="TreatmentDate" Type="DateTime" Precision="3" />
+          <Property Name="Review" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Document" Relationship="Ponant.Medical.ShoreModel.FK_Document_Passenger" FromRole="Passenger" ToRole="Document" />
+          <NavigationProperty Name="Information" Relationship="Ponant.Medical.ShoreModel.FK_DocumentType_Passenger" FromRole="Passenger" ToRole="Information" />
+          <NavigationProperty Name="LovAdvice" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovAdvice" FromRole="Passenger" ToRole="Lov" />
+          <NavigationProperty Name="LovStatus" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovStatus" FromRole="Passenger" ToRole="Lov" />
+          <NavigationProperty Name="LovTitle" Relationship="Ponant.Medical.ShoreModel.FK_Passenger_LovTitle" FromRole="Passenger" ToRole="Lov" />
+          <NavigationProperty Name="BookingActivity" Relationship="Ponant.Medical.ShoreModel.FK_BookingActivity_Passenger" FromRole="Passenger" ToRole="BookingActivity" />
+          <NavigationProperty Name="BookingCruisePassenger" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Passenger" FromRole="Passenger" ToRole="BookingCruisePassenger" />
+          <Property Name="AutoAttachment" Type="Boolean" />
+          <Property Name="UsualName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Token" Type="String" MaxLength="36" FixedLength="false" Unicode="false" />
+          <Property Name="IsDownloaded" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Document_Passenger">
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_Passenger">
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Information" Role="Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovAdvice">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdAdvice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovStatus">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovTitle">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdTitle" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vSurvey">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Languages" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NbIndividualSurveyMail" Type="Int32" />
+          <Property Name="NbGroupSurveyMail" Type="Int32" />
+          <Property Name="MedicalAdvice" Type="Boolean" Nullable="false" />
+          <Property Name="NbIndividualSurveys" Type="Int32" />
+          <Property Name="NbGroupSurveys" Type="Int32" />
+        </EntityType>
+        <EntityType Name="vCruiseShore">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="IdTypeCruise" Type="Int32" />
+          <Property Name="TypeCruise" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="DateDeparture" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdDestination" Type="Int32" />
+          <Property Name="Destination" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="IdShip" Type="Int32" />
+          <Property Name="Ship" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Agency" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Booking_LovOffice">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Booking" Role="Booking" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Booking">
+              <PropertyRef Name="IdOffice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vCruiseBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="16" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="SailingDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="NbPassenger" Type="Int32" Nullable="false" />
+          <Property Name="NbQMAvailable" Type="Int32" Nullable="false" />
+          <Property Name="NbQMDone" Type="Int32" Nullable="false" />
+          <Property Name="SailingLengthDays" Type="Int32" Nullable="false" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+          <Property Name="NbQMNotAvailable" Type="Int32" Nullable="false" />
+          <Property Name="NbQMReceive" Type="Int32" Nullable="false" />
+          <Property Name="NbQMValidate" Type="Int32" Nullable="false" />
+          <Property Name="NbQMWaiting" Type="Int32" Nullable="false" />
+          <Property Name="NbQMRefused" Type="Int32" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <Property Name="IdShipAssigned" Type="Int32" />
+        </EntityType>
+        <Association Name="FK_BookingActivity_Passenger">
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingActivity" Role="BookingActivity" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingActivity">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BookingCruisePassenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdBooking" Type="Int32" Nullable="false" />
+          <Property Name="IdCruise" Type="Int32" Nullable="false" />
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <Property Name="CabinNumber" Type="String" MaxLength="8" Unicode="false" FixedLength="false" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Booking" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Booking" FromRole="BookingCruisePassenger" ToRole="Booking" />
+          <NavigationProperty Name="Passenger" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Passenger" FromRole="BookingCruisePassenger" ToRole="Passenger" />
+          <NavigationProperty Name="Cruise" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Cruise" FromRole="BookingCruisePassenger" ToRole="Cruise" />
+        </EntityType>
+        <Association Name="FK_BookingCruisePassenger_Booking">
+          <End Type="Ponant.Medical.ShoreModel.Booking" Role="Booking" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingCruisePassenger" Role="BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Booking">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdBooking" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BookingCruisePassenger_Passenger">
+          <End Type="Ponant.Medical.ShoreModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingCruisePassenger" Role="BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Cruise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdTypeCruise" Type="Int32" Nullable="false" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+          <Property Name="IdDestination" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="SailingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SailingLengthDays" Type="Int32" Nullable="false" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+          <Property Name="Extract" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="BookingCruisePassenger" Relationship="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Cruise" FromRole="Cruise" ToRole="BookingCruisePassenger" />
+          <NavigationProperty Name="LovDestination" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovDestination" FromRole="Cruise" ToRole="Lov" />
+          <NavigationProperty Name="LovShip" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovShip" FromRole="Cruise" ToRole="Lov" />
+          <NavigationProperty Name="LovTypeCruise" Relationship="Ponant.Medical.ShoreModel.FK_Cruise_LovTypeCruise" FromRole="Cruise" ToRole="Lov" />
+        </EntityType>
+        <Association Name="FK_BookingCruisePassenger_Cruise">
+          <End Type="Ponant.Medical.ShoreModel.Cruise" Role="Cruise" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.BookingCruisePassenger" Role="BookingCruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cruise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BookingCruisePassenger">
+              <PropertyRef Name="IdCruise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovDestination">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Cruise" Role="Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdDestination" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovShip">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Cruise" Role="Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_LovTypeCruise">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Cruise" Role="Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdTypeCruise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="AgencyAccessRight">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdAgency" Type="Int32" Nullable="false" />
+          <Property Name="CruiseCode" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="BookingNumber" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Agency" Relationship="Ponant.Medical.ShoreModel.FK_AgencyAccessRight_Agency" FromRole="AgencyAccessRight" ToRole="Agency" />
+        </EntityType>
+        <Association Name="FK_AgencyAccessRight_Agency">
+          <End Type="Ponant.Medical.ShoreModel.Agency" Role="Agency" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.AgencyAccessRight" Role="AgencyAccessRight" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Agency">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="AgencyAccessRight">
+              <PropertyRef Name="IdAgency" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vAgencyAccessRight">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAgency" />
+            <PropertyRef Name="AgencyName" />
+            <PropertyRef Name="CruiseCode" />
+            <PropertyRef Name="GroupName" />
+            <PropertyRef Name="BookingNumber" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdAgency" Type="Int32" Nullable="false" />
+          <Property Name="AgencyName" Type="String" Nullable="false" MaxLength="97" FixedLength="false" Unicode="false" />
+          <Property Name="CruiseCode" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="GroupName" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="BookingNumber" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vPassengerBoard">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdAdvice" />
+            <PropertyRef Name="IdStatus" />
+            <PropertyRef Name="IsExtract" />
+            <PropertyRef Name="IdCruise" />
+            <PropertyRef Name="IsDownloaded" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="UsualName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IdAdvice" Type="Int32" Nullable="false" />
+          <Property Name="Review" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+          <Property Name="Doctor" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="IdCruise" Type="Int32" Nullable="false" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
+          <Property Name="IsDownloaded" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="vPassengerShore">
+          <Key>
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="EmailUpdated" />
+            <PropertyRef Name="IdStatus" />
+            <PropertyRef Name="NbSent" />
+            <PropertyRef Name="IdAdvice" />
+            <PropertyRef Name="IsEnabled" />
+            <PropertyRef Name="IsExtract" />
+            <PropertyRef Name="IsDownloaded" />
+            <PropertyRef Name="BookingNumber" />
+            <PropertyRef Name="BookingOffice" />
+            <PropertyRef Name="BookingIdOffice" />
+            <PropertyRef Name="IdBooking" />
+            <PropertyRef Name="IsGroup" />
+            <PropertyRef Name="IdCruise" />
+            <PropertyRef Name="CruiseCode" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Civility" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Email" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="EmailUpdated" Type="Boolean" Nullable="false" />
+          <Property Name="ValidEmail" Type="Boolean" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="QMStatus" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="SendingDate" Type="DateTime" Precision="3" />
+          <Property Name="ReceiptDate" Type="DateTime" Precision="3" />
+          <Property Name="NbSent" Type="Int32" Nullable="false" />
+          <Property Name="IdAdvice" Type="Int32" Nullable="false" />
+          <Property Name="Advice" Type="String" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Doctor" Type="String" MaxLength="32" FixedLength="false" Unicode="true" />
+          <Property Name="TreatmentDate" Type="DateTime" Precision="3" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="Review" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+          <Property Name="AutoAttachment" Type="Boolean" />
+          <Property Name="UsualName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="IsDownloaded" Type="Boolean" Nullable="false" />
+          <Property Name="BookingAgency" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="BookingNumber" Type="Int32" Nullable="false" />
+          <Property Name="BookingOffice" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="BookingIdOffice" Type="Int32" Nullable="false" />
+          <Property Name="IdBooking" Type="Int32" Nullable="false" />
+          <Property Name="GroupName" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="IsGroup" Type="Boolean" Nullable="false" />
+          <Property Name="IdCruise" Type="Int32" Nullable="false" />
+          <Property Name="CruiseCode" Type="String" Nullable="false" MaxLength="16" FixedLength="false" Unicode="false" />
+          <Property Name="DoctorId" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="Assignment">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="LovShip" Relationship="Ponant.Medical.ShoreModel.FK_IdShip" FromRole="Assignment" ToRole="Lov" />
+          <Property Name="Cruises" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK_IdShip">
+          <End Type="Ponant.Medical.ShoreModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="Ponant.Medical.ShoreModel.Assignment" Role="Assignment" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Assignment">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="vAssignment">
+          <Key>
+            <PropertyRef Name="Ship" />
+            <PropertyRef Name="Cruises" />
+            <PropertyRef Name="Deadline" />
+            <PropertyRef Name="Id" />
+            <PropertyRef Name="IdShip" />
+          </Key>
+          <Property Name="Ship" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Cruises" Type="String" Nullable="false" MaxLength="8000" FixedLength="false" Unicode="false" />
+          <Property Name="Deadline" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PonantMedicalShoreModelStoreContainer" CdmEntityContainer="ShoreEntities">
+          <EntitySetMapping Name="Agency">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Agency">
+              <MappingFragment StoreEntitySet="Agency">
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CruiseCriterionDestination">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.CruiseCriterionDestination">
+              <MappingFragment StoreEntitySet="CruiseCriterionDestination">
+                <ScalarProperty Name="IdCruiseCriterion" ColumnName="IdCruiseCriterion" />
+                <ScalarProperty Name="IdDestination" ColumnName="IdDestination" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CruiseCriterionShip">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.CruiseCriterionShip">
+              <MappingFragment StoreEntitySet="CruiseCriterionShip">
+                <ScalarProperty Name="IdCruiseCriterion" ColumnName="IdCruiseCriterion" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Document">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Message" ColumnName="Message" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Information">
+              <MappingFragment StoreEntitySet="Information">
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+                <ScalarProperty Name="IdInformation" ColumnName="IdInformation" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Language">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Language">
+              <MappingFragment StoreEntitySet="Language">
+                <ScalarProperty Name="GroupAdditionalMail" ColumnName="GroupAdditionalMail" />
+                <ScalarProperty Name="IndividualAdditionalMail" ColumnName="IndividualAdditionalMail" />
+                <ScalarProperty Name="GroupAutomaticResponse" ColumnName="GroupAutomaticResponse" />
+                <ScalarProperty Name="IndividualAutomaticResponse" ColumnName="IndividualAutomaticResponse" />
+                <ScalarProperty Name="GroupSurveyFileName" ColumnName="GroupSurveyFileName" />
+                <ScalarProperty Name="IndividualSurveyFileName" ColumnName="IndividualSurveyFileName" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdSurvey" ColumnName="IdSurvey" />
+                <ScalarProperty Name="IdLanguage" ColumnName="IdLanguage" />
+                <ScalarProperty Name="IndividualSurveyMail" ColumnName="IndividualSurveyMail" />
+                <ScalarProperty Name="GroupSurveyMail" ColumnName="GroupSurveyMail" />
+                <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lov">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Lov">
+              <MappingFragment StoreEntitySet="Lov">
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="IdLovType" ColumnName="IdLovType" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LovType">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.LovType">
+              <MappingFragment StoreEntitySet="LovType">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reminder">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Reminder">
+              <MappingFragment StoreEntitySet="Reminder">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Enabled" ColumnName="Enabled" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Survey">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Survey">
+              <MappingFragment StoreEntitySet="Survey">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="MedicalAdvice" ColumnName="MedicalAdvice" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CruiseCriterion">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.CruiseCriterion">
+              <MappingFragment StoreEntitySet="CruiseCriterion">
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Cruise" ColumnName="Cruise" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="IdCruiseType" ColumnName="IdCruiseType" />
+                <ScalarProperty Name="IdSurvey" ColumnName="IdSurvey" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vCriteria">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vCriteria">
+              <MappingFragment StoreEntitySet="vCriteria">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Survey" ColumnName="Survey" />
+                <ScalarProperty Name="Activity" ColumnName="Activity" />
+                <ScalarProperty Name="Cruise" ColumnName="Cruise" />
+                <ScalarProperty Name="Length" ColumnName="Length" />
+                <ScalarProperty Name="Ship" ColumnName="Ship" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="CruiseType" ColumnName="CruiseType" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Booking">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Booking">
+              <MappingFragment StoreEntitySet="Booking">
+                <ScalarProperty Name="IdSurveyLanguage" ColumnName="IdSurveyLanguage" />
+                <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="IdOffice" ColumnName="IdOffice" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="IdAgency" ColumnName="IdAgency" />
+                <ScalarProperty Name="IdLanguage" ColumnName="IdLanguage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingActivity">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.BookingActivity">
+              <MappingFragment StoreEntitySet="BookingActivity">
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IdActivity" ColumnName="IdActivity" />
+                <ScalarProperty Name="IdBooking" ColumnName="IdBooking" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passenger">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Passenger">
+              <MappingFragment StoreEntitySet="Passenger">
+                <ScalarProperty Name="IsDownloaded" ColumnName="IsDownloaded" />
+                <ScalarProperty Name="Token" ColumnName="Token" />
+                <ScalarProperty Name="AutoAttachment" ColumnName="AutoAttachment" />
+                <ScalarProperty Name="UsualName" ColumnName="UsualName" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="TreatmentDate" ColumnName="TreatmentDate" />
+                <ScalarProperty Name="Doctor" ColumnName="Doctor" />
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="SentCount" ColumnName="SentCount" />
+                <ScalarProperty Name="SentDate" ColumnName="SentDate" />
+                <ScalarProperty Name="IsEmailValid" ColumnName="IsEmailValid" />
+                <ScalarProperty Name="IsEmailUpdated" ColumnName="IsEmailUpdated" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Number" ColumnName="Number" />
+                <ScalarProperty Name="IdTitle" ColumnName="IdTitle" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdAdvice" ColumnName="IdAdvice" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vSurvey">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vSurvey">
+              <MappingFragment StoreEntitySet="vSurvey">
+                <ScalarProperty Name="NbGroupSurveys" ColumnName="NbGroupSurveys" />
+                <ScalarProperty Name="NbIndividualSurveys" ColumnName="NbIndividualSurveys" />
+                <ScalarProperty Name="MedicalAdvice" ColumnName="MedicalAdvice" />
+                <ScalarProperty Name="NbGroupSurveyMail" ColumnName="NbGroupSurveyMail" />
+                <ScalarProperty Name="NbIndividualSurveyMail" ColumnName="NbIndividualSurveyMail" />
+                <ScalarProperty Name="Languages" ColumnName="Languages" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vCruiseShore">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vCruiseShore">
+              <MappingFragment StoreEntitySet="vCruiseShore">
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="Agency" ColumnName="Agency" />
+                <ScalarProperty Name="Ship" ColumnName="Ship" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="Destination" ColumnName="Destination" />
+                <ScalarProperty Name="IdDestination" ColumnName="IdDestination" />
+                <ScalarProperty Name="DateDeparture" ColumnName="DateDeparture" />
+                <ScalarProperty Name="TypeCruise" ColumnName="TypeCruise" />
+                <ScalarProperty Name="IdTypeCruise" ColumnName="IdTypeCruise" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vCruiseBoard">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vCruiseBoard">
+              <MappingFragment StoreEntitySet="vCruiseBoard">
+                <ScalarProperty Name="IdShipAssigned" ColumnName="IdShipAssigned" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="NbQMRefused" ColumnName="NbQMRefused" />
+                <ScalarProperty Name="NbQMWaiting" ColumnName="NbQMWaiting" />
+                <ScalarProperty Name="NbQMValidate" ColumnName="NbQMValidate" />
+                <ScalarProperty Name="NbQMReceive" ColumnName="NbQMReceive" />
+                <ScalarProperty Name="NbQMNotAvailable" ColumnName="NbQMNotAvailable" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="SailingLengthDays" ColumnName="SailingLengthDays" />
+                <ScalarProperty Name="NbQMDone" ColumnName="NbQMDone" />
+                <ScalarProperty Name="NbQMAvailable" ColumnName="NbQMAvailable" />
+                <ScalarProperty Name="NbPassenger" ColumnName="NbPassenger" />
+                <ScalarProperty Name="SailingDate" ColumnName="SailingDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BookingCruisePassenger">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.BookingCruisePassenger">
+              <MappingFragment StoreEntitySet="BookingCruisePassenger">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="CabinNumber" ColumnName="CabinNumber" />
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+                <ScalarProperty Name="IdCruise" ColumnName="IdCruise" />
+                <ScalarProperty Name="IdBooking" ColumnName="IdBooking" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cruise">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Cruise">
+              <MappingFragment StoreEntitySet="Cruise">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Extract" ColumnName="Extract" />
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="SailingLengthDays" ColumnName="SailingLengthDays" />
+                <ScalarProperty Name="SailingDate" ColumnName="SailingDate" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdDestination" ColumnName="IdDestination" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="IdTypeCruise" ColumnName="IdTypeCruise" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AgencyAccessRight">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.AgencyAccessRight">
+              <MappingFragment StoreEntitySet="AgencyAccessRight">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CruiseCode" ColumnName="CruiseCode" />
+                <ScalarProperty Name="IdAgency" ColumnName="IdAgency" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vAgencyAccessRight">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vAgencyAccessRight">
+              <MappingFragment StoreEntitySet="vAgencyAccessRight">
+                <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="CruiseCode" ColumnName="CruiseCode" />
+                <ScalarProperty Name="AgencyName" ColumnName="AgencyName" />
+                <ScalarProperty Name="IdAgency" ColumnName="IdAgency" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPassengerBoard">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vPassengerBoard">
+              <MappingFragment StoreEntitySet="vPassengerBoard">
+                <ScalarProperty Name="IsDownloaded" ColumnName="IsDownloaded" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="IdCruise" ColumnName="IdCruise" />
+                <ScalarProperty Name="Doctor" ColumnName="Doctor" />
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="IdAdvice" ColumnName="IdAdvice" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UsualName" ColumnName="UsualName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vPassengerShore">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vPassengerShore">
+              <MappingFragment StoreEntitySet="vPassengerShore">
+                <ScalarProperty Name="DoctorId" ColumnName="DoctorId" />
+                <ScalarProperty Name="CruiseCode" ColumnName="CruiseCode" />
+                <ScalarProperty Name="IdCruise" ColumnName="IdCruise" />
+                <ScalarProperty Name="IsGroup" ColumnName="IsGroup" />
+                <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+                <ScalarProperty Name="IdBooking" ColumnName="IdBooking" />
+                <ScalarProperty Name="BookingIdOffice" ColumnName="BookingIdOffice" />
+                <ScalarProperty Name="BookingOffice" ColumnName="BookingOffice" />
+                <ScalarProperty Name="BookingNumber" ColumnName="BookingNumber" />
+                <ScalarProperty Name="BookingAgency" ColumnName="BookingAgency" />
+                <ScalarProperty Name="IsDownloaded" ColumnName="IsDownloaded" />
+                <ScalarProperty Name="UsualName" ColumnName="UsualName" />
+                <ScalarProperty Name="AutoAttachment" ColumnName="AutoAttachment" />
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="TreatmentDate" ColumnName="TreatmentDate" />
+                <ScalarProperty Name="Doctor" ColumnName="Doctor" />
+                <ScalarProperty Name="Advice" ColumnName="Advice" />
+                <ScalarProperty Name="IdAdvice" ColumnName="IdAdvice" />
+                <ScalarProperty Name="NbSent" ColumnName="NbSent" />
+                <ScalarProperty Name="ReceiptDate" ColumnName="ReceiptDate" />
+                <ScalarProperty Name="SendingDate" ColumnName="SendingDate" />
+                <ScalarProperty Name="QMStatus" ColumnName="QMStatus" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="ValidEmail" ColumnName="ValidEmail" />
+                <ScalarProperty Name="EmailUpdated" ColumnName="EmailUpdated" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="Civility" ColumnName="Civility" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Assignment">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.Assignment">
+              <MappingFragment StoreEntitySet="Assignment">
+                <ScalarProperty Name="Cruises" ColumnName="Cruises" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="vAssignment">
+            <EntityTypeMapping TypeName="Ponant.Medical.ShoreModel.vAssignment">
+              <MappingFragment StoreEntitySet="vAssignment">
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="Cruises" ColumnName="Cruises" />
+                <ScalarProperty Name="Ship" ColumnName="Ship" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

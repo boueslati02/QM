@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Cruising assignment";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="form-inline filterdiv">
+
+    @if (ViewBag.ShipList != null)
+    {
+        <div class="form-group">
+            @Html.Label("Ship", new { @for = "CruiseShip" })
+            @Html.DropDownList("CruiseShip", ViewBag.ShipList as List<SelectListItem>, "All", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "CruiseShip" })
+        </div>
+    }
+
+    <div class="form-group">
+        @Html.Label("Cruise Code", new { @for = "CruiseCode" })
+        @Html.TextBox("CruiseCode", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "CruiseCode" })
+    </div>
+
+    <input type="button" value="Search" class="btn btn-primary" data-mvcgrid-apply-filter="click" />
+</div>
+
+@if (TempData["message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["message"]</div>
+}
+<button id="btnCruiseAssignmentCreate" type="button" class="btn btn-primary" onclick="create('/CruiseAssignment/_Create')">Add</button>
+@Html.MVCGrid("CruiseAssignment")
+<div id="frmCreate">
+</div>
+<div id="frmEdit">
+</div>

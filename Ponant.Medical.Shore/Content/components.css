@@ -1,0 +1,13 @@
+﻿
+/*Composant ListBox MultiSelect*/
+.multiselect-container {
+    background-color: white;
+}
+
+    .multiselect-container label {
+        color: black !important;
+    }
+
+        .multiselect-container label:hover {
+            color: white !important;
+        }

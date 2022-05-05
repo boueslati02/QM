@@ -1,0 +1,136 @@
+﻿<!doctype html>
+<html lang="en-us">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href="/favicon.ico" rel="shortcut icon" />
+    <title>Medical Ponant - @ViewBag.Title</title>
+    @Scripts.Render("~/bundles/modernizr_bundle")
+    @Scripts.Render("~/bundles/jquery_bundle")
+    @Scripts.Render("~/bundles/jqueryval_bundle")
+    @Scripts.Render("~/bundles/bootstrap_bundle")
+    @RenderSection("scripts", required: false)
+    <script src="~/MVCGridHandler.axd/script.js"></script>
+    @Styles.Render("~/Content/css_bundle")
+</head>
+
+@{ /*Génération du numéro de version affiché*/
+    Version version = @ViewContext.Controller.GetType().Assembly.GetName().Version;
+    string strVersion = "Version " + version.Major.ToString() +
+            (version.Minor != 0 ? "." + version.Minor.ToString() : "") +
+            (version.Build != 0 ? "." + version.Build.ToString() : "") +
+            (version.Revision != 0 ? "." + version.Revision.ToString() : "");
+}
+
+<body>
+    @if (!ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("upload"))
+    {
+        <div class="navbar navbar-default navbar-fixed-top">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    @if (Request.IsAuthenticated && !ViewContext.RouteData.Values["action"].Equals("ChangePassword"))
+                    {
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                    }
+                    @Html.ActionLink("Medical Ponant", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                </div>
+                @if (Request.IsAuthenticated && !ViewContext.RouteData.Values["action"].Equals("ChangePassword"))
+                {
+                    <div class="navbar-collapse collapse">
+                        <ul class="nav navbar-nav">
+                            <li>@Html.ActionLink("Cruises", "Index", "Cruise")</li>
+
+                            @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_DOCTOR) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Documents <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("Management by passenger", "Index", "PassengerDocument")</li>
+                                        <li>@Html.ActionLink("Management by document", "Index", "AvailableDocument")</li>
+                                    </ul>
+                                </li>
+                            }
+
+                            @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_IT_ADMINISTRATOR) || 
+                                User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_BOOKING_ADMINISTRATOR) || 
+                                User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_GROUP) || 
+                                User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_AGENCY_ADMINISTRATOR) || 
+                                User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+                            {
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        @if (!User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+                                        { 
+                                            <li>@Html.ActionLink("Users", "Index", "User")</li>
+                                        }
+                                        @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_IT_ADMINISTRATOR) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_GROUP))
+                                        {
+                                            <li>@Html.ActionLink("Agency access rights", "Index", "AgencyAccessRight")</li>
+                                        }
+                                        @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_IT_ADMINISTRATOR) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_BOOKING_ADMINISTRATOR))
+                                        {
+                                            <li>@Html.ActionLink("Surveys", "Index", "Survey")</li>
+                                            <li>@Html.ActionLink("Cruising criteria", "Index", "Criteria")</li>
+                                            <li>@Html.ActionLink("Reminders", "Edit", "Reminder")</li>
+                                        }
+                                        @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+                                        {
+                                            <li>@Html.ActionLink("Cruising assignment", "Index", "CruiseAssignment")</li>
+                                        }
+                                    </ul>
+                                </li>
+                            }
+
+                            @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_IT_ADMINISTRATOR)
+                                || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_BOOKING_ADMINISTRATOR)
+                                || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR)
+                                || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_DOCTOR)
+                                || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL)
+                                || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_GROUP))
+                            {
+                                <li id="report-menu" class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports <span class="caret"></span></a>
+                                    <ul class="dropdown-menu">
+                                        <li>@Html.ActionLink("QM Statistics", "QmStatistics", "Report")</li>
+                                        <li>@Html.ActionLink("QM Treatment", "QmTreatment", "Report")</li>
+                                    </ul>
+                                </li>
+                            }
+                        </ul>
+                        @Html.Partial("_LoginPartial")
+                    </div>
+                }
+            </div>
+        </div>
+    }
+
+    @if (!ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("upload"))
+    {
+        <div class="container-fluid body-content">
+            @RenderBody()
+        </div>
+    }
+    else
+    {
+        @RenderBody()
+    }
+
+    @if (!ViewContext.RouteData.Values["controller"].ToString().ToLower().Equals("upload"))
+    {
+        <footer>
+            <hr />
+            <img src="~/images/logo.png" />
+            <label id="labVersion">
+                @{@strVersion}
+            </label>
+        </footer>
+    }
+</body>
+</html>

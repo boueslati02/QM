@@ -1,0 +1,15 @@
+﻿@model ReportViewer
+
+@using Microsoft.Reporting.WebForms;
+@using ReportViewerForMvc;
+
+@{
+    ViewBag.Title = "Qm Treatment";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="QmStatistics">
+    <h2>Qm Treatment</h2>
+    <hr/>
+    @Html.ReportViewer(Model)
+</div>

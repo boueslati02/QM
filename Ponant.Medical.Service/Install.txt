@@ -1,0 +1,43 @@
+
+- Dev :
+Invite de commandes développeur pour VS2015 > Exécuter en tant qu'administrateur
+(Nico) cd d:\users\nicolas.borrione\source\repos\ponant.medical\ponant.medical\ponant.medical.service\bin\debug
+(Vincent) D: & cd D:\Users\vincent.knobloch\Documents\Visual Studio Projects\Ponant.QM\Ponant.Medical\Ponant.Medical.Service\bin\Dev
+(Hugo) D: & cd D:\Users\hugo.oswell\source\repos\Ponant.QM\Ponant.Medical\Ponant.Medical.Service\bin\Dev
+// Suppression du service
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe -u ponant.medical.service.exe
+// Installation du service
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\installutil.exe ponant.medical.service.exe
+
+- Integration :
+1 - Invite de commandes > Exécuter en tant qu'administrateur
+2 - Lancer la commande : 
+	cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
+3 - Lancer la commande pour supprimer le service Ponant existant : 
+	installutil.exe -u C:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe
+4 - Copie du dossier bin dans le dossier : 
+	C:\MedicalApplication\MedicalCode\Ponant.Medical.Service
+5 - Lancer la commande pour installer le service Ponant : 
+	installutil.exe C:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe
+
+- Recette :
+1 - Invite de commandes > Exécuter en tant qu'administrateur
+2 - Lancer la commande : 
+	cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
+3 - Lancer la commande pour supprimer le service Ponant existant : 
+	installutil.exe -u D:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe
+4 - Copie du dossier bin dans le dossier : 
+	D:\MedicalApplication\MedicalCode\Ponant.Medical.Service
+5 - Lancer la commande pour installer le service Ponant : 
+	installutil.exe D:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe
+
+- Production :
+1 - Invite de commandes > Exécuter en tant qu'administrateur
+2 - Lancer la commande : 
+	cd C:\Windows\Microsoft.NET\Framework\v4.0.30319
+3 - Lancer la commande pour supprimer le service Ponant existant : 
+	installutil.exe -u D:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe
+4 - Copie du dossier bin dans le dossier : 
+	D:\MedicalApplication\MedicalCode\Ponant.Medical.Service
+5 - Lancer la commande pour installer le service Ponant : 
+	installutil.exe D:\MedicalApplication\MedicalCode\Ponant.Medical.Service\ponant.medical.service.exe

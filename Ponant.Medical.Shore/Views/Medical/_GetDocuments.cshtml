@@ -1,0 +1,26 @@
+﻿
+@model Ponant.Medical.Shore.Models.GetDocumentsMedicalViewModel
+
+@{
+    ViewBag.Title = "List of documents for ";
+}
+
+<div class="modal fade" id="modalDocuments" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@ViewBag.Title @Model.Name</h4>
+            </div>
+            <div class="modal-body">
+                @Html.Hidden("SeenText", ViewBag.SeenText as string)
+                @Html.MVCGrid("DocumentOnePassenger", new { IdPassenger = Model.Id })               
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-default" data-dismiss="modal" value="Close" />
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@Scripts.Render("~/bundles/medical_bundle")

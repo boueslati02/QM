@@ -1,0 +1,82 @@
+﻿@model Ponant.Medical.Shore.Models.ReminderViewModel
+
+@{
+    ViewBag.Title = "Management of reminders to individual passengers";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div id="divQuestion" class="col-md-12">
+    <div class="glyphicon glyphicon-question-sign"></div>
+    <span>The survey is sent by e-mail upon receipt of the booking. In this screen you can set the reminder times.</span>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div id="successAlert" class="alert alert-success col-md-12" role="alert">@TempData["Message"]</div>
+}
+@using (Html.BeginForm("Edit", "Reminder", FormMethod.Post, new { @id = "formReminderEdit", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    @Html.HiddenFor(model => model.FirstReminderId)
+    @Html.HiddenFor(model => model.SecondReminderId)
+    @Html.HiddenFor(model => model.ThirdReminderId)
+
+    <div class="col-md-12 form-group">
+        <div class="col-md-2">
+            @Html.CheckBoxFor(model => model.FirstReminderEnabled, new { @inputjoin = "FirstReminderDays" })
+            @Html.LabelFor(model => model.FirstReminderEnabled, new { @class = "checkboxLabel" })
+        </div>
+        <div class="col-md-1">
+            @Html.TextBoxFor(model => model.FirstReminderDays, new { @class= "numericInput" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.FirstReminderDays, new { @class = "daysReminderLabel" })
+        </div>
+        <div class="col-md-7">
+            @Html.ValidationMessageFor(model => model.FirstReminderDays, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-12 form-group">
+        <div class="col-md-2">
+            @Html.CheckBoxFor(model => model.SecondReminderEnabled, new { @inputjoin = "SecondReminderDays" })
+            @Html.LabelFor(model => model.SecondReminderEnabled, new { @class = "checkboxLabel" })
+        </div>
+        <div class="col-md-1">
+            @Html.TextBoxFor(model => model.SecondReminderDays, new { @class = "numericInput" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.SecondReminderDays, new { @class = "daysReminderLabel" })
+        </div>
+        <div class="col-md-7">
+            @Html.ValidationMessageFor(model => model.SecondReminderDays, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-12 form-group">
+        <div class="col-md-2">
+            @Html.CheckBoxFor(model => model.ThirdReminderEnabled, new { @inputjoin = "ThirdReminderDays" })
+            @Html.LabelFor(model => model.ThirdReminderEnabled, new { @class = "checkboxLabel" })
+        </div>
+        <div class="col-md-1">
+            @Html.TextBoxFor(model => model.ThirdReminderDays, new { @class = "numericInput" })
+        </div>
+        <div class="col-md-2">
+            @Html.LabelFor(model => model.ThirdReminderDays, new { @class = "daysReminderLabel" })
+        </div>
+        <div class="col-md-7">
+            @Html.ValidationMessageFor(model => model.ThirdReminderDays, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-12">
+        <input id="submitButton" type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+    </div>
+   
+}
+
+@Scripts.Render("~/bundles/reminder_bundle")
+@Styles.Render("~/Content/reminder_bundle")

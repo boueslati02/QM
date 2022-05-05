@@ -1,0 +1,17 @@
+﻿
+- Pour transformer le certificat .crt en .pfx il est nécessaire d'utiliser OpenSSL:
+	- Télécharger et installer Win64 OpenSSL v1.1.1g Light depuis le site https://slproweb.com/products/Win32OpenSSL.html
+	- Ouvrir l'invité de commande OpenSSL : C:\Program Files\OpenSSL-Win64\bin\openssl.exe
+	- Taper la commande (en remplaçant "path" par le chemin des fichiers) : pkcs12 -export -out path\ponant.pfx -inkey path\ponant.key -in path\ponant.crt
+
+- Importation du certificat sur le serveur :
+	- Installer le certificat sur le serveur :
+		- A installer dans : "Local Machine"
+		- Utiliser le mot de passe précédement défini
+		- Dans le Certificate Store : "Personnal"
+	- Ouvrir "Manage computer certificate" et vérifier que le nouveau certificat est bien présent
+
+- Association du certificat dans IIS :
+	- Depuis le serveur, menu "Server Certificates" vérifier que le nouveau certificat est bien présent
+	- Pour chaque site utiliser le menu "Binding"
+	- Editer le binding existant en séléctionnant (via le bouton "Select") le nouveau certificat

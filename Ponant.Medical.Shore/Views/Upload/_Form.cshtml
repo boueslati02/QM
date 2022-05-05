@@ -1,0 +1,310 @@
+﻿@model Ponant.Medical.Shore.Models.UploadViewModel
+
+<div class="form form__white text__medium col-xs-12">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Token)
+    @Html.HiddenFor(model => model.IdPassenger)
+    @Html.HiddenFor(model => model.IdLanguage)
+    @Html.HiddenFor(model => model.SaillingDate)
+    @Html.HiddenFor(model => model.IdStatus)
+
+    <div data-role="content" class="cancel__padding_top">
+        <div class="row col-xs-12">
+            <div class="col-xs">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-12 col-md-7 col-lg-7">
+                        @if (ViewBag.SendQmThreeMonthBefore != null && ViewBag.SendQmThreeMonthBefore)
+                        {
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 warningQmMobile">
+                                    <div class="col-xs-12 row middle-xs padding__s background__warning margin__top_rem">
+                                        <div class="col-xs-2 col-md-1">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d67f00" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                                <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                                <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                                            </svg>
+                                        </div>
+                                        <div class="col-xs-10 col-md-11">
+                                            <p class="color__warning text__medium text__s cancel__margin_bottom">
+                                                @ResourcesViews.Index.WarningDeparture
+                                            </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                        <br />
+                        <div class="row">
+                            <div class="col-xs-9 col-sm-9 col-md-6 col-lg-6">
+                                <p class="informationsUser">
+                                    @ResourcesViews.Index.CivilityTitle
+                                    @Html.DisplayFor(model => model.Civility)
+                                    @Html.HiddenFor(model => model.Civility)
+                                    @Html.DisplayFor(model => model.LastName)
+                                    @Html.HiddenFor(model => model.LastName)
+                                    @Html.DisplayFor(model => model.FirstName),
+                                    @Html.HiddenFor(model => model.FirstName)
+                                </p>
+                            </div>
+                            @Html.HiddenFor(model => model.AgencyLogo)
+                            @if (!string.IsNullOrEmpty(Model.AgencyLogo))
+                            {
+                                <div class="col-xs-3 col-sm-3 col-md-6 col-lg-6 logoAgencyContainerMobile">
+                                    <img src="@ViewBag.AgencyLogoPath" />
+                                </div>
+                            }
+                        </div>
+                        <p class="informationsUser">
+                            @if (!string.IsNullOrEmpty(Model.AgencyLogo))
+                            {
+                                @ResourcesViews.Index.MadeWith<span> </span>
+                                @Html.DisplayFor(model => model.AgencyName)<span>.</span>
+                                @Html.HiddenFor(model => model.AgencyName)<br />
+                            }
+                            @ResourcesViews.Index.ShipPresentation,
+                            @Html.DisplayFor(model => model.CruiseName).
+                            @Html.HiddenFor(model => model.CruiseName)<br />
+                            @ResourcesViews.Index.FillForm
+                        </p>
+                    </div>
+                    @if (!string.IsNullOrEmpty(Model.AgencyLogo))
+                    {
+                        <div class="col-xs-12 col-sm-12 col-md-5 col-lg-5 logoAgencyContainerLaptop">
+                            <img class="medicalFileLogo" src="@ViewBag.AgencyLogoPath" />
+                        </div>
+                    }
+                </div>
+                @if (ViewBag.QmAlreadySent != null && ViewBag.QmAlreadySent)
+                {
+                    <div id="questionQmResent">
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                @ResourcesViews.Index.QmAlreadySent
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                <input type="radio" id="radioBtnValid" name="ResendQm" value="1">
+                                <label for="radioBtnValid">@ResourcesViews.Index.radioBtnValid</label>
+                                <input type="radio" id="radioBtnCancel" name="ResendQm" value="0" checked>
+                                <label for="radioBtnCancel">@ResourcesViews.Index.radioBtnCancel</label>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <div class="row medicalSurveyContainer">
+                    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        @Html.LabelFor(model => model.MedicalSurvey)<span> *</span>
+                        <div class="row">
+                            <div class="input input__popup_trigger col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                <br />
+                                <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="inputFileText" id="MedicalSurveyTextFile" readonly>
+                                            <div class="input-group-btn">
+                                                <span class="fileUpload btn btn-primary" id="BtnMedicalSurvey">
+                                                    <span id="uploadImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                        </svg>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.MedicalSurvey, new { type = "file", @class = "upload inputFile", required = "required" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.MedicalSurvey, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    @if (ViewBag.SendQmThreeMonthBefore != null && ViewBag.SendQmThreeMonthBefore)
+                    {
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6 warningQmLaptop">
+                            <div class="col-xs-12 row middle-xs padding__s background__warning margin__top_rem">
+                                <div class="col-xs-2 col-md-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="#d67f00" class="bi bi-exclamation-triangle" viewBox="0 0 16 16">
+                                        <path d="M7.938 2.016A.13.13 0 0 1 8.002 2a.13.13 0 0 1 .063.016.146.146 0 0 1 .054.057l6.857 11.667c.036.06.035.124.002.183a.163.163 0 0 1-.054.06.116.116 0 0 1-.066.017H1.146a.115.115 0 0 1-.066-.017.163.163 0 0 1-.054-.06.176.176 0 0 1 .002-.183L7.884 2.073a.147.147 0 0 1 .054-.057zm1.044-.45a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566z" />
+                                        <path d="M7.002 12a1 1 0 1 1 2 0 1 1 0 0 1-2 0zM7.1 5.995a.905.905 0 1 1 1.8 0l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995z" />
+                                    </svg>
+                                </div>
+                                <div class="col-xs-10 col-md-11">
+                                    <p class="color__warning text__medium text__s cancel__margin_bottom">
+                                        @ResourcesViews.Index.WarningDeparture
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+                <div id="RelatedDocuments">
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                            @Html.LabelFor(model => model.RelatedDocuments1)
+                            <div class="row">
+                                <div class="input input__popup_trigger  col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                                    <br />
+                                    <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <input type="text" class="inputFileText" readonly>
+                                                <div class="input-group-btn">
+                                                    <span class="fileUpload btn btn-primary">
+                                                        <span id="uploadImg">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                                <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                            </svg>
+                                                        </span>
+                                                        @Html.TextBoxFor(model => model.RelatedDocuments1, new { type = "file", @class = "upload inputFile" })
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    @Html.ValidationMessageFor(model => model.RelatedDocuments1, "", new { @class = "text-danger" })
+                                    <span class="text-danger field-validation-error" data-valmsg-for="RelatedDocuments1" id="ErrorCheckedRelatedDocuments">
+                                        <span id="RelatedDocuments1_FileData-error" class="" hidden>@ResourcesViews.Index.ErrorRelatedDocuments</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="input input__popup_trigger">
+                                <br />
+                                <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="inputFileText" readonly>
+                                            <div class="input-group-btn">
+                                                <span class="fileUpload btn btn-primary">
+                                                    <span id="uploadImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                        </svg>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.RelatedDocuments2, new { type = "file", @class = "upload inputFile" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.RelatedDocuments2, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="input input__popup_trigger">
+                                <br />
+                                <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="inputFileText" readonly>
+                                            <div class="input-group-btn">
+                                                <span class="fileUpload btn btn-primary">
+                                                    <span id="uploadImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                        </svg>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.RelatedDocuments3, new { type = "file", @class = "upload inputFile" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.RelatedDocuments3, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="input input__popup_trigger">
+                                <br />
+                                <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="inputFileText" readonly>
+                                            <div class="input-group-btn">
+                                                <span class="fileUpload btn btn-primary">
+                                                    <span id="uploadImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                        </svg>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.RelatedDocuments4, new { type = "file", @class = "upload inputFile" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.RelatedDocuments4, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                            <div class="input input__popup_trigger">
+                                <br />
+                                <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12">
+                                    <div class="form-group">
+                                        <div class="input-group">
+                                            <input type="text" class="inputFileText" readonly>
+                                            <div class="input-group-btn">
+                                                <span class="fileUpload btn btn-primary">
+                                                    <span id="uploadImg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-folder" viewBox="0 0 16 16">
+                                                            <path d="M.54 3.87.5 3a2 2 0 0 1 2-2h3.672a2 2 0 0 1 1.414.586l.828.828A2 2 0 0 0 9.828 3h3.982a2 2 0 0 1 1.992 2.181l-.637 7A2 2 0 0 1 13.174 14H2.826a2 2 0 0 1-1.991-1.819l-.637-7a1.99 1.99 0 0 1 .342-1.31zM2.19 4a1 1 0 0 0-.996 1.09l.637 7a1 1 0 0 0 .995.91h10.348a1 1 0 0 0 .995-.91l.637-7A1 1 0 0 0 13.81 4H2.19zm4.69-1.707A1 1 0 0 0 6.172 2H2.5a1 1 0 0 0-1 .981l.006.139C1.72 3.042 1.95 3 2.19 3h5.396l-.707-.707z" />
+                                                        </svg>
+                                                    </span>
+                                                    @Html.TextBoxFor(model => model.RelatedDocuments5, new { type = "file", @class = "upload inputFile" })
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                @Html.ValidationMessageFor(model => model.RelatedDocuments5, "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-12">
+                    <br>
+                    <br>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <input type="submit" id="btnSubmitForm" class="button btn_medium btn_primary btn_fill" value="@ResourcesViews.Index.BtnSend" data-loading-text="@ResourcesViews.Index.Loading">
+                            <p class="margin__top_rem text__xs">
+                                <i>@ResourcesViews.Index.RequiredFields</i>
+                            </p>
+                        </div>
+                        <p class="col-xs-12"><br></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="informationsUser">
+        @ResourcesViews.Index.AllowedFormats
+        <br />
+        @ResourcesViews.Index.FileSize
+    </p>
+    <div class="col-xs-12 row middle-xs padding__s background__light_secondary margin__top_rem margin__bottom">
+        <div class="col-xs-2 col-md-1">
+            <svg xmlns="http://www.w3.org/2000/svg" width="39" height="39" fill="#26afc2" class="bi bi-info-circle" viewBox="0 0 16 16">
+                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588zM9 4.5a1 1 0 1 1-2 0 1 1 0 0 1 2 0z" />
+            </svg>
+        </div>
+        <div class="col-xs-10 col-md-11">
+            <p class="color__primary text__medium text__s cancel__margin_bottom">
+                @ResourcesViews.Index.RGPD
+            </p>
+        </div>
+    </div>
+</div>

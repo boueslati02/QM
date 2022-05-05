@@ -1,0 +1,6 @@
+AU:Austral17
+BO:Boreal17
+LY:Lyrial17
+PO:Ponant17
+SO:Soleal17
+System:Ponant17$

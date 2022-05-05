@@ -1,0 +1,309 @@
+﻿@using Ponant.Medical.Shore.Models
+@using Ponant.Medical.Data
+
+@model PassengerViewModel
+
+@{
+    ViewBag.Title = "List of cruise passengers ";
+}
+
+<h2>@ViewBag.Title @Model.CruiseCode</h2>
+
+<div id="successAlert" class="alert alert-success" role="alert" style="@(@TempData["Message"] == null ? "display:none;" : "" )">@TempData["Message"]</div>
+<div id="errorAlert" class="alert alert-danger" role="alert" style="@(@TempData["ErrorMessage"] == null ? "display:none;" : "" )">@TempData["ErrorMessage"]</div>
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.IdCruise)
+
+@if (HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_IT_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_GROUP))
+{
+    <div id="cruiseCounter" class="row">
+        <div class="col-md-2 col-md-offset-1 imgicon">
+            <img src="~/images/passengerMany.png" />
+            <label>
+                @Model.NbPassenger
+                <br />
+                passengers
+            </label>
+        </div>
+        <div class="col-md-2 imgicon">
+            <img src="~/images/qmShore.png" />
+            <label>
+                @Model.NbQMShore
+                <br />
+                receive on shore
+            </label>
+        </div>
+        <div class="col-md-2 imgicon">
+            <div title="@Model.ShipName" style="display:inline-block;">
+                <img src="~/images/qmBoard.png" />
+                <label>
+                    @Model.NbQMBoard
+                    <br />
+                    download on board
+                </label>
+            </div>
+        </div>
+        <div class="col-md-2 imgicon">
+            <img src="~/images/qmTreat.png" />
+            <label>
+                @Model.NbQMTreat
+                <br />
+                done
+            </label>
+        </div>
+        <div class="col-md-2 imgicon">
+            <img src="~/images/qmDowload.png" />
+            <label>
+                @Model.NbQMDowloadCruise
+                <br />
+                download before cruise
+            </label>
+        </div>
+    </div>
+}
+
+<div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        @if (HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_IT_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_GROUP))
+        {
+            <li role="presentation" class="@(@ViewBag.BookingGroupToDisplay == 0 ? "active" : "")">
+                <a href="#indivPassenger" aria-controls="indivPassenger" role="tab" data-toggle="tab">Individual passengers</a>
+            </li>
+        }
+
+        @if ((Model.ListOfGroups != null) && (Model.ListOfGroups.Count > 0))
+        {
+            <li role="presentation" class="@(@ViewBag.BookingGroupToDisplay != 0 ? "active" : "")">
+                <a href="#groupPassenger" aria-controls="groupPassenger" role="tab" data-toggle="tab">Groups/Charters</a>
+            </li>
+        }
+    </ul>
+
+    <!-- Tab Principal -->
+    <div class="tab-content">
+        @*Premier Tabs Principal*@
+        @if (HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_IT_ADMINISTRATOR) ||
+             HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_GROUP))
+        {
+            <div role="tabpanel" id="indivPassenger" class="@(@ViewBag.BookingGroupToDisplay == 0 ? "tab-pane active" : "tab-pane")">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-2 col-md-offset-1 imgicon">
+                            <img src="~/images/passengerOne.png" />
+                            <label>
+                                @Model.NbIndiv
+                                <br />
+                                individual passengers
+                            </label>
+                        </div>
+                        <div class="col-md-2 imgicon">
+                            <img src="~/images/qmReceive.png" />
+                            <label>
+                                @Model.NbIndivReceive
+                                <br />
+                                receive on shore
+                            </label>
+                        </div>
+                        <div class="col-md-2 imgicon qmvalid">
+                            <img src="~/images/qmValidate.png" />
+                            <label>
+                                @Model.NbIndivValidate
+                                <br />
+                                validated
+                            </label>
+                        </div>
+                        <div class="col-md-2 imgicon qmwaiting">
+                            <img src="~/images/qmWaiting.png" />
+                            <label>
+                                @Model.NbIndivWaiting
+                                <br />
+                                in waiting
+                            </label>
+                        </div>
+                        <div class="col-md-2 imgicon qmrefuse">
+                            <img src="~/images/qmUnfavorable.png" />
+                            <label>
+                                @Model.NbIndivUnfavorableAdvice
+                                <br />
+                                unfavorables advices
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-inline filterdiv fixedfilterdiv">
+                    <div class="form-group">
+                        @Html.Label("Passenger", new { @for = "indivNameFilter" })
+                        @Html.TextBox("indivNameFilter", "", new { @class = "form-control" })
+                    </div>
+
+                    @if (ViewBag.ListQmStatus != null)
+                    {
+                        <div class="form-group">
+                            @Html.Label("QM status", new { @for = "indivQmStatusFilter" })
+                            @Html.DropDownList("indivQmStatusFilter", ViewBag.ListQmStatus as List<SelectListItem>, "All", new { @class = "form-control" })
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        @Html.Label("Office", new { @for = "indivOfficeFilter" })
+                        @Html.ListBox("indivOfficeFilter", ViewBag.ListOffice as List<SelectListItem>, new { @class = "form-control listboxMultiSelect" })
+                    </div>
+                    <input id="searchPassengerIndivButton" type="button" value="Search" class="btn btn-primary" />
+                </div>
+                <input id="RelaunchIndivButton" type="button" value="Relaunch" class="btn btn-primary" disabled="disabled" />
+
+                @Html.MVCGrid("IndividualPassenger", new { IdCruise = Model.IdCruise })
+            </div>
+        }
+
+        @if ((Model.ListOfGroups != null) && (Model.ListOfGroups.Count > 0))
+        {
+            // Second Tabs Principal
+            <div role="tabpanel" id="groupPassenger" class="@(@ViewBag.BookingGroupToDisplay != 0 ? "tab-pane active" : "tab-pane")">
+
+                <!-- Tab groupes -->
+                <ul class="nav nav-tabs" role="tablist">
+                    @{
+                        string classTitre = "active";
+                        foreach (PassengersGroup passengersGroup in Model.ListOfGroups)
+                        {
+                            <li role="presentation" class="@(@ViewBag.BookingGroupToDisplay == 0 ? classTitre : (@ViewBag.BookingGroupToDisplay == passengersGroup.Id ? "active" : ""))">
+                                <a href="#group_@passengersGroup.Id" aria-controls="group_@passengersGroup.Id" role="tab" data-toggle="tab" bookingGroupId="@passengersGroup.Id">@passengersGroup.Name</a>
+                            </li>
+                            classTitre = "";
+                        }
+                    }
+                </ul>
+
+                <div class="tab-content">
+                    @{
+                        string classContent = "tab-pane active";
+                        foreach (PassengersGroup passengersGroup in Model.ListOfGroups)
+                        {
+                            <div role="tabpanel" id="group_@passengersGroup.Id" class="@(@ViewBag.BookingGroupToDisplay == 0 ? "" + classContent + "" : (@ViewBag.BookingGroupToDisplay == passengersGroup.Id ? "tab-pane active" : "tab-pane"))">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div>
+                                            <label>N°Booking : </label>
+                                            <span id="BookingNumber">@passengersGroup.BookingNumber</span>
+                                            <label> Agency : </label>
+                                            <span id="AgencyName">@passengersGroup.AgencyName</span>
+                                            <span id="IdAgency" class="hidden">@passengersGroup.IdAgency</span>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="col-md-2 imgicon">
+                                            <img src="~/images/passengerGroup.png" />
+                                            <label>
+                                                @passengersGroup.NbForGroup
+                                                <br />
+                                                passengers
+                                            </label>
+                                        </div>
+                                        @if (passengersGroup.IdAgency == AppSettings.IdAgency)
+                                        {
+                                        <div class="col-md-2 imgicon">
+                                            <img src="~/images/passengerIdentified.png" />
+                                            <label>
+                                                @passengersGroup.NbIdentify
+                                                <br />
+                                                identified passengers
+                                            </label>
+                                        </div>
+                                        }
+                                        <div class="col-md-2 imgicon">
+                                            <img src="~/images/qmReceive.png" />
+                                            <label>
+                                                @passengersGroup.NbQMReceive
+                                                <br />
+                                                receive on shore
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2 imgicon qmvalid">
+                                            <img src="~/images/qmValidate.png" />
+                                            <label>
+                                                @passengersGroup.NbQMValidate
+                                                <br />
+                                                validated
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2 imgicon qmwaiting">
+                                            <img src="~/images/qmWaiting.png" />
+                                            <label>
+                                                @passengersGroup.NbQMWaiting
+                                                <br />
+                                                in waiting
+                                            </label>
+                                        </div>
+                                        <div class="col-md-2 imgicon qmrefuse">
+                                            <img src="~/images/qmUnfavorable.png" />
+                                            <label>
+                                                @passengersGroup.NbQMUnfavorableAdvice
+                                                <br />
+                                                unfavorables advices
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            classContent = "tab-pane";
+                        }
+                    }
+                </div>
+                <br />
+                @Html.Hidden("IdBooking", (@ViewBag.BookingGroupToDisplay == 0 ? Model.ListOfGroups[0].Id : @ViewBag.BookingGroupToDisplay as int?))
+                <div id="divGroupPassenger" class="divStyleTab">
+                    <div class="form-inline filterdiv fixedfilterdiv">
+                        <div class="form-group">
+                            @Html.Label("Passenger", new { @for = "groupNameFilter" })
+                            @Html.TextBox("groupNameFilter", "", new { @class = "form-control" })
+                        </div>
+
+                        @if (ViewBag.ListQmStatus != null)
+                        {
+                            <div class="form-group">
+                                @Html.Label("QM status", new { @for = "groupQmStatusFilter" })
+                                @Html.DropDownList("groupQmStatusFilter", ViewBag.ListQmStatus as List<SelectListItem>, "All", new { @class = "form-control" })
+                            </div>
+                        }
+                        <input id="searchPassengerGroupButton" type="button" value="Search" class="btn btn-primary" />
+                    </div>
+                    <div>
+                        <input id="RelaunchIndivInGroupButton" type="button" value="Relaunch" class="btn btn-primary" disabled="disabled" />
+                        <input id="AddPassenger" type="button" value="Add" class="btn btn-primary" onclick="addNewPassenger(this)" />
+                        <input id="DownloadTemplate" type="button" value="Template" class="btn btn-primary" />
+                        <input id="ImportPassenger" type="button" value="Import" class="btn btn-primary" />
+                        <input id="FileInputPassenger" type="file" style="display: none;" />
+                        <input id="ExportGroupPassengerButton" type="button" value="Export" class="btn btn-primary" />
+                    </div>
+
+                    @Html.MVCGrid("GroupPassenger", new { IdCruise = Model.IdCruise })
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<div id="frmCreate">
+</div>
+<div id="frmEdit">
+</div>
+<div id="frmConfirmRelaunch">
+</div>
+
+@Scripts.Render("~/bundles/passenger_bundle")
+@Styles.Render("~/Content/passenger_bundle")

@@ -1,0 +1,2 @@
+IIS:Activer les applications 32 bits du pool d'applications
+Gestionnaire de serveur>Serveur local>Configuration de sécurité renforcée d'IE>Tout désactiver (pour tester local uniquement)

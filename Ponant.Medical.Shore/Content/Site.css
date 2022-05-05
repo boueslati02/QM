@@ -1,0 +1,208 @@
+﻿html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    margin-bottom: 55px;
+}
+
+footer {
+    position: absolute;
+    bottom: 15px;
+    width: 100%;
+    height: 55px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+    footer hr {
+        margin-bottom: 7px;
+        margin-top: 7px;
+    }
+
+.btn-primary, .btn-primary:focus {
+    background-color: #eee;
+    border-color: #ccc;
+    color: #000;
+}
+
+    .btn-primary:hover {
+        background-color: #ddd;
+        border-color: #ccc;
+        color: #000;
+    }
+
+img.logo {
+    padding: 15px;
+    max-width: 100%;
+    height: auto;
+}
+
+.circle {
+    display: inline-block;
+    background: black;
+    border-radius: 50%;
+    height: 15px;
+    width: 15px;
+    margin: 0;
+    position: absolute;
+}
+
+span.enabled {
+    background: radial-gradient(circle at 100px 100px, #000, #4cff00);
+}
+
+span.disabled {
+    background: radial-gradient(circle at 100px 100px, #000, #ff0000);
+}
+
+a.action {
+    text-decoration: none;
+    color: #000;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+a.action-success {
+    color: #3c763d !important;
+}
+
+a.action-danger {
+    color: #a94442 !important;
+}
+
+a.action-primary {
+    color: #337ab7 !important;
+}
+
+.form-inline {
+    background-color: rgb(125,161,196);
+    border: rgb(53,78,112) solid 1px;
+    border-radius: 5px;
+    color: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.form-inline .form-group {
+    margin-right: 50px;
+}
+
+.form-inline .form-group label {
+    margin-right: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding: 15px;
+}
+
+.home {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    width: 100%;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.datepicker {
+    background-color: white !important;
+    border-color: white !important;
+}
+
+.datepickerInput {
+    color: initial !important;
+}
+
+.nav-tabs {
+    border-bottom: 0px;
+}
+
+    .nav-tabs li a {
+        cursor: default;
+        background-color: #fff;
+        border: 1px solid #ddd;
+        border-bottom-color: transparent;
+    }
+
+    .nav-tabs li.active a {
+        color: #555;
+        font-weight: bold;
+    }
+
+.nav > li > a:hover {
+    background-color: #ddd;
+}
+
+.tab-content > .tab-pane, .divStyleTab {
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+    border-top-left-radius: 0px;
+    background-color: white;
+}
+
+table > tbody > tr:hover {
+    background-color: lightyellow !important;
+}
+
+.selectedRow {
+    background-color: lightblue !important;
+}
+
+#labVersion {
+    position: absolute;
+    right: 20px;
+    bottom: 0;
+}
+
+.col-action{
+    white-space:nowrap;
+    text-align:center;
+    cursor: pointer;
+}
+
+.col-action-select{
+    min-width: 30px;
+    width: 30px;
+    max-width: 30px;
+}
+
+#QmStatistics iframe {
+    height: calc(100vh - 225px) !important;
+    border: 0;
+}
+
+#QmStatistics hr {
+    margin-top: 20px 0;
+    border: 0;
+    border-top: 1px solid #eee;
+}
+
+.fixed-search-div {
+    position: fixed;
+    top: 5%;
+    width: 98%;
+    z-index: 1;
+}
+
+.displayField{
+    padding-top: 7px;
+}

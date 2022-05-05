@@ -1,0 +1,80 @@
+﻿
+@model Ponant.Medical.Shore.Models.LinkViewModel
+
+@{
+    ViewBag.Title = "Link the documents to a passenger";
+}
+
+<div class="modal fade" id="modalLink" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@ViewBag.Title (@Model.DocumentsNames)</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("_LinkPost", "AvailableDocument", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "frmLink",
+                    //OnSuccess = "modal('modalLink')",
+                    //OnFailure = "modal('modalLink')"
+                    OnSuccess = "modalNew(data, 'modalLink', 'frmLink')",
+                    OnFailure = "modalNew(data, 'modalLink', 'frmLink')"
+                }, new { @id = "formAvailableDocumentLink", @class = "form-horizontal", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.IdPassenger)
+                    @Html.HiddenFor(model => model.DocumentsNames)
+                    for (int i = 0; i < Model.IdsDocument.Count; i++)
+                    {
+                        @Html.HiddenFor(model => Model.IdsDocument[i])
+                    }
+
+                    @Html.ValidationMessageFor(model => model.IdsDocument, "", new { @class = "text-danger" })
+                    <div class="form-inline filterdiv">
+                        <div class="row">
+                            <div class="form-group col-md-2">
+                                @Html.Label("Passenger", new { @for = "passengerFilter" })
+                                @Html.TextBox("passengerFilter", "", new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                @Html.Label("Cruise", new { @for = "cruiseFilter" })
+                                @Html.TextBox("cruiseFilter", "", new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                @Html.Label("N° booking", new { @for = "bookingFilter" })
+                                @Html.TextBox("bookingFilter", "", new { @class = "form-control" })
+                            </div>
+
+                            <div class="form-group col-md-2">
+                                @Html.Label("Group", new { @for = "groupFilter" })
+                                @Html.TextBox("groupFilter", "", new { @class = "form-control" })
+                            </div>
+                            <input id="searchAvailableDocumentLinkButton" type="button" value="Search" class="btn btn-primary col-md-1" />
+                        </div>
+                    </div>
+                    @Html.ValidationMessageFor(model => model.IdPassenger, "", new { @class = "text-danger" })
+
+                    <div id="labInfo" class="alert alert-info">
+                        <span>Please make a search to display the list of corresponding passengers</span>
+                    </div>
+
+                    @Html.MVCGrid("DocumentLinkPassenger")
+                  
+                    <div class="modal-footer">
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                        <input type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@Scripts.Render("~/bundles/availableDocument_bundle")
+@Styles.Render("~/Content/availableDocument_bundle")

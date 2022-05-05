@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="Ponant.Medical.Board.View.SurveyToDoPage1View"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Ponant.Medical.Board.View"
+             xmlns:conv="clr-namespace:Ponant.Medical.Board.Converters"
+             xmlns:extended="clr-namespace:Ponant.Medical.Board.Extended"
+             x:Name="myUserControlPage1View"
+             mc:Ignorable="d" 
+             d:DesignHeight="525" d:DesignWidth="700">
+    <UserControl.Resources>
+        <conv:DoubleValueCommandParameterConverter x:Key="myDoubleValueCommandParameterConverter" />
+        <conv:IntegerToBooleanConverter x:Key="myIntegerToBooleanConverter" />
+        <conv:BooleanToVisibilityConverter x:Key="myBooleanToVisibilityConverter" />
+    </UserControl.Resources>
+    <Grid Margin="10">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <extended:RowDefinitionExtended Height="Auto" Visible="{Binding DownloadAvailable, Mode=OneWay, Converter={StaticResource myIntegerToBooleanConverter}}"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="0" Margin="15" Width="32" Fill="Black">
+                <Rectangle.OpacityMask>
+                    <VisualBrush Visual="{StaticResource appbar_question}" Stretch="Uniform"/>
+                </Rectangle.OpacityMask>
+            </Rectangle>
+            <StackPanel Grid.Column="1">
+                <BulletDecorator Margin="0,5">
+                    <BulletDecorator.Bullet>
+                        <Ellipse Height="5" Width="5" Fill="Black"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock Margin="10,0" TextWrapping="Wrap"
+                               Text="Click on the download icon of a cruise to retrieve the questionnaires locally. The doctor can not recover only one cruise at a time on a ship as it is then blocked for doctors from others ships." />
+                </BulletDecorator>
+                <BulletDecorator Margin="0,5">
+                    <BulletDecorator.Bullet>
+                        <Ellipse Height="5" Width="5" Fill="Black"/>
+                    </BulletDecorator.Bullet>
+                    <TextBlock Margin="10,0" VerticalAlignment="Center" TextWrapping="Wrap" 
+                               Text="Click on the cruising icon to give your opinion on the passengers." />
+                </BulletDecorator>
+            </StackPanel>
+        </Grid>
+        <GroupBox Grid.Row="1" Header="List of available cruises">
+            <DataGrid Grid.Row="2" Margin="10" IsReadOnly="True" GridLinesVisibility="All" AutoGenerateColumns="False" BorderBrush="LightGray" BorderThickness="1" 
+                  ItemsSource="{Binding AvailableCruiseItems, Mode=OneWay}">
+                <DataGrid.CellStyle>
+                    <Style TargetType="{x:Type DataGridCell}">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsAssignedCruise}" Value="true">
+                                <Setter Property="Foreground" Value="Green" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </DataGrid.CellStyle>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="Auto" Header="Cruise" Binding="{Binding CruiseCode, Mode=OneWay}" />
+                    <DataGridTextColumn Width="*" Header="Nb passengers" Binding="{Binding PassengerCount, Mode=OneWay}" />
+                    <DataGridTextColumn Width="*" Header="Nb QM available" Binding="{Binding QMCount, Mode=OneWay}" />
+                    <DataGridTextColumn Width="*" Header="Nb QM done" Binding="{Binding QMDoneCount, Mode=OneWay}" />
+                    <DataGridTextColumn Width="*" Header="Nb QM downloaded" Binding="{Binding QMDownloadedCount, Mode=OneWay}" />
+                    <DataGridTextColumn Width="*" Header="Deadline" Binding="{Binding Deadline, Mode=OneWay, StringFormat=d}" />
+                    <DataGridTemplateColumn Width="Auto" Header="Action">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <Button ToolTip="Download the surveys" Background="Transparent" Visibility="{Binding IsDownloadSurveysVisible, Converter={StaticResource myBooleanToVisibilityConverter}}" Command="{Binding DownloadSurveysCommand}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource myDoubleValueCommandParameterConverter}">
+                                                <Binding />
+                                                <Binding Path="DataContext" ElementName="myUserControlPage1View"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                        <Rectangle Height="16" Width="16" Fill="Black">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_download}"/>
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                    </Button>
+                                    <Button ToolTip="Treat a cruise" Background="Transparent" Visibility="{Binding IsTreatCruiseVisible, Converter={StaticResource myBooleanToVisibilityConverter}}" Command="{Binding TreatCruiseCommand}">
+                                        <Button.CommandParameter>
+                                            <MultiBinding Converter="{StaticResource myDoubleValueCommandParameterConverter}">
+                                                <Binding />
+                                                <Binding Path="DataContext" ElementName="myUserControlPage1View"/>
+                                            </MultiBinding>
+                                        </Button.CommandParameter>
+                                        <Rectangle Height="16" Width="16" Fill="Black">
+                                            <Rectangle.OpacityMask>
+                                                <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_edit}"/>
+                                            </Rectangle.OpacityMask>
+                                        </Rectangle>
+                                    </Button>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+        <StackPanel Grid.Row="2" Margin="0,10,0,0" VerticalAlignment="Bottom">
+            <TextBlock Margin="10,0" HorizontalAlignment="Left" >
+                <TextBlock.Text>
+                    <MultiBinding StringFormat="{}{0} received / {1} available">
+                        <Binding Path="DownloadReceived" />
+                        <Binding Path="DownloadAvailable" />
+                    </MultiBinding>
+                </TextBlock.Text>
+            </TextBlock>
+            <ProgressBar Minimum="0" Maximum="{Binding DownloadAvailable}" Value="{Binding DownloadReceived}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

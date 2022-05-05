@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Cruise started";
+}
+<div class="row">
+    <div class="col-xs-12 margin__top margin__bottom cruiseDeparture text-center">
+        <img src="~/images/travel.png" />
+    </div>
+    <br />
+    <div class="col-xs-12 text-center">
+        <p>
+            @ResourcesViews._CruiseDeparture.ErrorAfterCruiseDeparture
+        </p>
+    </div>
+</div>
+@Styles.Render("~/Content/upload_bundle")
+@Scripts.Render("~/bundles/upload_bundle")

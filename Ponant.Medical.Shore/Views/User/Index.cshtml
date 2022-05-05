@@ -1,0 +1,59 @@
+﻿@model IEnumerable<Ponant.Medical.Shore.Models.ApplicationUser>
+@using Ponant.Medical.Data;
+
+@{
+    ViewBag.Title = "User management";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="form-inline filterdiv">
+
+    <div class="form-group">
+        @Html.Label("Agency", new { @for = "agency" })
+        @Html.TextBox("agency", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "agencyFilter" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("User", new { @for = "user" })
+        @Html.TextBox("user", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "userFilter" })
+    </div>
+
+    @if (ViewBag.Roles != null)
+    {
+        <div class="form-group">
+            @Html.Label("Role", new { @for = "role" })
+            @Html.DropDownList("role", ViewBag.Roles as List<SelectListItem>, "All", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "roleFilter" })
+        </div>
+    }
+
+    @if (ViewBag.Enabled != null)
+    {
+        <div class="form-group">
+            @Html.Label("Shore access", new { @for = "enabled" })
+            @Html.DropDownList("enabled", ViewBag.Enabled as List<SelectListItem>, "All", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "enabledFilter" })
+        </div>
+    }
+
+    <input type="button" value="Search" class="btn btn-primary" data-mvcgrid-apply-filter="click" />
+</div>
+@if (TempData["message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["message"]</div>
+}
+<button id="btnUserCreate" type="button" class="btn btn-primary" onclick="create('/User/_Create')">Add</button>
+
+@if (HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_IT_ADMINISTRATOR) || HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_GROUP))
+{
+    @Html.MVCGrid("AgencyUsers")
+}
+else
+{
+    @Html.MVCGrid("Users")
+}
+
+
+<div id="frmCreate">
+</div>
+<div id="frmEdit">
+</div>

@@ -1,0 +1,120 @@
+﻿<#@ template debug="false" hostspecific="false" language="C#" #>
+<#@ assembly name="System.Data" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Globalization" #>
+<#@ import namespace="System.Data.SqlClient" #>
+<#@ import namespace="System.Text.RegularExpressions" #>
+<#@ import namespace="System.Collections.Generic" #>
+<#@ output extension=".cs" #>
+
+<#string namespaceName = System.Runtime.Remoting.Messaging.CallContext.LogicalGetData("NamespaceHint").ToString().Replace(".Shore", "");#>
+
+namespace <#=namespaceName#>
+{
+	/// <summary>
+    /// Classe de gestion des constantes de base de données
+    /// </summary>
+    public static partial class Constants
+    {
+		<#
+			// Connection info
+			ServerName = @"10.8.1.163\SQLEXPRESS";
+			DatabaseName = "Ponant.Medical.Shore";
+			User = "User_Ponant";
+			Password = "User_Ponant";
+	
+			CreateConstants();
+		#>
+	}
+}
+
+<#+
+// Class Feature Block (#+) avoids repeating common code
+ 
+private string ServerName;
+private string DatabaseName;
+private string User;
+private string Password;
+ 
+private string CreateConnectionString()
+{
+    SqlConnectionStringBuilder sb = new SqlConnectionStringBuilder();
+    sb.DataSource = ServerName;
+    sb.InitialCatalog = DatabaseName;
+    sb.UserID = User;
+	sb.Password = Password;
+ 
+    return sb.ConnectionString;
+}
+ 
+private string ParseEntityField(string name)
+{
+    // Remove the dot, left bracket, right bracket, space
+    // and slash characters from the fieldname.
+    string pattern = @"[\(\)\'\.\[\]/-<%,+&-]*";
+    Regex regex = new Regex(pattern, RegexOptions.None);
+    name = regex.Replace(name, string.Empty);
+
+	pattern = @"\s";
+    regex = new Regex(pattern, RegexOptions.None);
+    name = regex.Replace(name, "_");
+
+	name = RemoveDiacritics(name);
+
+	return name.ToUpper();
+}
+
+private string RemoveDiacritics(string text) 
+{
+    string normalizedString = text.Normalize(NormalizationForm.FormD);
+    StringBuilder sb = new StringBuilder();
+
+    foreach (char c in normalizedString)
+    {
+        UnicodeCategory unicodeCategory = CharUnicodeInfo.GetUnicodeCategory(c);
+
+        if (unicodeCategory != UnicodeCategory.NonSpacingMark)
+        {
+            sb.Append(c);
+        }
+    }
+
+    return sb.ToString().Normalize(NormalizationForm.FormC);
+}
+ 
+private void CreateConstants()
+{
+    using (SqlConnection conn = new SqlConnection(CreateConnectionString()))
+    {
+        SqlCommand cmd = conn.CreateCommand();
+        StringBuilder query = new StringBuilder();
+
+		query.AppendLine("(SELECT l.Id, l.Name lov, t.Name LovType");
+		query.AppendLine("FROM Lov l");
+		query.AppendLine("INNER JOIN LovType t ON t.Id = l.IdLovType)");
+		query.AppendLine("UNION");
+		query.AppendLine("(SELECT Id, Name, 'Lov'");
+		query.AppendLine("FROM LovType)");
+		
+        cmd.CommandText = query.ToString();
+        conn.Open();
+ 
+        using (SqlDataReader row = cmd.ExecuteReader())
+        {
+            PushIndent("\t");
+			PushIndent("\t");
+
+            while (row.Read())
+            {
+				string type = ParseEntityField(row["LovType"].ToString());
+				string lov = ParseEntityField(row["Lov"].ToString());
+				
+				WriteLine(string.Format("public const int {0}_{1} = {2};", type, lov, row["Id"].ToString()));
+            }
+
+        }
+
+		ClearIndent();
+    }
+}
+#>

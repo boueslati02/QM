@@ -1,0 +1,8 @@
+﻿
+#searchAvailableDocumentLinkButton {
+    margin-top: 25px;
+}
+
+#passengerFilter, #cruiseFilter, #bookingFilter, #groupFilter{
+    width: 170px;
+}

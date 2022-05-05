@@ -1,0 +1,2 @@
+﻿Executer la ligne de commande suivante dans le cmd windows en administrateur :
+C:\Program Files (x86)\Microsoft SDKs\Windows\v10.0A\bin\NETFX 4.6.2 Tools>xsd D:\Users\hugo.oswell\Documents\keyrus\Ponant\QM\BookingQM.xsd /c /o:D:\Users\hugo.oswell\Documents\keyrus\Ponant\QM

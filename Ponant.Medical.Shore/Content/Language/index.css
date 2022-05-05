@@ -1,0 +1,26 @@
+﻿
+#languageMangementDiv {
+    display: inline-block;
+    margin-top: 50px;
+    width: 100%;
+}
+
+#labelDefaultDocument {
+    text-align: center;
+}
+
+
+#MVCGridTable_Language {
+    table-layout: fixed;
+}
+
+#MVCGridTable_Language th {
+        text-align: center;
+        vertical-align: baseline;
+ }
+
+#elipsis {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

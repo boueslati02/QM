@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "List of cruises";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+<div class="form-inline filterdiv fixedfilterdiv">
+    <div class="row">
+        <div class="form-group col-md-3">
+            @Html.Label("Cruise", new { @for = "cruiseCode" })
+            @Html.TextBox("cruiseCode", "", new { @class = "form-control" })
+        </div>
+
+        @if (ViewBag.ShipList != null)
+        {
+            <div class="form-group col-md-3">
+                @Html.Label("Ship", new { @for = "cruiseShip" })
+                @Html.DropDownList("cruiseShip", ViewBag.ShipList as List<SelectListItem>, "All", new { @class = "form-control" })
+            </div>
+        }
+
+        <div class="form-group col-md-3">
+            @Html.Label("Date of departure", new { @for = "cruiseDateDeparture" })
+            @Html.TextBox("cruiseDateDeparture", "", new { @class = "form-control datepickerInput", placeholder = "    /    /    " })
+        </div>
+
+        @if (ViewBag.DestinationList != null)
+        {
+            <div class="form-group col-md-3">
+                @Html.Label("Destination", new { @for = "cruiseDestination" })
+                @Html.DropDownList("cruiseDestination", ViewBag.DestinationList as List<SelectListItem>, "All", new { @class = "form-control" })
+            </div>
+        }
+    </div>
+    <div id="indexSecondRow" class="row">
+        <div class="form-group col-md-3">
+            @Html.Label("Passenger", new { @for = "cruisePassenger" })
+            @Html.TextBox("cruisePassenger", "", new { @class = "form-control" })
+        </div>
+
+        @if (ViewBag.CruiseTypeList != null)
+        {
+            <div class="form-group col-md-3">
+                @Html.Label("Type of cruise", new { @for = "cruiseType" })
+                @Html.DropDownList("cruiseType", ViewBag.CruiseTypeList as List<SelectListItem>, "All", new { @class = "form-control" })
+            </div>
+        }
+
+        <div class="form-group col-md-3">
+            @Html.Label("Agency", new { @for = "cruiseAgency" })
+            @Html.TextBox("cruiseAgency", "", new { @class = "form-control" })
+        </div>
+
+        <div class="form-group col-md-3 mx-auto">
+            <input id="searchCruiseIndexButton" type="button" value="Search" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+@if (TempData["Message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["Message"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorAlert" class="alert alert-danger" role="alert">@TempData["ErrorMessage"]</div>
+}
+@Html.MVCGrid("Cruise")
+
+@Scripts.Render("~/bundles/cruise_bundle")
+@Styles.Render("~/Content/cruise_bundle")

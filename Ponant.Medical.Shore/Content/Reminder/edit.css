@@ -1,0 +1,35 @@
+﻿
+.checkboxLabel {
+    padding-top: 7px;
+    font-weight: normal;
+}
+
+.daysReminderLabel {
+    padding-top: 7px;
+    font-weight: normal;
+}
+
+#formReminderEdit {
+    margin-top: 80px;
+}
+
+#successAlert {
+    margin-top: 20px;
+}
+
+#submitButton {
+    margin-left: 15px;
+}
+
+#divQuestion {
+    display: inline-flex;
+}
+
+    #divQuestion div {
+        font-size: 25px;
+    }
+
+    #divQuestion span {
+        margin-left: 10px;
+        margin-top: 5px;
+    }

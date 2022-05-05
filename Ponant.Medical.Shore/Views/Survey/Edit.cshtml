@@ -1,0 +1,61 @@
+﻿@using Ponant.Medical.Shore.Models
+@model Ponant.Medical.Shore.Models.EditSurveyViewModel
+
+@{
+    ViewBag.Title = "Update a survey";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+@if (TempData["Message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["Message"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorAlert" class="alert alert-danger" role="alert">@TempData["ErrorMessage"]</div>
+}
+
+@if (ViewBag.SurveyIsInUse)
+{
+    <div id="labInfo" class="alert alert-info">
+        <span>Warning. This survey is in use</span>
+    </div>
+}
+
+@using (Html.BeginForm("Edit", "Survey", FormMethod.Post, new { @id = "formSurveyEdit", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="col-md-12 form-group">
+        <div class="col-md-1">
+            @Html.LabelFor(model => model.Name, new { })
+        </div>
+        <div class="col-md-2">
+            @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+        </div>
+
+        <div class="col-md-9">
+            @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-12 form-group">
+        <div class="col-md-2 col-md-offset-1">
+            @Html.CheckBoxFor(model => model.MedicaleAdvice, new { })
+            @Html.LabelFor(model => model.MedicaleAdvice, new { @class = "checkboxLabel" })
+        </div>
+        <div class="col-md-9">
+            @Html.ValidationMessageFor(model => model.MedicaleAdvice, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="col-md-11 col-md-offset-1">
+        @Html.ActionLink("Cancel", "Index", "Survey", null, new { @id = "cancelButton", @class = "btn btn-default", @type = "button" })
+        <input id="submitButton" type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+    </div>
+}
+
+@{Html.RenderAction("Index", "Language", new { idSurvey = Model.Id });}

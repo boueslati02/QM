@@ -1,0 +1,12 @@
+{
+  "ServerUri": "http://20.74.44.188:9000/",
+  "Organization": null,
+  "ProjectKey": "Ponant.QM",
+  "ProjectName": "Ponant.QM",
+  "Profiles": {
+    "CSharp": {
+      "ProfileKey": "AXmuWS_8XNzdWHslKD89",
+      "ProfileTimestamp": "2021-05-27T15:02:31Z"
+    }
+  }
+}

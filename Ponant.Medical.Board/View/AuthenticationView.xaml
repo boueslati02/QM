@@ -1,0 +1,30 @@
+﻿<Controls:MetroWindow x:Class="Ponant.Medical.Board.View.AuthenticationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Ponant.Medical.Board.View"
+        xmlns:view="clr-namespace:Ponant.Medical.Board.View"
+        xmlns:vm="clr-namespace:Ponant.Medical.Board.ViewModel"
+        mc:Ignorable="d"
+        Title="{ Binding Title }" 
+        SizeToContent="WidthAndHeight"
+        Icon="/favicon.ico"
+        ShowIconOnTitleBar="False"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterScreen" 
+        BorderThickness="0" 
+        GlowBrush="Black" d:DesignWidth="450" d:DesignHeight="300">
+    <Controls:MetroWindow.Resources>
+        <DataTemplate DataType="{x:Type vm:AuthenticationViewModel}">
+            <view:LoginView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type vm:AdviceItemViewModel}">
+            <view:ChangePasswordView/>
+        </DataTemplate>
+    </Controls:MetroWindow.Resources>
+    <Grid>
+        <ContentControl Content="{ Binding ViewToShow }"/>
+    </Grid>
+</Controls:MetroWindow>

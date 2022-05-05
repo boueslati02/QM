@@ -1,0 +1,141 @@
+﻿@using Ponant.Medical.Shore.Models
+
+@model Ponant.Medical.Shore.Models.MedicalViewModel
+
+@{
+    ViewBag.Title = "List of cruise passengers ";
+}
+
+<h2>@ViewBag.Title @Model.CruiseCode</h2>
+
+<div id="successAlert" class="alert alert-success" role="alert" style="@(@TempData["Message"] == null ? "display:none;" : "" )">@TempData["Message"]</div>
+<div id="errorAlert" class="alert alert-danger" role="alert" style="@(@TempData["ErrorMessage"] == null ? "display:none;" : "" )">@TempData["ErrorMessage"]</div>
+
+@Html.AntiForgeryToken()
+@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+@Html.HiddenFor(model => model.IdCruise)
+
+<div id="cruiseCounter" class="row">
+    <div class="col-md-2 col-md-offset-1 imgicon">
+        <img src="~/images/passengerMany.png" />
+        <label>
+            @Model.NbPassenger
+            <br />
+            passengers
+        </label>
+    </div>
+    <div class="col-md-2 imgicon">
+        <img src="~/images/qmShore.png" />
+        <label>
+            @Model.NbQMShore
+            <br />
+            receive on shore
+        </label>
+    </div>
+    <div class="col-md-2 imgicon">
+        <div title="@Model.ShipName" style="display:inline-block;">
+            <img src="~/images/qmBoard.png" />
+            <label>
+                @Model.NbQMBoard
+                <br />
+                download on board
+            </label>
+        </div>
+    </div>
+    <div class="col-md-2 imgicon">
+        <img src="~/images/qmTreat.png" />
+        <label>
+            @Model.NbQMTreat
+            <br />
+            done
+        </label>
+    </div>
+    <div class="col-md-2 imgicon">
+        <img src="~/images/qmDowload.png" />
+        <label>
+            @Model.NbQMDowloadCruise
+            <br />
+            download before cruise
+        </label>
+    </div>
+</div>
+
+<div>
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="@(@ViewBag.TabsToDisplay == 0 ? "active" : "")">
+            <a href="#todoPassenger" aria-controls="todoPassenger" role="tab" data-toggle="tab">List of passengers to do</a>
+        </li>
+
+        <li role="presentation" class="@(@ViewBag.TabsToDisplay == 1 ? "active" : "")">
+            <a href="#donePassenger" aria-controls="donePassenger" role="tab" data-toggle="tab">List of passengers done</a>
+        </li>
+    </ul>
+
+    <!-- Tab Principal -->
+    <div class="tab-content">
+        @*Premier Tabs Principal*@
+        <div role="tabpanel" id="todoPassenger" class="@(@ViewBag.TabsToDisplay == 0 ? "tab-pane active" : "tab-pane")">
+            <div class="form-inline filterdiv fixedfilterdiv">
+                <div class="form-group">
+                    @Html.Label("Passenger", new { @for = "todoNameFilter" })
+                    @Html.TextBox("todoNameFilter", "", new { @class = "form-control" })
+                </div>
+
+                @if (ViewBag.AdviceList != null)
+                {
+                    <div class="form-group">
+                        @Html.Label("Advice", new { @for = "todoAdviceFilter" })
+                        @Html.DropDownList("todoAdviceFilter", ViewBag.AdviceList as List<SelectListItem>, "All", new { @class = "form-control" })
+                    </div>
+                }
+
+                @if (ViewBag.DoctorList != null)
+                {
+                    <div class="form-group">
+                        @Html.Label("Doctor", new { @for = "todoDoctorFilter" })
+                        @Html.DropDownList("todoDoctorFilter", ViewBag.DoctorList as List<SelectListItem>, "All", new { @class = "form-control" })
+                    </div>
+                }
+
+                <input id="todoSearchMedicalButton" type="button" value="Search" class="btn btn-primary" />
+            </div>
+            @Html.MVCGrid("TodoPassenger", new { cruiseId = Model.IdCruise })
+        </div>
+        @*Second Tabs Principal*@
+        <div role="tabpanel" id="donePassenger" class="@(@ViewBag.TabsToDisplay == 1 ? "tab-pane active" : "tab-pane")">
+            <div class="form-inline filterdiv fixedfilterdiv">
+                <div class="form-group">
+                    @Html.Label("Passenger", new { @for = "doneNameFilter" })
+                    @Html.TextBox("doneNameFilter", "", new { @class = "form-control" })
+                </div>
+
+                @if (ViewBag.AdviceList != null)
+                {
+                    <div class="form-group">
+                        @Html.Label("Advice", new { @for = "doneAdviceFilter" })
+                        @Html.DropDownList("doneAdviceFilter", ViewBag.AdviceList as List<SelectListItem>, "All", new { @class = "form-control" })
+                    </div>
+                }
+
+                @if (ViewBag.DoctorList != null)
+                {
+                    <div class="form-group">
+                        @Html.Label("Doctor", new { @for = "doneDoctorFilter" })
+                        @Html.DropDownList("doneDoctorFilter", ViewBag.DoctorList as List<SelectListItem>, "All", new { @class = "form-control" })
+                    </div>
+                }
+
+                <input id="doneSearchMedicalButton" type="button" value="Search" class="btn btn-primary" />
+            </div>
+            @Html.MVCGrid("DonePassenger", new { cruiseId = Model.IdCruise })
+        </div>
+    </div>
+</div>
+<div id="frmDocuments">
+</div>
+<div id="frmEditAdvice">
+</div>
+
+@Scripts.Render("~/bundles/medical_bundle")
+@Styles.Render("~/Content/medical_bundle")

@@ -1,0 +1,43 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+<link href="~/Content/home.css" rel="stylesheet" type="text/css" />
+@if (TempData["message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["message"].ToString()</div>
+}
+<div class="tiles">
+    @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_DOCTOR) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+    {
+        <a href="~/Cruise">
+            <div class="alert">
+                <h1 class="glyphicon glyphicon-header"></h1>
+                <div>
+                    <h3>Analysis of medical surveys</h3>
+                    <h4>This screen allows you to give an opinion on the surveys of the passengers.</h4>
+                </div>
+            </div>
+        </a>
+    }
+    @if (User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_DOCTOR) || User.IsInRole(Ponant.Medical.Data.Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR))
+    {
+        <a href="~/PassengerDocument">
+            <div class="alert">
+                <h1 class="glyphicon glyphicon-user"></h1>
+                <div>
+                    <h3>Search by passenger</h3>
+                    <h4>This screen allows you to attach documents scanned and 	present on your computer to a passenger.</h4>
+                </div>
+            </div>
+        </a>
+        <a href="~/AvailableDocument">
+            <div class="alert">
+                <h1 class="glyphicon glyphicon-file"></h1>
+                <div>
+                    <h3>Search by document</h3>
+                    <h4>This screen allows you to attach documents in the system to a passenger.</h4>
+                </div>
+            </div>
+        </a>
+    }
+</div>

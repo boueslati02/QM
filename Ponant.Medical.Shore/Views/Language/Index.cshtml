@@ -1,0 +1,17 @@
+﻿
+<div id="languageMangementDiv" class="col-md-12">
+    @{
+        ViewBag.Title = "Language management";
+    }
+
+    <h2>@ViewBag.Title</h2>
+    <hr />
+    <button id="btnSurveyCreate" type="button" class="btn btn-primary" onclick="create('/Language/_Create/?idSurvey=@ViewBag.IdSurvey')">Add</button>
+    @Html.MVCGrid("Language", new { IdSurvey = @ViewBag.IdSurvey })
+    <div id="frmCreate">
+    </div>
+    <div id="frmEdit">
+    </div>
+
+    @Styles.Render("~/Content/language_bundle")
+</div>

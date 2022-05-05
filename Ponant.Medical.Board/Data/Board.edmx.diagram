@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="1de47397e4574a9bbd77b697dc4c2dc1" Name="Diagram1" ZoomLevel="81" >
+        <EntityTypeShape EntityType="BoardModel.Cruise" Width="2.125" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="BoardModel.Document" Width="1.5" PointX="10.5" PointY="6" />
+        <EntityTypeShape EntityType="BoardModel.Information" Width="1.5" PointX="7.5" PointY="6.375" />
+        <EntityTypeShape EntityType="BoardModel.Lov" Width="1.5" PointX="3" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="BoardModel.LovType" Width="1.5" PointX="0.75" PointY="6.375" />
+        <EntityTypeShape EntityType="BoardModel.Passenger" Width="1.5" PointX="5.25" PointY="5.5" />
+        <AssociationConnector Association="BoardModel.FK_Document_LovStatus" />
+        <AssociationConnector Association="BoardModel.FK_Document_Passenger" />
+        <AssociationConnector Association="BoardModel.FK_DocumentType_LovDocumentType" />
+        <AssociationConnector Association="BoardModel.FK_DocumentType_Passenger" />
+        <AssociationConnector Association="BoardModel.FK_Lov_LovType" />
+        <AssociationConnector Association="BoardModel.FK_Passenger_LovAdvice" />
+        <AssociationConnector Association="BoardModel.FK_Passenger_LovStatus" />
+        <EntityTypeShape EntityType="BoardModel.User" Width="1.5" PointX="5.375" PointY="0.75" />
+        <EntityTypeShape EntityType="BoardModel.Log" Width="1.5" PointX="7.375" PointY="0.75" />
+        <AssociationConnector Association="BoardModel.CruisePassenger" />
+        <AssociationConnector Association="BoardModel.FK_User_Lov" />
+        <AssociationConnector Association="BoardModel.FK_Cruise_Lov" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

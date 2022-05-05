@@ -1,0 +1,30 @@
+﻿
+.body-content {
+    background-color: #eee;
+}
+
+.imgicon img {
+    max-height: 48px;
+    max-width: 48px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    vertical-align: bottom;
+}
+
+.imgicon label {
+    margin-left: 5px;
+}
+
+#cruiseCounter {
+    margin-bottom: 20px;
+}
+
+button.multiselect {
+    white-space: normal;
+}
+
+.col-action-icon{
+    min-width : 120px;
+    width : 120px;
+    max-width : 120px;
+}

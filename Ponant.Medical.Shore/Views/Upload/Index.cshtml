@@ -1,0 +1,44 @@
+﻿@model Ponant.Medical.Shore.Models.UploadViewModel
+@{
+    ViewBag.Title = "Upload QM";
+}
+<body data-container="body" class="small-search-display uploadPage page-layout-1column" aria-busy="false">
+    <div class="navbar navbar-default navbar-fixed-top">
+        <div class="navbar-header">
+            <div class="logoWhitePonant">
+                <img src="~/images/logoWhite.png" />
+            </div>
+        </div>
+    </div>
+    <div class="page-wrapper">
+        <main id="maincontent" class="page-main">
+            <a id="contentarea" tabindex="-1"></a>
+            <div class="columns">
+                <div class="column main">
+                    <div class="page__header_image">
+                        <div class="header__img imgPassenger"></div>
+                    </div>
+                    @using (Html.BeginForm("Index", "Upload", FormMethod.Post,
+                        new
+                        {
+                            @id = "frmUpload",
+                            role = "form",
+                            enctype = "multipart/form-data"
+                        }))
+                    {
+                        if (ViewBag.CruiseDeparture)
+                        {
+                            @Html.Partial("_CruiseDeparture")
+                        }
+                        else
+                        {
+                            @Html.Partial("_Form")
+                        }
+                    }
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+@Styles.Render("~/Content/upload_bundle")
+@Scripts.Render("~/bundles/upload_bundle")

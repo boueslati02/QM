@@ -1,0 +1,18 @@
+﻿@using Microsoft.AspNet.Identity
+@if (Request.IsAuthenticated && !ViewContext.RouteData.Values["action"].Equals("ChangePassword"))
+{
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    {
+        @Html.AntiForgeryToken()
+
+        <ul class="nav navbar-nav navbar-right">
+            <li>@Html.ActionLink(" ", "Help", "Base", new { @class = "glyphicon glyphicon-question-sign", target = "_blank" })</li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle glyphicon glyphicon-user" data-toggle="dropdown"><span>@Session["UserName"]</span><span class="caret"></span></a>
+                <ul class="dropdown-menu">
+                    <li><a href="javascript:document.getElementById('logoutForm').submit()">Sign out</a></li>
+                </ul>
+            </li>
+        </ul>
+    }
+}

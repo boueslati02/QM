@@ -1,0 +1,252 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{44188129-DE3F-4580-9C01-12061A4365A2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Ponant.Medical.Data</RootNamespace>
+    <AssemblyName>Ponant.Medical.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <AdditionalFileItemNames>$(AdditionalFileItemNames);Content</AdditionalFileItemNames>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Dev|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Dev\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;DEV</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <CodeAnalysisRuleSet>..\.sonarlint\ponant.qmcsharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Production|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Production\</OutputPath>
+    <DefineConstants>TRACE;PRODUCTION</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <CodeAnalysisRuleSet>..\.sonarlint\ponant.qmcsharp.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Integration|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Integration\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;INTEGRATION</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>..\.sonarlint\ponant.qmcsharp.ruleset</CodeAnalysisRuleSet>
+    <WarningLevel>2</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Recette|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Recette\</OutputPath>
+    <DefineConstants>TRACE;RECETTE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>..\.sonarlint\ponant.qmcsharp.ruleset</CodeAnalysisRuleSet>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Auth\AspNetRoles.cs" />
+    <Compile Include="Auth\AspNetUserClaims.cs" />
+    <Compile Include="Auth\AspNetUserLogins.cs" />
+    <Compile Include="Auth\AspNetUsers.cs" />
+    <Compile Include="Auth\AspNetUserShips.cs" />
+    <Compile Include="Auth\AuthContext.cs" />
+    <Compile Include="Auth\Constants.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Constants.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Auth\Interfaces\IAuthContext.cs" />
+    <Compile Include="Auth\Models\User.cs" />
+    <Compile Include="Shore\Agency.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\AgencyAccessRight.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Assignment.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Booking.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\BookingActivity.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\BookingCruisePassenger.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Constants.cs">
+      <DependentUpon>Constants.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Shore\Cruise.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\CruiseCriterion.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\CruiseCriterionDestination.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\CruiseCriterionShip.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Document.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Information.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Language.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Log.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Lov.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\LovType.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Models\AdviceBoard.cs" />
+    <Compile Include="Shore\Models\LovBoard.cs" />
+    <Compile Include="Shore\Models\PassengerCruise.cs" />
+    <Compile Include="Shore\Models\UserBoard.cs" />
+    <Compile Include="Shore\Models\vPassengerBoard.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shore\Passenger.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Reminder.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Shore.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shore.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Shore.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Shore.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Shore.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\Survey.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vAgencyAccessRight.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vAssignment.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vCriteria.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vCruiseBoard.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vCruiseShore.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vPassengerBoard.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vPassengerShore.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Shore\vSurvey.cs">
+      <DependentUpon>Shore.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <AdditionalFiles Include="..\.sonarlint\ponant.qm\CSharp\SonarLint.xml">
+      <Link>SonarLint.xml</Link>
+    </AdditionalFiles>
+    <Content Include="Auth\Constants.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Constants.cs</LastGenOutput>
+    </Content>
+    <Content Include="Shore\Constants.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>Constants.cs</LastGenOutput>
+    </Content>
+    <Content Include="Shore\Shore.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Shore.edmx</DependentUpon>
+      <LastGenOutput>Shore.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Shore\Shore.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Shore.edmx</DependentUpon>
+      <LastGenOutput>Shore.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\.sonarlint\ponant.qmcsharp.ruleset">
+      <Link>ponant.qmcsharp.ruleset</Link>
+    </None>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Shore\Shore.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Shore.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="packages.config" />
+    <None Include="Shore\Shore.edmx.diagram">
+      <DependentUpon>Shore.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Analyzer Include="..\packages\SecurityCodeScan.3.5.4.0\analyzers\dotnet\SecurityCodeScan.dll" />
+    <Analyzer Include="..\packages\SecurityCodeScan.3.5.4.0\analyzers\dotnet\YamlDotNet.dll" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

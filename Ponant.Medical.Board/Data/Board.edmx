@@ -1,0 +1,791 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="BoardModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Cruise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdShip" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="SailingDate" Type="datetime" Nullable="false" />
+          <Property Name="SailingLengthDays" Type="int" Nullable="false" />
+          <Property Name="PassengersNumber" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberAvailable" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberNotAvailable" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberDownloaded" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberDoneBoard" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberDoneShore" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberSent" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberReceive" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberValidate" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberWaiting" Type="int" Nullable="false" />
+          <Property Name="SurveyNumberRefused" Type="int" Nullable="false" />
+          <Property Name="IsExtract" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+          <Property Name="Deadline" Type="datetime" />
+          <Property Name="IdShipAssigned" Type="int" />
+        </EntityType>
+        <EntityType Name="CruisePassenger">
+          <Key>
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdCruise" />
+          </Key>
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdCruise" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="IsToDetach" Type="bit" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="FileName" Type="varchar" MaxLength="128" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdInformation" />
+          </Key>
+          <Property Name="IdPassenger" Type="int" Nullable="false" />
+          <Property Name="IdInformation" Type="int" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="User" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Date" Type="datetime" Nullable="false" />
+          <Property Name="Level" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Action" Type="varchar" MaxLength="32" Nullable="false" />
+          <Property Name="Booking" Type="int" />
+          <Property Name="Details" Type="varchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Lov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdLovType" Type="int" Nullable="false" />
+          <Property Name="Code" Type="varchar" MaxLength="32" />
+          <Property Name="Name" Type="varchar" MaxLength="80" />
+          <Property Name="IsEnabled" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LovType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="IdAdvice" Type="int" Nullable="false" />
+          <Property Name="IdStatus" Type="int" Nullable="false" />
+          <Property Name="LastName" Type="varchar" MaxLength="64" />
+          <Property Name="UsualName" Type="varchar" MaxLength="64" />
+          <Property Name="FirstName" Type="varchar" MaxLength="64" />
+          <Property Name="Email" Type="varchar" MaxLength="256" />
+          <Property Name="Review" Type="varchar" MaxLength="256" />
+          <Property Name="ReviewBoard" Type="varchar" MaxLength="256" />
+          <Property Name="QmReceiptDate" Type="datetime" />
+          <Property Name="IsDownloaded" Type="bit" Nullable="false" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserName" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="PasswordHash" Type="varchar" MaxLength="256" Nullable="false" />
+          <Property Name="LockoutEndDate" Type="datetime" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="ExpirationDate" Type="datetime" Nullable="false" />
+          <Property Name="PasswordChange" Type="bit" Nullable="false" />
+          <Property Name="IdShip" Type="int" />
+          <Property Name="Creator" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="CreationDate" Type="datetime" Nullable="false" />
+          <Property Name="Editor" Type="varchar" MaxLength="64" Nullable="false" />
+          <Property Name="ModificationDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CruisePassenger_Cruise">
+          <End Role="Cruise" Type="Self.Cruise" Multiplicity="1" />
+          <End Role="CruisePassenger" Type="Self.CruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cruise">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruisePassenger">
+              <PropertyRef Name="IdCruise" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CruisePassenger_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="CruisePassenger" Type="Self.CruisePassenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="CruisePassenger">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_LovStatus">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="Document" Type="Self.Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_LovDocumentType">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdInformation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_Passenger">
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="1" />
+          <End Role="Information" Type="Self.Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lov_LovType">
+          <End Role="LovType" Type="Self.LovType" Multiplicity="1" />
+          <End Role="Lov" Type="Self.Lov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LovType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lov">
+              <PropertyRef Name="IdLovType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovAdvice">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdAdvice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovStatus">
+          <End Role="Lov" Type="Self.Lov" Multiplicity="1" />
+          <End Role="Passenger" Type="Self.Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="BoardModelStoreContainer">
+          <EntitySet Name="Cruise" EntityType="Self.Cruise" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CruisePassenger" EntityType="Self.CruisePassenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Document" EntityType="Self.Document" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Information" EntityType="Self.Information" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Log" EntityType="Self.Log" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Lov" EntityType="Self.Lov" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LovType" EntityType="Self.LovType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Passenger" EntityType="Self.Passenger" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="User" EntityType="Self.User" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CruisePassenger_Cruise" Association="Self.FK_CruisePassenger_Cruise">
+            <End Role="Cruise" EntitySet="Cruise" />
+            <End Role="CruisePassenger" EntitySet="CruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CruisePassenger_Passenger" Association="Self.FK_CruisePassenger_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="CruisePassenger" EntitySet="CruisePassenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_LovStatus" Association="Self.FK_Document_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_Passenger" Association="Self.FK_Document_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_LovDocumentType" Association="Self.FK_DocumentType_LovDocumentType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_Passenger" Association="Self.FK_DocumentType_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lov_LovType" Association="Self.FK_Lov_LovType">
+            <End Role="LovType" EntitySet="LovType" />
+            <End Role="Lov" EntitySet="Lov" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovAdvice" Association="Self.FK_Passenger_LovAdvice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovStatus" Association="Self.FK_Passenger_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="BoardModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="BoardEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Cruise" EntityType="BoardModel.Cruise" />
+          <EntitySet Name="Document" EntityType="BoardModel.Document" />
+          <EntitySet Name="Information" EntityType="BoardModel.Information" />
+          <EntitySet Name="Lov" EntityType="BoardModel.Lov" />
+          <EntitySet Name="LovType" EntityType="BoardModel.LovType" />
+          <EntitySet Name="Passenger" EntityType="BoardModel.Passenger" />
+          <AssociationSet Name="FK_Document_LovStatus" Association="BoardModel.FK_Document_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Document_Passenger" Association="BoardModel.FK_Document_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Document" EntitySet="Document" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_LovDocumentType" Association="BoardModel.FK_DocumentType_LovDocumentType">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DocumentType_Passenger" Association="BoardModel.FK_DocumentType_Passenger">
+            <End Role="Passenger" EntitySet="Passenger" />
+            <End Role="Information" EntitySet="Information" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Lov_LovType" Association="BoardModel.FK_Lov_LovType">
+            <End Role="LovType" EntitySet="LovType" />
+            <End Role="Lov" EntitySet="Lov" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovAdvice" Association="BoardModel.FK_Passenger_LovAdvice">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Passenger_LovStatus" Association="BoardModel.FK_Passenger_LovStatus">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <EntitySet Name="User" EntityType="BoardModel.User" />
+          <EntitySet Name="Log" EntityType="BoardModel.Log" />
+          <AssociationSet Name="CruisePassenger" Association="BoardModel.CruisePassenger">
+            <End Role="Cruise" EntitySet="Cruise" />
+            <End Role="Passenger" EntitySet="Passenger" />
+          </AssociationSet>
+          <AssociationSet Name="FK_User_Lov" Association="BoardModel.FK_User_Lov">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="User" EntitySet="User" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Cruise_Lov" Association="BoardModel.FK_Cruise_Lov">
+            <End Role="Lov" EntitySet="Lov" />
+            <End Role="Cruise" EntitySet="Cruise" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Cruise">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PassengersNumber" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberAvailable" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberSent" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberDownloaded" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SailingDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="SailingLengthDays" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Passenger" Relationship="BoardModel.CruisePassenger" FromRole="Cruise" ToRole="Passenger" />
+          <Property Name="SurveyNumberDoneBoard" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberDoneShore" Type="Int32" Nullable="false" />
+          <Property Name="IsExtract" Type="Boolean" Nullable="false" />
+          <Property Name="IdShip" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Lov" Relationship="BoardModel.FK_Cruise_Lov" FromRole="Cruise" ToRole="Lov" />
+          <Property Name="SurveyNumberNotAvailable" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberReceive" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberValidate" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberWaiting" Type="Int32" Nullable="false" />
+          <Property Name="SurveyNumberRefused" Type="Int32" Nullable="false" />
+          <Property Name="Deadline" Type="DateTime" Precision="3" />
+          <Property Name="IdShipAssigned" Type="Int32" />
+        </EntityType>
+        <EntityType Name="Document">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="FileName" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Lov" Relationship="BoardModel.FK_Document_LovStatus" FromRole="Document" ToRole="Lov" />
+          <NavigationProperty Name="Passenger" Relationship="BoardModel.FK_Document_Passenger" FromRole="Document" ToRole="Passenger" />
+          <Property Name="IsToDetach" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Information">
+          <Key>
+            <PropertyRef Name="IdPassenger" />
+            <PropertyRef Name="IdInformation" />
+          </Key>
+          <Property Name="IdPassenger" Type="Int32" Nullable="false" />
+          <Property Name="IdInformation" Type="Int32" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Lov" Relationship="BoardModel.FK_DocumentType_LovDocumentType" FromRole="Information" ToRole="Lov" />
+          <NavigationProperty Name="Passenger" Relationship="BoardModel.FK_DocumentType_Passenger" FromRole="Information" ToRole="Passenger" />
+        </EntityType>
+        <EntityType Name="Lov">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdLovType" Type="Int32" Nullable="false" />
+          <Property Name="Code" Type="String" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Document" Relationship="BoardModel.FK_Document_LovStatus" FromRole="Lov" ToRole="Document" />
+          <NavigationProperty Name="Information" Relationship="BoardModel.FK_DocumentType_LovDocumentType" FromRole="Lov" ToRole="Information" />
+          <NavigationProperty Name="LovType" Relationship="BoardModel.FK_Lov_LovType" FromRole="Lov" ToRole="LovType" />
+          <NavigationProperty Name="PassengerAdvice" Relationship="BoardModel.FK_Passenger_LovAdvice" FromRole="Lov" ToRole="Passenger" />
+          <NavigationProperty Name="PassengerStatus" Relationship="BoardModel.FK_Passenger_LovStatus" FromRole="Lov" ToRole="Passenger" />
+          <NavigationProperty Name="User" Relationship="BoardModel.FK_User_Lov" FromRole="Lov" ToRole="User" />
+          <Property Name="IsEnabled" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="Cruise" Relationship="BoardModel.FK_Cruise_Lov" FromRole="Lov" ToRole="Cruise" />
+        </EntityType>
+        <EntityType Name="LovType">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Lov" Relationship="BoardModel.FK_Lov_LovType" FromRole="LovType" ToRole="Lov" />
+        </EntityType>
+        <EntityType Name="Passenger">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="IdAdvice" Type="Int32" Nullable="false" />
+          <Property Name="IdStatus" Type="Int32" Nullable="false" />
+          <Property Name="LastName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="UsualName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="FirstName" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Review" Type="String" Nullable="true" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="ReviewBoard" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="QmReceiptDate" Type="DateTime" Precision="3" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="Document" Relationship="BoardModel.FK_Document_Passenger" FromRole="Passenger" ToRole="Document" />
+          <NavigationProperty Name="Information" Relationship="BoardModel.FK_DocumentType_Passenger" FromRole="Passenger" ToRole="Information" />
+          <NavigationProperty Name="LovAdvice" Relationship="BoardModel.FK_Passenger_LovAdvice" FromRole="Passenger" ToRole="Lov" />
+          <NavigationProperty Name="LovStatus" Relationship="BoardModel.FK_Passenger_LovStatus" FromRole="Passenger" ToRole="Lov" />
+          <NavigationProperty Name="Cruise" Relationship="BoardModel.CruisePassenger" FromRole="Passenger" ToRole="Cruise" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="IsDownloaded" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Document_LovStatus">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="BoardModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Document_Passenger">
+          <End Type="BoardModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="BoardModel.Document" Role="Document" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Document">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_LovDocumentType">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="BoardModel.Information" Role="Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdInformation" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DocumentType_Passenger">
+          <End Type="BoardModel.Passenger" Role="Passenger" Multiplicity="1" />
+          <End Type="BoardModel.Information" Role="Information" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Passenger">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Information">
+              <PropertyRef Name="IdPassenger" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Lov_LovType">
+          <End Type="BoardModel.LovType" Role="LovType" Multiplicity="1" />
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="LovType">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Lov">
+              <PropertyRef Name="IdLovType" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovAdvice">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="BoardModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdAdvice" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Passenger_LovStatus">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="BoardModel.Passenger" Role="Passenger" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Passenger">
+              <PropertyRef Name="IdStatus" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+          <Property Name="LockoutEndDate" Type="DateTime" Precision="3" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="ExpirationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="PasswordChange" Type="Boolean" Nullable="false" />
+          <Property Name="Creator" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="CreationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Editor" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="ModificationDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="IdShip" Type="Int32" />
+          <NavigationProperty Name="Lov" Relationship="BoardModel.FK_User_Lov" FromRole="User" ToRole="Lov" />
+        </EntityType>
+        <EntityType Name="Log">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="User" Type="String" Nullable="false" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="Level" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Type" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Action" Type="String" Nullable="false" MaxLength="32" FixedLength="false" Unicode="false" />
+          <Property Name="Booking" Type="Int32" />
+          <Property Name="Details" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="CruisePassenger">
+          <End Type="BoardModel.Cruise" Role="Cruise" Multiplicity="*" />
+          <End Type="BoardModel.Passenger" Role="Passenger" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_User_Lov">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="0..1" />
+          <End Type="BoardModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Cruise_Lov">
+          <End Type="BoardModel.Lov" Role="Lov" Multiplicity="1" />
+          <End Type="BoardModel.Cruise" Role="Cruise" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Lov">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Cruise">
+              <PropertyRef Name="IdShip" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="BoardModelStoreContainer" CdmEntityContainer="BoardEntities" >
+          <EntitySetMapping Name="Cruise">
+            <EntityTypeMapping TypeName="BoardModel.Cruise">
+              <MappingFragment StoreEntitySet="Cruise">
+                <ScalarProperty Name="IdShipAssigned" ColumnName="IdShipAssigned" />
+                <ScalarProperty Name="Deadline" ColumnName="Deadline" />
+                <ScalarProperty Name="SurveyNumberRefused" ColumnName="SurveyNumberRefused" />
+                <ScalarProperty Name="SurveyNumberWaiting" ColumnName="SurveyNumberWaiting" />
+                <ScalarProperty Name="SurveyNumberValidate" ColumnName="SurveyNumberValidate" />
+                <ScalarProperty Name="SurveyNumberReceive" ColumnName="SurveyNumberReceive" />
+                <ScalarProperty Name="SurveyNumberNotAvailable" ColumnName="SurveyNumberNotAvailable" />
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="IsExtract" ColumnName="IsExtract" />
+                <ScalarProperty Name="SurveyNumberDoneShore" ColumnName="SurveyNumberDoneShore" />
+                <ScalarProperty Name="SurveyNumberDoneBoard" ColumnName="SurveyNumberDoneBoard" />
+                <ScalarProperty Name="SailingLengthDays" ColumnName="SailingLengthDays" />
+                <ScalarProperty Name="SailingDate" ColumnName="SailingDate" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="SurveyNumberDownloaded" ColumnName="SurveyNumberDownloaded" />
+                <ScalarProperty Name="SurveyNumberSent" ColumnName="SurveyNumberSent" />
+                <ScalarProperty Name="SurveyNumberAvailable" ColumnName="SurveyNumberAvailable" />
+                <ScalarProperty Name="PassengersNumber" ColumnName="PassengersNumber" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Document">
+            <EntityTypeMapping TypeName="BoardModel.Document">
+              <MappingFragment StoreEntitySet="Document">
+                <ScalarProperty Name="IsToDetach" ColumnName="IsToDetach" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Information">
+            <EntityTypeMapping TypeName="BoardModel.Information">
+              <MappingFragment StoreEntitySet="Information">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="IdInformation" ColumnName="IdInformation" />
+                <ScalarProperty Name="IdPassenger" ColumnName="IdPassenger" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Lov">
+            <EntityTypeMapping TypeName="BoardModel.Lov">
+              <MappingFragment StoreEntitySet="Lov">
+                <ScalarProperty Name="IsEnabled" ColumnName="IsEnabled" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="IdLovType" ColumnName="IdLovType" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LovType">
+            <EntityTypeMapping TypeName="BoardModel.LovType">
+              <MappingFragment StoreEntitySet="LovType">
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Passenger">
+            <EntityTypeMapping TypeName="BoardModel.Passenger">
+              <MappingFragment StoreEntitySet="Passenger">
+                <ScalarProperty Name="IsDownloaded" ColumnName="IsDownloaded" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="ReviewBoard" ColumnName="ReviewBoard" />
+                <ScalarProperty Name="UsualName" ColumnName="UsualName" />
+                <ScalarProperty Name="QmReceiptDate" ColumnName="QmReceiptDate" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="Review" ColumnName="Review" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="IdStatus" ColumnName="IdStatus" />
+                <ScalarProperty Name="IdAdvice" ColumnName="IdAdvice" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="User">
+            <EntityTypeMapping TypeName="BoardModel.User">
+              <MappingFragment StoreEntitySet="User">
+                <ScalarProperty Name="IdShip" ColumnName="IdShip" />
+                <ScalarProperty Name="ModificationDate" ColumnName="ModificationDate" />
+                <ScalarProperty Name="Editor" ColumnName="Editor" />
+                <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+                <ScalarProperty Name="Creator" ColumnName="Creator" />
+                <ScalarProperty Name="PasswordChange" ColumnName="PasswordChange" />
+                <ScalarProperty Name="ExpirationDate" ColumnName="ExpirationDate" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="LockoutEndDate" ColumnName="LockoutEndDate" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Log">
+            <EntityTypeMapping TypeName="BoardModel.Log">
+              <MappingFragment StoreEntitySet="Log">
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="Booking" ColumnName="Booking" />
+                <ScalarProperty Name="Action" ColumnName="Action" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="Level" ColumnName="Level" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="User" ColumnName="User" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CruisePassenger" TypeName="BoardModel.CruisePassenger" StoreEntitySet="CruisePassenger">
+            <EndProperty Name="Passenger">
+              <ScalarProperty Name="Id" ColumnName="IdPassenger" />
+            </EndProperty>
+            <EndProperty Name="Cruise">
+              <ScalarProperty Name="Id" ColumnName="IdCruise" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Aucun" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "Document management by passenger";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div id="divQuestion" class="col-md-12">
+    <div class="glyphicon glyphicon-question-sign"></div>
+    <span>This screen allows you to attach documents scanned an present on your computer to a passenger.</span>
+</div>
+<br />
+
+@if (TempData["Message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert" on>@TempData["Message"]</div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div id="errorAlert" class="alert alert-danger" role="alert">@TempData["ErrorMessage"]</div>
+}
+
+<div id="byDocument">
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-inline filterdiv fixedfilterdiv">
+        <div class="row">
+            <div class="form-group col-md-2">
+                @Html.Label("Passenger", new { @for = "passenger" })
+                @Html.TextBox("passenger", "", new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.Label("Cruise", new { @for = "cruise" })
+                @Html.TextBox("cruise", "", new { @class = "form-control" })
+            </div>
+            <div class="form-group col-md-2">
+                @Html.Label("N° booking", new { @for = "booking" })
+                @Html.TextBox("booking", "", new { @class = "form-control" })
+            </div>
+            <input id="searchPassengerDocumentIndexButton" type="button" value="Search" class="btn btn-primary col-md-1" />
+        </div>
+    </div>
+    <button id="btnPassengerDocumentAdd" type="button" class="btn btn-primary" onclick="addNewPassenger(this)">Add</button>
+
+    <div id="labInfo" class="alert alert-info">
+        <span>Please make a search to display the list of passengers</span>
+    </div>  
+    @Html.MVCGrid("PassengerDocument")
+    <div id="frmCreate">
+    </div>
+    <div id="frmAddDocument">
+    </div>
+    <div id="frmLink">
+    </div>
+</div>
+
+@Scripts.Render("~/bundles/passengerDocument_bundle")
+@Styles.Render("~/Content/passengerDocument_bundle")

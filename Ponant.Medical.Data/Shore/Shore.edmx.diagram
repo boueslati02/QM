@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="4116a2115cab4948a140aa4dac7ad2ce" Name="Diagram1" ZoomLevel="72">
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Agency" Width="1.5" PointX="0.75" PointY="12.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.CruiseCriterionDestination" Width="1.5" PointX="15.75" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.CruiseCriterionShip" Width="1.5" PointX="17.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Document" Width="1.5" PointX="17.25" PointY="14.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Information" Width="1.5" PointX="20.25" PointY="12.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Language" Width="1.5" PointX="10.5" PointY="17.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Log" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Lov" Width="1.5" PointX="8.25" PointY="10.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.LovType" Width="1.5" PointX="6" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Reminder" Width="1.5" PointX="0.75" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Survey" Width="1.5" PointX="8.25" PointY="7" IsExpanded="true" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionDestination_LovDestination" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionShip_LovShip" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Document_LovStatus" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_DocumentType_LovDocumentType" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Language_LovLanguage" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Language_Survey" ManuallyRouted="false" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Lov_LovType" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.CruiseCriterion" Width="1.5" PointX="10.75" PointY="6.75" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterion_Survey" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionDestination_CruiseCriterion" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterionShip_CruiseCriterion" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vCriteria" Width="1.5" PointX="12" PointY="0.5" FillColor="224, 224, 224" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_CruiseCriterion_LovCruiseType" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Booking" Width="1.5" PointX="2.875" PointY="12" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.BookingActivity" Width="1.5" PointX="5.5" PointY="16.625" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Booking_Agency" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Booking_LovLanguage" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingActivity_Booking" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingActivity_LovActivity" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Passenger" Width="1.5" PointX="15.25" PointY="11.75" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Document_Passenger" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_DocumentType_Passenger" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Passenger_LovAdvice" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Passenger_LovStatus" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Passenger_LovTitle" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vSurvey" Width="2.125" PointX="15.875" PointY="0.5" FillColor="224, 224, 224" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vCruiseShore" Width="1.5" PointX="10.125" PointY="0.5" FillColor="224, 224, 224" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Booking_LovOffice" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vCruiseBoard" Width="1.5" PointX="13.875" PointY="0.5" FillColor="224, 224, 224" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingActivity_Passenger" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.BookingCruisePassenger" Width="1.5" PointX="19.5" PointY="16.125" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Booking" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Passenger" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Cruise" Width="1.5" PointX="10.5" PointY="11.625" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_BookingCruisePassenger_Cruise" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Cruise_LovDestination" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Cruise_LovShip" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_Cruise_LovTypeCruise" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.AgencyAccessRight" Width="1.5" PointX="3" PointY="17.375" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_AgencyAccessRight_Agency" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vAgencyAccessRight" Width="1.5" PointX="4.5" PointY="0.5" FillColor="224, 224, 224" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vPassengerBoard" Width="1.5" PointX="8.25" PointY="0.5" FillColor="224, 224, 224" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vPassengerShore" Width="1.5" PointX="6.375" PointY="0.5" FillColor="224, 224, 224" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.Assignment" Width="1.5" PointX="10.5" PointY="22.25" />
+        <AssociationConnector Association="Ponant.Medical.ShoreModel.FK_IdShip" />
+        <EntityTypeShape EntityType="Ponant.Medical.ShoreModel.vAssignment" Width="1.5" PointX="5.375" PointY="12.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

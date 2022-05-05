@@ -1,0 +1,179 @@
+﻿@using Ponant.Medical.Shore.Models
+@model Ponant.Medical.Shore.Models.EditLanguageViewModel
+
+@{
+    ViewBag.Title = "Edit a language";
+}
+
+<div class="modal fade" id="modalEdit" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+
+                @using (Ajax.BeginForm("_Edit", "Language", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "frmEdit",
+                    OnSuccess = "modalNew(data, 'modalEdit', 'frmEdit')",
+                    OnFailure = "modalNew(data, 'modalEdit', 'frmEdit')"
+                }, new { @id = "formLanguageEdit", @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.Id)
+                    @Html.HiddenFor(model => model.IdSurvey)
+                    @Html.HiddenFor(model => model.UploadFileError)
+
+                    if (ViewBag.LanguageIsInUse)
+                    {
+                        <div id="labInfo" class="alert alert-info">
+                            <span>Warning. This language is in use</span>
+                        </div>
+                    }
+
+                    <div id="labelDefaultDocument" class="form-group">
+                        <label class="text-danger">
+                            Caution, default language documents will be used for documents not filled in.
+                        </label>
+                    </div>
+
+                    if (ViewBag.LangueList != null)
+                    {
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.Langue, htmlAttributes: new { @class = "control-label col-md-4" })
+                            <div class="col-md-8">
+                                @if (ViewBag.LangueList != null)
+                                {
+                                    @Html.DropDownListFor(model => model.Langue, ViewBag.LangueList as List<SelectListItem>, "", new { @class = "form-control" })
+                                    @Html.ValidationMessageFor(model => model.Langue, "", new { @class = "text-danger" })
+                                }
+                            </div>
+                        </div>
+                    }
+
+                    <div class="form-group">
+                        <div class="col-md-8 col-md-offset-4">
+                            @Html.CheckBoxFor(model => model.DefaultLanguage)
+                            @Html.LabelFor(model => model.DefaultLanguage, htmlAttributes: new { @class = "control-label" })
+                            @Html.ValidationMessageFor(model => model.DefaultLanguage, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+                    @Html.ValidationMessageFor(model => model.UploadFileError, "", new { @class = "text-danger" })
+
+                    <div>
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li role="presentation" class="active">
+                                <a href="#indivEdit" aria-controls="indivEdit" role="tab" data-toggle="tab">For individual</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#groupEdit" aria-controls="groupEdit" role="tab" data-toggle="tab">For Group</a>
+                            </li>
+                        </ul>
+
+                        @*Content for individual passengers*@
+                        <div class="tab-content">
+                            <div role="tabpanel" class="tab-pane active" id="indivEdit">
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.IndividualSurvey, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.IndividualSurvey) ? Html.Raw("<br/><span>(" + Model.IndividualSurvey + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.IndividualSurvey)
+                                        @Html.TextBoxFor(model => model.IndividualSurvey, new { id = "IndividualSurvey_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
+                                        @Html.ValidationMessageFor(model => model.IndividualSurvey, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.IndividualMail, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.IndividualMail) ? Html.Raw("<br/><span>(" + Model.IndividualMail + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.IndividualMail)
+                                        @Html.TextBoxFor(model => model.IndividualMail, new { id = "IndividualMail_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                        @Html.ValidationMessageFor(model => model.IndividualMail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.IndividualAutomaticResponse, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.IndividualAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.IndividualAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.IndividualAutomaticResponse)
+                                        @Html.TextBoxFor(model => model.IndividualAutomaticResponse, new { id = "IndividualAutomaticResponse_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                        @Html.ValidationMessageFor(model => model.IndividualAutomaticResponse, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+
+                            @*Content for group passengers*@
+                            <div role="tabpanel" class="tab-pane" id="groupEdit">
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.GroupSurvey, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.GroupSurvey) ? Html.Raw("<br/><span>(" + Model.GroupSurvey + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.GroupSurvey)
+                                        @Html.TextBoxFor(model => model.GroupSurvey, new { id = "GroupSurvey_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
+                                        @Html.ValidationMessageFor(model => model.GroupSurvey, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.GroupMail, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.GroupMail) ? Html.Raw("<br/><span>(" + Model.GroupMail + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.GroupMail)
+                                        @Html.TextBoxFor(model => model.GroupMail, new { id = "GroupMail_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                        @Html.ValidationMessageFor(model => model.GroupMail, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="control-label col-md-5">
+                                        @Html.LabelFor(model => model.GroupAutomaticResponse, htmlAttributes: new { @class = "control-label" })
+                                        @(!string.IsNullOrEmpty(Model.GroupAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.GroupAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
+                                    </div>
+                                    <div class="col-md-7">
+                                        @Html.HiddenFor(model => model.GroupAutomaticResponse)
+                                        @Html.TextBoxFor(model => model.GroupAutomaticResponse, new { id = "GroupAutomaticResponse_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                        @Html.ValidationMessageFor(model => model.GroupAutomaticResponse, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="labelDefaultDocument" class="form-group">
+                        <span>
+                            Unicode Outlook messages are not supported for mail templates.&nbsp;
+                        </span>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input type = "button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                        <input type = "submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+@Scripts.Render("~/bundles/language_bundle")
+@Styles.Render("~/Content/language_bundle")

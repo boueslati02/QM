@@ -1,0 +1,89 @@
+﻿<Controls:MetroWindow x:Class="Ponant.Medical.Board.View.DocumentsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:MahApps.Metro.Controls;assembly=MahApps.Metro"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+        xmlns:local="clr-namespace:Ponant.Medical.Board.View"
+        xmlns:conv="clr-namespace:Ponant.Medical.Board.Converters"
+        xmlns:vm="clr-namespace:Ponant.Medical.Board.ViewModel"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        Width="500" Height="300"
+        Title="{Binding ViewTitle}"
+        x:Name="myDocumentsView"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        BorderThickness="1"
+        mc:Ignorable="d" 
+        d:DesignHeight="300" d:DesignWidth="300">
+    <Controls:MetroWindow.Resources>
+        <conv:BooleanToVisibilityConverter x:Key="myBooleanToVisibilityConverter" />
+        <conv:DoubleValueCommandParameterConverter x:Key="myDoubleValueCommandParameterConverter" />
+    </Controls:MetroWindow.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <DataGrid Grid.Row="0" Margin="10" VerticalAlignment="Stretch" BorderBrush="LightGray" BorderThickness="1" IsReadOnly="True" GridLinesVisibility="All" AutoGenerateColumns="False" ItemsSource="{Binding DocumentItems}">
+            <DataGrid.Columns>
+                <DataGridTemplateColumn Width="*" Header="Document" SortMemberPath="Name">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <TextBlock>
+                                <Hyperlink Command="{Binding OpenCommand}">
+                                    <Hyperlink.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource myDoubleValueCommandParameterConverter}">
+                                            <Binding />
+                                            <Binding Path="DataContext" ElementName="myDocumentsView"/>
+                                        </MultiBinding>
+                                    </Hyperlink.CommandParameter>
+                                    <Run Text="{Binding Name, Mode=OneWay}" /> 
+                                </Hyperlink>
+                            </TextBlock>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Width="Auto" Header="Date" Binding="{Binding Date, StringFormat=d}" />
+                <DataGridTextColumn Width="Auto" Header="Status" Binding="{Binding Status}" Visibility="{Binding Path=DataContext.IsStatusColumnVisible, Source={x:Reference myCloseButton}, Converter={StaticResource myBooleanToVisibilityConverter}}"/>
+                <DataGridTemplateColumn Width="Auto" CanUserSort="False">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Button ToolTip="Open the document" Background="Transparent" Command="{Binding OpenCommand}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource myDoubleValueCommandParameterConverter}">
+                                            <Binding />
+                                            <Binding Path="DataContext" ElementName="myDocumentsView"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                    <Rectangle Height="16" Width="16" Fill="Black">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_book_open}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                                <Button ToolTip="Detach the document" Background="Transparent" Command="{Binding DetachCommand}" Visibility="{Binding Path=DataContext.IsStatusColumnVisible, Source={x:Reference myCloseButton}, Converter={StaticResource myBooleanToVisibilityConverter}}">
+                                    <Button.CommandParameter>
+                                        <MultiBinding Converter="{StaticResource myDoubleValueCommandParameterConverter}">
+                                            <Binding />
+                                            <Binding Path="DataContext" ElementName="myDocumentsView"/>
+                                        </MultiBinding>
+                                    </Button.CommandParameter>
+                                    <Rectangle Height="16" Width="16" Fill="Black">
+                                        <Rectangle.OpacityMask>
+                                            <VisualBrush Stretch="Fill" Visual="{StaticResource appbar_page_delete}"/>
+                                        </Rectangle.OpacityMask>
+                                    </Rectangle>
+                                </Button>
+                            </StackPanel>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+        <Button Grid.Row="1" x:Name="myCloseButton" Margin="10" HorizontalAlignment="Right" VerticalAlignment="Bottom" IsCancel="True" Content="Close" Style="{StaticResource myDefaultButtonStyle}"/>
+    </Grid>
+</Controls:MetroWindow>

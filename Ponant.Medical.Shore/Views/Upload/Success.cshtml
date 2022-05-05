@@ -1,0 +1,29 @@
+﻿@{
+    ViewBag.Title = "Success";
+}
+<body data-container="body" class="small-search-display uploadPage page-layout-1column" aria-busy="false">
+    <div class="page-wrapper">
+        <main id="maincontent" class="page-main">
+            <a id="contentarea" tabindex="-1"></a>
+            <div class="columns">
+                <div class="column main">
+                    <div class="page__header_image">
+                        <div class="header__img imgPassenger"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 margin__top margin__bottom text-center">
+                            <img src="~/images/check.png" />
+                        </div>
+                        <div class="col-xs-12 text-center">
+                            <p>
+                                @ResourcesViews._Success.DocumentsSent
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+</body>
+@Styles.Render("~/Content/upload_bundle")
+@Scripts.Render("~/bundles/upload_bundle")

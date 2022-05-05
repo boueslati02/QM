@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="Booking">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="BookingContext" minOccurs="1" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="LanguageCode" minOccurs="1" maxOccurs="1" type="xs:string"/>
+              <xs:element name="BookingNo" minOccurs="1" maxOccurs="1" type="xs:int"/>
+              <xs:element name="BookingStatusCode" minOccurs="1" maxOccurs="1" type="xs:string"/>
+              <xs:element name="OfficeName" minOccurs="1" maxOccurs="1" type="xs:string"/>
+              <xs:element name="IsGroup" minOccurs="1" maxOccurs="1" type="xs:boolean"/>
+			        <xs:element name="GroupId" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="AgencyAddress" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="AgencyId" minOccurs="1" maxOccurs="1" type="xs:int"/>
+              <xs:element name="AgencyName" minOccurs="1" maxOccurs="1" type="xs:string"/>
+              <xs:element name="Email" minOccurs="0" maxOccurs="1" type="xs:string"/>
+              <xs:element name="LastName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+              <xs:element name="FirstName" minOccurs="0" maxOccurs="1" type="xs:string"/>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="CruiseBookings" minOccurs="0" maxOccurs="1">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="ActivityBookings" minOccurs="0" maxOccurs="1">
+                <xs:complexType>
+                  <xs:sequence>
+                    <xs:element name="ActivityBooking" minOccurs="0" maxOccurs="unbounded">
+                      <xs:complexType>
+                        <xs:sequence>
+                          <xs:element name="ActivityCode" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                          <xs:element name="ActivityDescription" minOccurs="1" maxOccurs="1" type="xs:string"/>
+                          <xs:element name="ParticipantIDs" minOccurs="0" maxOccurs="1">
+                            <xs:complexType>
+                              <xs:sequence>
+                                <xs:element name="PassengerNo" minOccurs="0" maxOccurs="unbounded" type="xs:int"/>
+                              </xs:sequence>
+                            </xs:complexType>
+                          </xs:element>
+                        </xs:sequence>
+                      </xs:complexType>
+                    </xs:element>
+                  </xs:sequence>
+                </xs:complexType>
+              </xs:element>
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

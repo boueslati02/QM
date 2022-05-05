@@ -1,0 +1,40 @@
+﻿@{
+    ViewBag.Title = "Agency access right management";
+}
+
+<h2>@ViewBag.Title</h2>
+<hr />
+<div class="form-inline filterdiv">
+
+    <div class="form-group">
+        @Html.Label("Agency Name", new { @for = "agency" })
+        @Html.TextBox("agency", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "agency" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Cruise Code", new { @for = "cruise" })
+        @Html.TextBox("cruise", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "cruise" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Group ID", new { @for = "group" })
+        @Html.TextBox("group", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "group" })
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Booking Number", new { @for = "booking" })
+        @Html.TextBox("booking", "", new { @class = "form-control", data_mvcgrid_type = "filter", data_mvcgrid_option = "booking" })
+    </div>
+
+    <input type="button" value="Search" class="btn btn-primary" data-mvcgrid-apply-filter="click" />
+</div>
+@if (TempData["message"] != null)
+{
+    <div id="successAlert" class="alert alert-success" role="alert">@TempData["message"]</div>
+}
+<button id="btnAgencyAccessRightCreate" type="button" class="btn btn-primary" onclick="create('/AgencyAccessRight/_Create')">Add</button>
+@Html.MVCGrid("AgencyAccessRight")
+<div id="frmCreate">
+</div>
+<div id="frmEdit">
+</div>

@@ -1,0 +1,68 @@
+﻿body {
+    background: url(/images/background.jpg) no-repeat center fixed;
+    -webkit-background-size: cover; /* pour anciens Chrome et Safari */
+    background-size: cover;
+}
+
+.tiles {
+    margin-top: 100px;
+}
+
+    .tiles a {
+        text-decoration: none;
+    }
+
+    .tiles .alert {
+        background-color: rgb(125,161,196);
+        border: rgb(53,78,112) solid 2px;
+        color: #fff;
+        display: block;
+        margin-left: 100px;
+        max-width: 1000px;
+        padding: 30px;
+        position: relative;
+    }
+
+        .tiles .alert div {
+            padding-left: 60px;
+        }
+
+        .tiles .alert h1 {
+            float: left;
+            margin: 0;
+            padding: 0;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .tiles .alert div h3, .alert div h4 {
+            margin: 0;
+            padding: 0;
+        }
+
+@media (max-width: 767px) {
+    .tiles {
+        margin-top: 0;
+    }
+
+        .tiles .alert {
+            display: inline-block;
+            margin-left: 0;
+            margin-bottom: 5px;
+        }
+
+            .tiles .alert div {
+                padding: 0;
+            }
+
+            .tiles .alert h1 {
+                position: inherit;
+                top: 0;
+                transform: none;
+            }
+
+            .tiles .alert div h3, .alert div h4 {
+                display: none;
+            }
+}

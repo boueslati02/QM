@@ -1,0 +1,34 @@
+﻿
+<div class="modal fade" id="modalConfirmRelaunch" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">@ViewBag.Title</h4>
+            </div>
+            <div class="modal-body">
+                @using (Ajax.BeginForm("_ConfirmRelaunch", "Passenger", new AjaxOptions
+                {
+                    HttpMethod = "POST",
+                    InsertionMode = InsertionMode.Replace,
+                    UpdateTargetId = "frmConfirmRelaunch",
+                    //OnSuccess = "modal('modalCreate')",
+                    //OnFailure = "modal('modalCreate')"
+                    OnSuccess = "modalNew(null, 'modalConfirmRelaunch', 'frmConfirmRelaunch')",
+                    OnFailure = "modalNew(null, 'modalConfirmRelaunch', 'frmConfirmRelaunch')"
+                }, new { @id = "modalConfirmRelaunch", @class = "form-horizontal", role = "form" }))
+                {
+                    <div class="text-center confirm-relaunch-modal">
+                        <p>Do you want to move back QM with status received to QM with status sent ?</p>
+                    </div>
+
+                    <div class="modal-footer">
+                        <input id="ChangeStatusBtn" type="button" onclick="ChangeStatusOrNot(true)" class="btn btn-primary col-md-offset-4" value="Yes"/>
+                        <input id="UnchangeStatusBtn" type="button" onclick="ChangeStatusOrNot(false)" class="btn btn-primary" value="No"/>
+                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                    </div>
+                }
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

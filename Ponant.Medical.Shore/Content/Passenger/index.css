@@ -1,0 +1,62 @@
+﻿
+.body-content {
+    background-color: #eee;
+}
+
+.imgicon img {
+    max-height: 48px;
+    max-width: 48px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    vertical-align: bottom;
+}
+
+.imgicon label {
+    margin-left: 5px;
+}
+
+.imgicon.qmvalid label {
+    color: #7fb332;
+}
+
+.imgicon.qmwaiting label {
+    color: #e67d15;
+}
+
+.imgicon.qmrefuse label {
+    color: #ad1a1a;
+}
+
+.favorableAdvice {
+    color: #7fb332;
+}
+
+.waitingAdvice {
+    color: #FFA500;
+}
+
+.unfavorableAdvice {
+    color: #ad1a1a;
+}
+
+#cruiseCounter {
+    margin-bottom: 20px;
+}
+
+#groupPassenger .tab-pane {
+    border-bottom: 0px;
+    border-bottom-left-radius: 0px;
+    border-bottom-right-radius: 0px;
+    height: 50px;
+}
+
+#groupPassenger .divStyleTab {
+    border-top: 0px;
+    border-top-right-radius: 0px;
+}
+
+.col-action-icon{
+    min-width : 90px;
+    width : 90px;
+    max-width : 90px;
+}
