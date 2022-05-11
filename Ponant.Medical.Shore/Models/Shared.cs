@@ -1,6 +1,7 @@
 ﻿namespace Ponant.Medical.Shore.Models
 {
     using Ponant.Medical.Data.Shore;
+    using System;
     using System.Collections.Generic;
     using System.Linq;
     using System.Web.Mvc;
@@ -30,14 +31,21 @@
         /// <returns>Liste des paramétres</returns>
         public List<SelectListItem> GetLovList(int idLovType)
         {
-            return (from lov in _shoreEntities.Lov.AsEnumerable()
-                    where lov.IdLovType.Equals(idLovType) && lov.IsEnabled
-                    orderby lov.Name ascending
-                    select new SelectListItem()
-                    {
-                        Text = lov.Name,
-                        Value = lov.Id.ToString()
-                    }).ToList();
+            try
+            {
+                return (from lov in _shoreEntities.Lov.AsEnumerable()
+                        where lov.IdLovType.Equals(idLovType) && lov.IsEnabled
+                        orderby lov.Name ascending
+                        select new SelectListItem()
+                        {
+                            Text = lov.Name,
+                            Value = lov.Id.ToString()
+                        }).ToList();
+            }catch(Exception ex)
+            {
+                return null;
+            }
+            
         }
         #endregion
     }

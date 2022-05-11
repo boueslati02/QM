@@ -7,6 +7,8 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Ponant.Medical.Service.Class
 {
@@ -243,6 +245,10 @@ namespace Ponant.Medical.Service.Class
                 LogManager.InsertLog(LogManager.LogType.QmReceived, LogManager.LogAction.Send, AppSettings.UserAccount, exception);
             }
         }
+        #endregion
+
+        #region cryptage model
+        
         #endregion
     }
 }

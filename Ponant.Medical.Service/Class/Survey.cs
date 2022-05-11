@@ -233,7 +233,9 @@ namespace Ponant.Medical.Service.Class
                             {
                                 // Gere les criteres d'envoi du QM
                                 if ((!string.IsNullOrEmpty(bookingCruisePassenger.Passenger.Email) || bookingCruisePassenger.Booking.IsGroup) &&
-                                (bookingCruisePassenger.Passenger.SentCount.Equals(0) || sentForLanguageUpdate ||
+
+                                (bookingCruisePassenger.Passenger.SentCount.Equals(0) || 
+                                sentForLanguageUpdate ||
                                 bookingCruisePassenger.Passenger.IdStatus.Equals(Constants.SHORE_STATUS_QM_NOT_SENT) ||
                                 (bookingCruisePassenger.Passenger.IdStatus.Equals(Constants.SHORE_STATUS_QM_SENT) && isRelaunch) ||
                                 (bookingCruisePassenger.Passenger.IdStatus.Equals(Constants.SHORE_STATUS_QM_INCOMPLETE) && isRelaunch)))

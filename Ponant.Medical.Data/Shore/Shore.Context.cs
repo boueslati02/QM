@@ -76,6 +76,8 @@ namespace Ponant.Medical.Data.Shore
         public virtual DbSet<Passenger> Passenger { get; set; }
         public virtual DbSet<vSurvey> vSurvey { get; set; }
         public virtual DbSet<vCruiseShore> vCruiseShore { get; set; }
+
+
         public virtual DbSet<vCruiseBoard> vCruiseBoard { get; set; }
         public virtual DbSet<BookingCruisePassenger> BookingCruisePassenger { get; set; }
         public virtual DbSet<Cruise> Cruise { get; set; }
