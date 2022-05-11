@@ -36,6 +36,7 @@
         {
             if (idSurvey.HasValue)
             {
+                var tt = 
                 ViewBag.IdSurvey = idSurvey;
             }
             return PartialView();
@@ -124,6 +125,7 @@
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult _Edit(EditLanguageViewModel model)
         {
             if (ModelState.IsValid)

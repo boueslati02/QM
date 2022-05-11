@@ -55,6 +55,13 @@ namespace Ponant.Medical.Shore.Models
         public string IndividualAutomaticResponse { get; set; }
 
         /// <summary>
+        /// Nom de fichier pour l'email de réponse individuel automatique lors de la réception du QM
+        /// </summary>
+        [Display(Name = "Email sent to passengers")]
+        [AllowHtml]
+        public string EmailFormat { get; set; }
+
+        /// <summary>
         /// Nom de fichier pour l'email de réponse de Groupe automatique lors de la réception du QM
         /// </summary>
         [Display(Name = "Group Automatic Response")]
@@ -289,13 +296,14 @@ namespace Ponant.Medical.Shore.Models
                     language.IsDefault = model.DefaultLanguage;
                     language.Editor = CurrentUser;
                     language.ModificationDate = Now;
+                    language.EmailFormat = model.EmailFormat;
+                    language.IndividualAutomaticResponse = model.IndividualAutomaticResponse;
                     _shoreEntities.SaveChanges();
 
                     SaveLanguageFiles(ref language, model.IndividualSurvey, 1);
                     SaveLanguageFiles(ref language, model.GroupSurvey, 2);
                     SaveLanguageFiles(ref language, model.IndividualMail, 3);
                     SaveLanguageFiles(ref language, model.GroupMail, 4);
-                    SaveLanguageFiles(ref language, model.IndividualAutomaticResponse, 7);
                     SaveLanguageFiles(ref language, model.GroupAutomaticResponse, 8);
 
                     _shoreEntities.SaveChanges();

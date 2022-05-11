@@ -588,6 +588,7 @@
     <Content Include="Views\CruiseAssignment\_Create.cshtml" />
     <Content Include="Views\Report\QmTreatment.cshtml" />
     <Content Include="Views\CruiseAssignment\_Edit.cshtml" />
+    <Content Include="Views\EmailTemplate\ConfirmQM.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

@@ -51,7 +51,6 @@
             @Html.ValidationMessageFor(model => model.MedicaleAdvice, "", new { @class = "text-danger" })
         </div>
     </div>
-
     <div class="col-md-11 col-md-offset-1">
         @Html.ActionLink("Cancel", "Index", "Survey", null, new { @id = "cancelButton", @class = "btn btn-default", @type = "button" })
         <input id="submitButton" type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />

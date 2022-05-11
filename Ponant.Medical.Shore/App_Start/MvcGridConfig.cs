@@ -284,10 +284,10 @@
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.IndividualSurveyMail.GetLanguageFilesLink(3, l.Id))
                         .WithHeaderText("Request individual mail");
-                    cols.Add("IndividualAutomaticResponse")
+                    cols.Add("EmailFormat")
                         .WithHtmlEncoding(false)
-                        .WithValueExpression(l => l.IndividualAutomaticResponse.GetLanguageFilesLink(7, l.Id))
-                        .WithHeaderText("Automatic individual response");
+                        .WithValueExpression(l => l.EmailFormat)
+                        .WithHeaderText("Email sent to passengers");
                     cols.Add("GroupSurveyFileName")
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.GroupSurveyFileName.GetLanguageFilesLink(2, l.Id))
@@ -326,19 +326,19 @@
                 QueryOptions options = context.QueryOptions;
 
                 int.TryParse(options.GetPageParameterString("IdSurvey"), out int idSurvey);
-
+                var ttt = db.Language.Where(l => l.Id == 45).ToList();
                 IQueryable<Language> language = (from lang in db.Language where lang.IdSurvey.Equals(idSurvey) select lang);
 
                 if (options?.SortColumnData != null)
                 {
                     language = language.OrderBy(options.SortColumnData.ToString(), options.SortDirection.ToString());
                 }
-
-                return new QueryResult<Language>()
+                var test = new QueryResult<Language>()
                 {
                     Items = language.ToList(),
                     TotalRecords = language.Count()
                 };
+                return test;
             })
             );
             #endregion
