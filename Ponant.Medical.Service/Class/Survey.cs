@@ -196,7 +196,11 @@ namespace Ponant.Medical.Service.Class
             {
                 using (ShoreEntities db = new ShoreEntities())
                 {
-                    Data.Shore.Booking booking = db.Booking.Single(b => b.Number.Equals(bookingNumber));
+                    Data.Shore.Booking booking = db.Booking.FirstOrDefault(b => b.Number.Equals(bookingNumber));
+                    if(booking == null)
+                    {
+
+                    }
                     CruiseCriteria cruiseCriteria = new CruiseCriteria(db);
                     CruiseCriterion criteria = cruiseCriteria.GetCriteria(booking.BookingCruisePassenger);
                     int? idCruise = GetIdCruise(booking, criteria);

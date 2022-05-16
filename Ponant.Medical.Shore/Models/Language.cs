@@ -55,11 +55,28 @@ namespace Ponant.Medical.Shore.Models
         public string IndividualAutomaticResponse { get; set; }
 
         /// <summary>
-        /// Nom de fichier pour l'email de réponse individuel automatique lors de la réception du QM
+        /// Email à envoyer pour le passager
         /// </summary>
         [Display(Name = "Email sent to passengers")]
-        [AllowHtml]
         public string EmailFormat { get; set; }
+
+        /// <summary>
+        /// Email à envoyer pour le group
+        /// </summary>
+        [Display(Name = "Email sent to Group")]
+        public string EmailFormatGroup { get; set; }
+
+        /// <summary>
+        /// Email à envoyer pour le passager
+        /// </summary>
+        [Display(Name = "Text above the form passenger")]
+        public string TextFormatWebSite { get; set; }
+
+        /// <summary>
+        /// Email à envoyer pour le group
+        /// </summary>
+        [Display(Name = "Text above the form Group")]
+        public string TextFormatWebSiteGroup { get; set; }
 
         /// <summary>
         /// Nom de fichier pour l'email de réponse de Groupe automatique lors de la réception du QM
@@ -162,6 +179,10 @@ namespace Ponant.Medical.Shore.Models
                 model.GroupSurvey = language.GroupSurveyFileName;
                 model.IndividualMail = language.IndividualSurveyMail;
                 model.GroupMail = language.GroupSurveyMail;
+                model.EmailFormat = language.EmailFormat;
+                model.TextFormatWebSite = language.TextFormatWebSite;
+                model.EmailFormatGroup = language.EmailFormatGroup;
+                model.TextFormatWebSiteGroup = language.TextFormatWebSiteGroup;
                 model.DefaultLanguage = language.IsDefault;
             }
 
@@ -247,11 +268,16 @@ namespace Ponant.Medical.Shore.Models
                 {
                     language.IdSurvey = model.IdSurvey;
                     language.IdLanguage = model.Langue;
+                    language.EmailFormat = model.EmailFormat;
                     language.IsDefault = model.DefaultLanguage;
                     language.Creator = CurrentUser;
                     language.CreationDate = Now;
                     language.Editor = CurrentUser;
                     language.ModificationDate = Now;
+                    language.EmailFormat = model.EmailFormat;
+                    language.TextFormatWebSite = model.TextFormatWebSite;
+                    language.EmailFormatGroup = model.EmailFormatGroup;
+                    language.TextFormatWebSiteGroup = model.TextFormatWebSiteGroup;
                     _shoreEntities.Language.Add(language);
                     _shoreEntities.SaveChanges();
 
@@ -294,10 +320,13 @@ namespace Ponant.Medical.Shore.Models
                     language = _shoreEntities.Language.Find(model.Id);
                     language.IdLanguage = model.Langue;
                     language.IsDefault = model.DefaultLanguage;
+                    language.EmailFormat = model.EmailFormat;
+                    language.EmailFormatGroup = model.EmailFormatGroup;
                     language.Editor = CurrentUser;
                     language.ModificationDate = Now;
-                    language.EmailFormat = model.EmailFormat;
                     language.IndividualAutomaticResponse = model.IndividualAutomaticResponse;
+                    language.EmailFormatGroup = model.EmailFormatGroup;
+                    language.TextFormatWebSiteGroup = model.TextFormatWebSiteGroup;
                     _shoreEntities.SaveChanges();
 
                     SaveLanguageFiles(ref language, model.IndividualSurvey, 1);

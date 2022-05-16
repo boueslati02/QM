@@ -28,6 +28,9 @@ namespace Ponant.Medical.Data.Shore
         public string GroupSurveyFileName { get; set; }
         public string IndividualAutomaticResponse { get; set; }
         public string EmailFormat { get; set; }
+        public string EmailFormatGroup { get; set; }
+        public string TextFormatWebSite { get; set; }
+        public string TextFormatWebSiteGroup { get; set; }
         public string GroupAutomaticResponse { get; set; }
         public string IndividualAdditionalMail { get; set; }
         public string GroupAdditionalMail { get; set; }

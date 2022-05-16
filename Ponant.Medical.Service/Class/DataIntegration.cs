@@ -924,7 +924,6 @@ namespace Ponant.Medical.Service.Class
                     }
                 }
             }
-
             return isInsertable;
         }
 

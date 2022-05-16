@@ -1,8 +1,6 @@
 ﻿@model Ponant.Medical.Shore.Models.CreateLanguageViewModel
 
-@{
-    ViewBag.Title = "Create a language";
-}
+@{ ViewBag.Title = "Create a language"; }
 
 <div class="modal fade" id="modalCreate" tabindex="-1" role="dialog" aria-labelledby="modalLabel">
     <div class="modal-dialog" role="document">
@@ -24,146 +22,198 @@
                 }
                 , new { id = "formLanguageCreate", @class = "form-horizontal", role = "form", enctype = "multipart/form-data" }))
                 {
-                    @Html.AntiForgeryToken()
-                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.Id)
-                    @Html.HiddenFor(model => model.IdSurvey)           
-                    @Html.HiddenFor(model => model.UploadFileError)              
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.Id)
+                @Html.HiddenFor(model => model.IdSurvey)
+                @Html.HiddenFor(model => model.UploadFileError)
 
-                    <div id="labelDefaultDocument" class="form-group">
-                        <label class="text-danger">
-                            Caution, default language documents will be used for documents not filled in.
-                        </label>
-                    </div>
+                                                                                    <div id="labelDefaultDocument" class="form-group">
+                                                                                        <label class="text-danger">
+                                                                                            Caution, default language documents will be used for documents not filled in.
+                                                                                        </label>
+                                                                                    </div> if (ViewBag.LangueList != null)
+                                                                                                    {
+                                                                                    <div class="form-group">
+                                                                                        @Html.LabelFor(model => model.Langue, htmlAttributes: new { @class = "control-label col-md-4" })
+                                                                                        <div class="col-md-8">
+                                                                                            @if (ViewBag.LangueList != null)
+                                                                                            {
+                                                                        @Html.DropDownListFor(model => model.Langue, ViewBag.LangueList as List<SelectListItem>, "", new { @class = "form-control" })
+                                                                                                @Html.ValidationMessageFor(model => model.Langue, "", new { @class = "text-danger" })}
+                                                                                        </div>
+                                                                                    </div> }
 
-                    if (ViewBag.LangueList != null)
-                    {
-                        <div class="form-group">
-                            @Html.LabelFor(model => model.Langue, htmlAttributes: new { @class = "control-label col-md-4" })
-                            <div class="col-md-8">
-                                @if (ViewBag.LangueList != null)
-                                {
-                                    @Html.DropDownListFor(model => model.Langue, ViewBag.LangueList as List<SelectListItem>, "", new { @class = "form-control" })
-                                    @Html.ValidationMessageFor(model => model.Langue, "", new { @class = "text-danger" })
-                                }
-                            </div>
-                        </div>
-                    }
+                                                                                    <div class="form-group">
+                                                                                        <div class="col-md-8 col-md-offset-4">
+                                                                                            @Html.CheckBoxFor(model => model.DefaultLanguage)
+                                                                                            @Html.LabelFor(model => model.DefaultLanguage, htmlAttributes: new { @class = "control-label" })
+                                                                                            @Html.ValidationMessageFor(model => model.DefaultLanguage, "", new { @class = "text-danger" })
+                                                                                        </div>
+                                                                                    </div>
 
-                    <div class="form-group">
-                        <div class="col-md-8 col-md-offset-4">
-                            @Html.CheckBoxFor(model => model.DefaultLanguage)
-                            @Html.LabelFor(model => model.DefaultLanguage, htmlAttributes: new { @class = "control-label" })
-                            @Html.ValidationMessageFor(model => model.DefaultLanguage, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                                                                                                    @Html.ValidationMessageFor(model => model.UploadFileError, "", new { @class = "text-danger" })
 
-                    @Html.ValidationMessageFor(model => model.UploadFileError, "", new { @class = "text-danger" })
+                                                                                                                    <div>
+                                                                                                                        <ul class="nav nav-tabs" role="tablist">
+                                                                                                                            <li role="presentation" class="active">
+                                                                                                                                <a href="#indivCreate" aria-controls="indivCreate" role="tab" data-toggle="tab">For individual</a>
+                                                                                                                            </li>
+                                                                                                                            <li role="presentation">
+                                                                                                                                <a href="#groupCreate" aria-controls="groupCreate" role="tab" data-toggle="tab">For Group</a>
+                                                                                                                            </li>
+                                                                                                                        </ul>
 
-                    <div>
-                        <ul class="nav nav-tabs" role="tablist">
-                            <li role="presentation" class="active">
-                                <a href="#indivCreate" aria-controls="indivCreate" role="tab" data-toggle="tab">For individual</a>
-                            </li>
-                            <li role="presentation">
-                                <a href="#groupCreate" aria-controls="groupCreate" role="tab" data-toggle="tab">For Group</a>
-                            </li>
-                        </ul>
+                                                                                                                        @*Content for individual passengers*@
+                                                                                                                        <div class="tab-content">
+                                                                                                                            <div role="tabpanel" class="tab-pane active" id="indivCreate">
+                                                                                                                                <textarea id="ToSendAddedPassager" name="EmailFormat" class="hidden">@Model.EmailFormat</textarea>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="justify-content-md-center">
+                                                                                                                                        <div class="col-md-12">
+                                                                                                                                            <label>Content Email</label>
+                                                                                                                                            <div class="form-group">
+                                                                                                                                                <textarea id="editorEmailFormatAdded"></textarea>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div id="ValurEmailFormatAdded" class="hidden">
+                                                                                                                                    @Model.EmailFormat
+                                                                                                                                </div>
+                                                                                                                                <textarea id="ToSendTextFormatWebSite" name="TextFormatWebSite" class="hidden">@Model.TextFormatWebSite</textarea>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="justify-content-md-center">
+                                                                                                                                        <div class="col-md-12">
+                                                                                                                                            <label>Content Text Website</label>
+                                                                                                                                            <div class="form-group">
+                                                                                                                                                <textarea id="editorTextFormatWebSite"></textarea>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div id="TextFormatWebSite" class="hidden">
+                                                                                                                                    @Model.TextFormatWebSite
+                                                                                                                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.IndividualSurvey, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.IndividualSurvey) ? Html.Raw("<br/><span>(" + Model.IndividualSurvey + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.IndividualSurvey, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.IndividualSurvey, new { id = "IndividualSurvey_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.IndividualSurvey, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                        @*Content for individual passengers*@
-                        <div class="tab-content"> 
-                            <div role="tabpanel" class="tab-pane active" id="indivCreate">
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.IndividualSurvey, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.IndividualSurvey) ? Html.Raw("<br/><span>(" + Model.IndividualSurvey + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.IndividualSurvey, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.IndividualSurvey, new { id = "IndividualSurvey_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
-                                        @Html.ValidationMessageFor(model => model.IndividualSurvey, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.IndividualMail, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.IndividualMail) ? Html.Raw("<br/><span>(" + Model.IndividualMail + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.IndividualMail, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.IndividualMail, new { id = "IndividualMail_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.IndividualMail, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.IndividualMail, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.IndividualMail) ? Html.Raw("<br/><span>(" + Model.IndividualMail + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.IndividualMail, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.IndividualMail, new { id = "IndividualMail_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.IndividualMail, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.IndividualAutomaticResponse, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.IndividualAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.IndividualAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.IndividualAutomaticResponse, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.IndividualAutomaticResponse, new { id = "IndividualAutomaticResponse_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.IndividualAutomaticResponse, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.IndividualAutomaticResponse, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.IndividualAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.IndividualAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.IndividualAutomaticResponse, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.IndividualAutomaticResponse, new { id = "IndividualAutomaticResponse_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.IndividualAutomaticResponse, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                            </div>
 
-                            </div>
+                                                                                                                            @*Content for group passengers*@
+                                                                                                                            <div role="tabpanel" class="tab-pane" id="groupCreate">
+                                                                                                                                <textarea id="ToSendAddedPassagerGroup" name="EmailFormatGroup" class="hidden">@Model.EmailFormatGroup</textarea>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="justify-content-md-center">
+                                                                                                                                        <div class="col-md-12">
+                                                                                                                                            <label>Content Email</label>
+                                                                                                                                            <div class="form-group">
+                                                                                                                                                <textarea id="editorEmailFormatAddedGroup"></textarea>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div id="ValurEmailFormatAddedGroup" class="hidden">
+                                                                                                                                    @Model.EmailFormatGroup
+                                                                                                                                </div>
 
-                            @*Content for group passengers*@
-                            <div role="tabpanel" class="tab-pane" id="groupCreate">
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupSurvey, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupSurvey) ? Html.Raw("<br/><span>(" + Model.GroupSurvey + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupSurvey, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.GroupSurvey, new { id = "GroupSurvey_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
-                                        @Html.ValidationMessageFor(model => model.GroupSurvey, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                                <textarea id="ToSendTextFormatWebSiteGroup" name="TextFormatWebSiteGroup" class="hidden">@Model.TextFormatWebSiteGroup</textarea>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="justify-content-md-center">
+                                                                                                                                        <div class="col-md-12">
+                                                                                                                                            <label>Content Text Website Group</label>
+                                                                                                                                            <div class="form-group">
+                                                                                                                                                <textarea id="editorTextFormatWebSiteGroup"></textarea>
+                                                                                                                                            </div>
+                                                                                                                                        </div>
+                                                                                                                                    </div>
+                                                                                                                                </div>
+                                                                                                                                <div id="ValurEmailFormatAddedGroup" class="hidden">
+                                                                                                                                    @Model.TextFormatWebSiteGroup
+                                                                                                                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.GroupSurvey, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.GroupSurvey) ? Html.Raw("<br/><span>(" + Model.GroupSurvey + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.GroupSurvey, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.GroupSurvey, new { id = "GroupSurvey_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.GroupSurvey, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupMail, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupMail) ? Html.Raw("<br/><span>(" + Model.GroupMail + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupMail, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.GroupMail, new { id = "GroupMail_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.GroupMail, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.GroupMail, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.GroupMail) ? Html.Raw("<br/><span>(" + Model.GroupMail + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.GroupMail, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.GroupMail, new { id = "GroupMail_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.GroupMail, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupAutomaticResponse, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.GroupAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupAutomaticResponse, new { data_val = "false" })
-                                        @Html.TextBoxFor(model => model.GroupAutomaticResponse, new { id = "GroupAutomaticResponse_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.GroupAutomaticResponse, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
+                                                                                                                                <div class="form-group">
+                                                                                                                                    <div class="control-label col-md-5">
+                                                                                                                                        @Html.LabelFor(model => model.GroupAutomaticResponse, htmlAttributes: new { @class = "control-label" })
+                                                                                                                                        @(!string.IsNullOrEmpty(Model.GroupAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.GroupAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
+                                                                                                                                    </div>
+                                                                                                                                    <div class="col-md-7">
+                                                                                                                                        @Html.HiddenFor(model => model.GroupAutomaticResponse, new { data_val = "false" })
+                                                                                                                                        @Html.TextBoxFor(model => model.GroupAutomaticResponse, new { id = "GroupAutomaticResponse_FileData", data_val = "false", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                                                                                                                        @Html.ValidationMessageFor(model => model.GroupAutomaticResponse, "", new { @class = "text-danger" })
+                                                                                                                                    </div>
+                                                                                                                                </div>
 
-                            </div>
-                        </div>
-                    </div>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    </div>
 
-                    <div id="labelDefaultDocument" class="form-group">
-                        <span>
-                            Unicode Outlook messages are not supported for mail templates.&nbsp;
-                        </span>
-                    </div>
+                                                                                                                                    <div id="labelDefaultDocument" class="form-group">
+                                                                                                                                        <span>
+                                                                                                                                            Unicode Outlook messages are not supported for mail templates.&nbsp;
+                                                                                                                                        </span>
+                                                                                                                                    </div>
 
-                    <div class="modal-footer">
-                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
-                        <input type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
-                    </div>
-                }
+                                                                                                                                                    <div class="modal-footer">
+                                                                                                                                                        <input type="button" class="btn btn-default" data-dismiss="modal" value="Cancel" />
+                                                                                                                                                        <input type="submit" class="btn btn-primary" value="Save" data-loading-text="Loading..." />
+                                                                                                                                                    </div>}
             </div>
 
         </div><!-- /.modal-content -->
@@ -172,3 +222,78 @@
 
 @Scripts.Render("~/bundles/language_bundle")
 @Styles.Render("~/Content/language_bundle")
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+<script>
+    $(function () {
+        let ContenteditorEmailFormatAdded = $.parseHTML($("#ValurEmailFormatAdded").html());
+        tinymce.init({
+            selector: 'textarea#editorEmailFormatAdded',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editor) {
+                editor.on('init', function (e) {
+                    editor.setContent(ContenteditorEmailFormatAdded[0].data);
+                });
+                editor.on('blur', function (e) {
+                    let content = tinymce.get(e.target.id).getContent();
+                    $("textarea#ToSendAddedPassager").val(content);
+                });
+            }
+        });
+        let ContenteditorEmailFormatAddedGroup = $.parseHTML($("#ValurEmailFormatAddedGroup").html());
+        tinymce.init({
+            selector: 'textarea#editorEmailFormatAddedGroup',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editorgroup) {
+                editorgroup.on('init', function (event) {
+                    editorgroup.setContent(ContenteditorEmailFormatAddedGroup[0].data);
+                });
+                editorgroup.on('blur', function (event) {
+                    let contentGroup = tinymce.get(event.target.id).getContent();
+                    $("textarea#ToSendAddedPassagerGroup").val(contentGroup);
+                });
+            }
+        });
+
+        let ContentTextFormatWebSite = $.parseHTML($("#TextFormatWebSite").html());
+        tinymce.init({
+            selector: 'textarea#editorTextFormatWebSite',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editoreditorTextFormatWebSite) {
+                editoreditorTextFormatWebSite.on('init', function (e) {
+                    editoreditorTextFormatWebSite.setContent(ContentTextFormatWebSite[0].data);
+                });
+                editoreditorTextFormatWebSite.on('blur', function (e) {
+                    let content = tinymce.get(e.target.id).getContent();
+                    $("textarea#ToSendTextFormatWebSite").val(content);
+                });
+            }
+        });
+        let ContentTextFormatWebSiteGroup = $.parseHTML($("#ValurEmailFormatAddedGroup").html());
+        tinymce.init({
+            selector: 'textarea#editorTextFormatWebSiteGroup',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editorgroupwebsite) {
+                editorgroupwebsite.on('init', function (event) {
+                    editorgroupwebsite.setContent(ContentTextFormatWebSiteGroup[0].data);
+                });
+                editorgroupwebsite.on('blur', function (event) {
+                    let contentGroup = tinymce.get(event.target.id).getContent();
+                    $("textarea#ToSendTextFormatWebSiteGroup").val(contentGroup);
+                });
+            }
+        });
+    })
+
+</script>
