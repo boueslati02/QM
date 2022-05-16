@@ -1,11 +1,13 @@
 ﻿namespace Ponant.Medical.Shore.Controllers
 {
     using Ponant.Medical.Common;
+    using Ponant.Medical.Data.Shore;
     using Ponant.Medical.Shore.Helpers;
     using Ponant.Medical.Shore.Models;
     using System;
     using System.Data.Entity.Validation;
     using System.IO;
+    using System.Linq;
     using System.Net;
     using System.Net.Mime;
     using System.Web;
@@ -36,7 +38,7 @@
         {
             if (idSurvey.HasValue)
             {
-                var tt = 
+                ShoreEntities db = DependencyResolver.Current.GetService<ShoreEntities>();
                 ViewBag.IdSurvey = idSurvey;
             }
             return PartialView();
@@ -69,6 +71,7 @@
         /// <returns></returns>
         [HttpPost]
         [ValidateAntiForgeryToken]
+        [ValidateInput(false)]
         public ActionResult _Create(CreateLanguageViewModel model)
         {
             if (ModelState.IsValid)

@@ -76,6 +76,34 @@
                         @*Content for individual passengers*@
                         <div class="tab-content">
                             <div role="tabpanel" class="tab-pane active" id="indivEdit">
+                                <textarea id="ToSendPassager" name="EmailFormat" class="hidden">@Model.EmailFormat</textarea>
+                                <div class="form-group">
+                                    <div class="justify-content-md-center">
+                                        <div class="col-md-12">
+                                            <label>Content Email</label>
+                                            <div class="form-group">
+                                                <textarea id="editorEmailFormat"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="ValurEmailFormat" class="hidden">
+                                    @Model.EmailFormat
+                                </div>
+                                <textarea id="ToSendTextFormatWebSite" name="TextFormatWebSite" class="hidden">@Model.TextFormatWebSite</textarea>
+                                <div class="form-group">
+                                    <div class="justify-content-md-center">
+                                        <div class="col-md-12">
+                                            <label>Content Text Website</label>
+                                            <div class="form-group">
+                                                <textarea id="editorTextFormatWebSite"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div id="TextFormatWebSite" class="hidden">
+                                    @Model.TextFormatWebSite
+                                </div>
                                 <div class="form-group">
                                     <div class="control-label col-md-5">
                                         @Html.LabelFor(model => model.IndividualSurvey, htmlAttributes: new { @class = "control-label" })
@@ -99,62 +127,68 @@
                                         @Html.ValidationMessageFor(model => model.IndividualMail, "", new { @class = "text-danger" })
                                     </div>
                                 </div>
-                                <textarea id="ToSend" name="EmailFormat" class="hidden"></textarea>
-                                <div class="form-group">
-                                    <div class="justify-content-md-center">
-                                        <div class="col-md-12">
-                                            <label>Content Email</label>
-                                            <div class="form-group">
-                                                <textarea id="editorEmailFormat"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div id="ValurEmailFormat" class="hidden">
-                                    @Model.EmailFormat
-                                </div>
+
 
                             </div>
 
                             @*Content for group passengers*@
-                            <div role="tabpanel" class="tab-pane" id="groupEdit">
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupSurvey, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupSurvey) ? Html.Raw("<br/><span>(" + Model.GroupSurvey + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupSurvey)
-                                        @Html.TextBoxFor(model => model.GroupSurvey, new { id = "GroupSurvey_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
-                                        @Html.ValidationMessageFor(model => model.GroupSurvey, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupMail, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupMail) ? Html.Raw("<br/><span>(" + Model.GroupMail + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupMail)
-                                        @Html.TextBoxFor(model => model.GroupMail, new { id = "GroupMail_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.GroupMail, "", new { @class = "text-danger" })
+                        <div role="tabpanel" class="tab-pane" id="groupEdit">
+                            <textarea id="ToSendPassagerGroup" name="EmailFormatGroup" class="hidden">@Model.EmailFormatGroup</textarea>
+                            <div class="form-group">
+                                <div class="justify-content-md-center">
+                                    <div class="col-md-12">
+                                        <label>Content Email</label>
+                                        <div class="form-group">
+                                            <textarea id="editorEmailFormatGroup"></textarea>
+                                        </div>
                                     </div>
                                 </div>
-
-                                <div class="form-group">
-                                    <div class="control-label col-md-5">
-                                        @Html.LabelFor(model => model.GroupAutomaticResponse, htmlAttributes: new { @class = "control-label" })
-                                        @(!string.IsNullOrEmpty(Model.GroupAutomaticResponse) ? Html.Raw("<br/><span>(" + Model.GroupAutomaticResponse + ")</span>") : @Html.Raw(string.Empty))
-                                    </div>
-                                    <div class="col-md-7">
-                                        @Html.HiddenFor(model => model.GroupAutomaticResponse)
-                                        @Html.TextBoxFor(model => model.GroupAutomaticResponse, new { id = "GroupAutomaticResponse_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
-                                        @Html.ValidationMessageFor(model => model.GroupAutomaticResponse, "", new { @class = "text-danger" })
-                                    </div>
-                                </div>
-
                             </div>
+                            <div id="ValurEmailFormatGroup" class="hidden">
+                                @Model.EmailFormatGroup
+                            </div>
+
+                            <textarea id="ToSendTextFormatWebSiteGroup" name="TextFormatWebSiteGroup" class="hidden">@Model.TextFormatWebSiteGroup</textarea>
+                            <div class="form-group">
+                                <div class="justify-content-md-center">
+                                    <div class="col-md-12">
+                                        <label>Content Text Website Group</label>
+                                        <div class="form-group">
+                                            <textarea id="editorTextFormatWebSiteGroup"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ValurTextFormatWebSiteGroup" class="hidden">
+                                @Model.TextFormatWebSiteGroup
+                            </div>
+                            <div class="form-group">
+                                <div class="control-label col-md-5">
+                                    @Html.LabelFor(model => model.GroupSurvey, htmlAttributes: new { @class = "control-label" })
+                                    @(!string.IsNullOrEmpty(Model.GroupSurvey) ? Html.Raw("<br/><span>(" + Model.GroupSurvey + ")</span>") : @Html.Raw(string.Empty))
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.HiddenFor(model => model.GroupSurvey)
+                                    @Html.TextBoxFor(model => model.GroupSurvey, new { id = "GroupSurvey_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".pdf", maxFileSize = "500" })
+                                    @Html.ValidationMessageFor(model => model.GroupSurvey, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <div class="control-label col-md-5">
+                                    @Html.LabelFor(model => model.GroupMail, htmlAttributes: new { @class = "control-label" })
+                                    @(!string.IsNullOrEmpty(Model.GroupMail) ? Html.Raw("<br/><span>(" + Model.GroupMail + ")</span>") : @Html.Raw(string.Empty))
+                                </div>
+                                <div class="col-md-7">
+                                    @Html.HiddenFor(model => model.GroupMail)
+                                    @Html.TextBoxFor(model => model.GroupMail, new { id = "GroupMail_FileData", @class = "fileInput", type = "file", baseUploadUrl = "/Language/FileUpload", accept = ".msg", maxFileSize = "400" })
+                                    @Html.ValidationMessageFor(model => model.GroupMail, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                        </div>
                         </div>
                     </div>
 
@@ -175,7 +209,7 @@
 
 @Scripts.Render("~/bundles/language_bundle")
 @Styles.Render("~/Content/language_bundle")
-
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
     $(function () {
         let ContenteditorEmailFormat = $.parseHTML($("#ValurEmailFormat").html());
@@ -191,14 +225,63 @@
                 });
                 editor.on('blur', function (e) {
                     let content = tinymce.get(e.target.id).getContent();
-                    $("textarea#ToSend").val(content);
+                    $("textarea#ToSendPassager").val(content);
+                });
+            }
+        });
+        let ContenteditorEmailFormatGroup = $.parseHTML($("#ValurEmailFormatGroup").html());
+        tinymce.init({
+            selector: 'textarea#editorEmailFormatGroup',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editorgroup) {
+                editorgroup.on('init', function (event) {
+                    editorgroup.setContent(ContenteditorEmailFormatGroup[0].data);
+                });
+                editorgroup.on('blur', function (event) {
+                    let contentGroup = tinymce.get(event.target.id).getContent();
+                    $("textarea#ToSendPassagerGroup").val(contentGroup);
                 });
             }
         });
 
-
-
-
+        let ContentTextFormatWebSite = $.parseHTML($("#TextFormatWebSite").html());
+        console.log("ContentTextFormatWebSite", ContentTextFormatWebSite);
+        tinymce.init({
+            selector: 'textarea#editorTextFormatWebSite',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editoreditorTextFormatWebSite) {
+                editoreditorTextFormatWebSite.on('init', function (e) {
+                    editoreditorTextFormatWebSite.setContent(ContentTextFormatWebSite[0].data);
+                });
+                editoreditorTextFormatWebSite.on('blur', function (e) {
+                    let content = tinymce.get(e.target.id).getContent();
+                    $("textarea#ToSendTextFormatWebSite").val(content);
+                });
+            }
+        });
+        let ContentTextFormatWebSiteGroup = $.parseHTML($("#ValurTextFormatWebSiteGroup").html());
+        tinymce.init({
+            selector: 'textarea#editorTextFormatWebSiteGroup',
+            skin: 'bootstrap',
+            plugins: 'lists, link, image, media',
+            toolbar: 'h1 h2 bold italic strikethrough blockquote bullist numlist backcolor | link image media | removeformat help',
+            menubar: false,
+            setup: function (editorgroupwebsite) {
+                editorgroupwebsite.on('init', function (event) {
+                    editorgroupwebsite.setContent(ContentTextFormatWebSiteGroup[0].data);
+                });
+                editorgroupwebsite.on('blur', function (event) {
+                    let contentGroup = tinymce.get(event.target.id).getContent();
+                    $("textarea#ToSendTextFormatWebSiteGroup").val(contentGroup);
+                });
+            }
+        });
     })
 
 </script>

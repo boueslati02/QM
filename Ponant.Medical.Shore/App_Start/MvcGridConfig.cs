@@ -276,6 +276,22 @@
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.LovLanguage.Name)
                         .WithHeaderText("Language");
+                    cols.Add("EmailFormat")
+                        .WithHtmlEncoding(false)
+                        .WithValueExpression(l => l.EmailFormat)
+                        .WithHeaderText("Email sent to passengers");
+                    cols.Add("EmailFormatGroup")
+                        .WithHtmlEncoding(false)
+                        .WithValueExpression(l => l.EmailFormatGroup)
+                        .WithHeaderText("Email sent to Group");
+                    cols.Add("TextFormatWebSite")
+                        .WithHtmlEncoding(false)
+                        .WithValueExpression(l => l.TextFormatWebSite)
+                        .WithHeaderText("Text above the form passenger");
+                    cols.Add("TextFormatWebSiteGroup")
+                        .WithHtmlEncoding(false)
+                        .WithValueExpression(l => l.TextFormatWebSiteGroup)
+                        .WithHeaderText("Text above the form Group");
                     cols.Add("IndividualSurveyFileName")
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.IndividualSurveyFileName.GetLanguageFilesLink(1, l.Id))
@@ -284,10 +300,6 @@
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.IndividualSurveyMail.GetLanguageFilesLink(3, l.Id))
                         .WithHeaderText("Request individual mail");
-                    cols.Add("EmailFormat")
-                        .WithHtmlEncoding(false)
-                        .WithValueExpression(l => l.EmailFormat)
-                        .WithHeaderText("Email sent to passengers");
                     cols.Add("GroupSurveyFileName")
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.GroupSurveyFileName.GetLanguageFilesLink(2, l.Id))
@@ -296,10 +308,6 @@
                         .WithHtmlEncoding(false)
                         .WithValueExpression(l => l.GroupSurveyMail.GetLanguageFilesLink(4, l.Id))
                         .WithHeaderText("Request group mail");
-                    cols.Add("GroupAutomaticResponse")
-                        .WithHtmlEncoding(false)
-                        .WithValueExpression(l => l.GroupAutomaticResponse.GetLanguageFilesLink(8, l.Id))
-                        .WithHeaderText("Automatic group response");
                     cols.Add("IsDefault")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(s => "text-center")

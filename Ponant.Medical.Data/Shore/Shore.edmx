@@ -200,6 +200,10 @@
           <Property Name="ModificationDate" Type="datetime" Nullable="false" />
           <Property Name="IndividualAutomaticResponse" Type="varchar" MaxLength="64" />
           <Property Name="GroupAutomaticResponse" Type="varchar" MaxLength="64" />
+          <Property Name="EmailFormat" Type="text" />
+          <Property Name="EmailFormatGroup" Type="text" />
+          <Property Name="TextFormatWebSite" Type="text" />
+          <Property Name="TextFormatWebSiteGroup" Type="text" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -1239,6 +1243,10 @@ avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vSurvey' n'a pas de c
           <Property Name="GroupAutomaticResponse" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="IndividualAdditionalMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
           <Property Name="GroupAdditionalMail" Type="String" MaxLength="64" FixedLength="false" Unicode="false" />
+          <Property Name="EmailFormat" Type="String" FixedLength="false" Unicode="false" />
+          <Property Name="EmailFormatGroup" Type="String" FixedLength="false" Unicode="false" />
+          <Property Name="TextFormatWebSite" Type="String" FixedLength="false" Unicode="false" />
+          <Property Name="TextFormatWebSiteGroup" Type="String" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="Log">
           <Key>
@@ -2262,6 +2270,10 @@ avertissement 6002: La table/vue 'Ponant.Medical.Shore.dbo.vSurvey' n'a pas de c
                 <ScalarProperty Name="IndividualSurveyMail" ColumnName="IndividualSurveyMail" />
                 <ScalarProperty Name="GroupSurveyMail" ColumnName="GroupSurveyMail" />
                 <ScalarProperty Name="IsDefault" ColumnName="IsDefault" />
+                <ScalarProperty Name="EmailFormat" ColumnName="EmailFormat" />
+                <ScalarProperty Name="EmailFormatGroup" ColumnName="EmailFormatGroup" />
+                <ScalarProperty Name="TextFormatWebSite" ColumnName="TextFormatWebSite" />
+                <ScalarProperty Name="TextFormatWebSiteGroup" ColumnName="TextFormatWebSiteGroup" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
