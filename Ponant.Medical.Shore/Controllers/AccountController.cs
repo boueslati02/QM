@@ -6,9 +6,12 @@
     using MsgReader.Outlook;
     using Newtonsoft.Json;
     using Ponant.Medical.Common;
+    using Ponant.Medical.Data.Shore;
+    using Ponant.Medical.Data.Shore.Models;
     using Ponant.Medical.Shore.Models;
     using System;
     using System.IO;
+    using System.Linq;
     using System.Net.Mail;
     using System.Security.Cryptography;
     using System.Text;
@@ -26,6 +29,7 @@
 
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private SendEmail _sendEmail;
 
         public ApplicationSignInManager SignInManager
         {
@@ -40,7 +44,9 @@
         }
 
         public AccountController()
-        { }
+        {
+            _sendEmail = new SendEmail(_shoreEntities);
+        }
 
         public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
@@ -62,24 +68,6 @@
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Login(LoginViewModel model, string returnUrl)
         {
-            //ApplicationUser usersssss = new ApplicationUser();
-            //ApplicationUser qsdqsd = new ApplicationUser();
-            //try
-            //{
-            //    usersssss = UserManager.FindByName("boueslati");
-            //}
-            //catch (Exception ex)
-            //{
-            //    Console.WriteLine(ex.Message);
-            //}
-            //string ttt = JsonConvert.SerializeObject(usersssss);
-
-            //string test = EncryptString(ttt);
-            //string test2 = EncryptString(ttt);
-            //string bilel = DecryptString(test);
-            //ApplicationUser aa = JsonConvert.DeserializeObject<ApplicationUser>(bilel);
-            //PopulateBody(aa.Email, test2);
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -318,92 +306,8 @@
             return RedirectToAction("Index", "Home");
         }
         #endregion
-        public static string EncryptString(string plainText)
-        {
-            string key = "b14ca5898a4e4133bbce2ea2315a1916";
-            byte[] iv = new byte[16];
-            byte[] array;
+        
 
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-
-                ICryptoTransform encryptor = aes.CreateEncryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream())
-                {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, encryptor, CryptoStreamMode.Write))
-                    {
-                        using (StreamWriter streamWriter = new StreamWriter((Stream)cryptoStream))
-                        {
-                            streamWriter.Write(plainText);
-                        }
-
-                        array = memoryStream.ToArray();
-                    }
-                }
-            }
-
-            return Convert.ToBase64String(array);
-        }
-
-        public static string DecryptString(string cipherText)
-        {
-            string key = "b14ca5898a4e4133bbce2ea2315a1916";
-            byte[] iv = new byte[16];
-            byte[] buffer = Convert.FromBase64String(cipherText);
-
-            using (Aes aes = Aes.Create())
-            {
-                aes.Key = Encoding.UTF8.GetBytes(key);
-                aes.IV = iv;
-                ICryptoTransform decryptor = aes.CreateDecryptor(aes.Key, aes.IV);
-
-                using (MemoryStream memoryStream = new MemoryStream(buffer))
-                {
-                    using (CryptoStream cryptoStream = new CryptoStream((Stream)memoryStream, decryptor, CryptoStreamMode.Read))
-                    {
-                        using (StreamReader streamReader = new StreamReader((Stream)cryptoStream))
-                        {
-                            return streamReader.ReadToEnd();
-                        }
-                    }
-                }
-            }
-        }
-        private void PopulateBody(string email, string token)
-        {
-            try
-            {
-                MailMessage mail = new MailMessage();
-                string body = string.Empty;
-                using (StreamReader reader = new StreamReader(Server.MapPath("~/Views/EmailTemplate/ConfirmQM.cshtml")))
-                {
-                    body = reader.ReadToEnd();
-                }
-                body = body.Replace("{UserName}", "Bilel");
-                body = body.Replace("{Title}", "Confirmation QM");
-                body = body.Replace("{Url}", token);
-                body = body.Replace("{Description}", "<p style='color: red;'>test test test test</p>");
-
-                mail.To.Add("bilelweslatisi@gmail.com");
-                mail.From = new MailAddress("boueslati-ext@ponant.com");
-                mail.Subject = "Subject";
-                mail.Body = body;
-                mail.IsBodyHtml = true;
-                SmtpClient smtp = new SmtpClient();
-                smtp.Host = "smtp.outlook.com";
-                smtp.Port = 587;
-                smtp.UseDefaultCredentials = false;
-                smtp.Credentials = new System.Net.NetworkCredential("boueslati-ext@ponant.com", "6azerty*");
-                smtp.EnableSsl = true;
-                smtp.Send(mail);
-            }catch(Exception ex)
-            {
-                Console.WriteLine(ex.Message);
-            }
-            
-        }
+        
     }
 }

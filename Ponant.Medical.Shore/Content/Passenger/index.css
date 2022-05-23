@@ -28,7 +28,7 @@
 }
 
 .favorableAdvice {
-    color: #7fb332;
+    background-color: #7fb332 !important;
 }
 
 .waitingAdvice {

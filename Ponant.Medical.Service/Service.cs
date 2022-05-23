@@ -54,10 +54,7 @@ namespace Ponant.Medical.Service
             survey = new Survey();
             mailService = new MailService();
 
-#if DEV
-            // On force le démarrage pour le test en appli console
-            OnStart(null);
-#endif
+
 
             // Wire up the UnhandledExcepetion event of the current AppDomain.  
             // This will fire any time an undandled exception is thrown
@@ -115,10 +112,6 @@ namespace Ponant.Medical.Service
             }
 
 
-#if DEV || INTEGRATION || RECETTE
-            // On force le démarrage du timer pour le test du service
-            Timer_Elapsed(null, null);
-#endif
         }
         #endregion
 

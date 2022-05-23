@@ -94,7 +94,7 @@ namespace Ponant.Medical.Common
         /// Insert a Log
         /// </summary>
         /// <param name="log"></param>
-        public void InsertLog(Log log)
+        public void InsertLog(LogLevel error, Log log)
         {
             _shoreEntities.Log.Add(log);
             _shoreEntities.SaveChanges();

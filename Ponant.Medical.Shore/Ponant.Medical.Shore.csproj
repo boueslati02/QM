@@ -239,6 +239,7 @@
     <Compile Include="Controllers\CriteriaController.cs" />
     <Compile Include="Controllers\CruiseAssignmentController.cs" />
     <Compile Include="Controllers\CruiseController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
     <Compile Include="Controllers\LanguageController.cs" />
     <Compile Include="Controllers\MedicalController.cs" />
     <Compile Include="Controllers\PassengerController.cs" />
@@ -271,6 +272,7 @@
     <Compile Include="Models\PassengerDocument.cs" />
     <Compile Include="Models\Reminder.cs" />
     <Compile Include="Models\Report.cs" />
+    <Compile Include="Models\SendEmail.cs" />
     <Compile Include="Models\Shared.cs" />
     <Compile Include="Models\SharedPassenger.cs" />
     <Compile Include="Models\Survey.cs" />
@@ -359,6 +361,7 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\images\ponant-navires-2.jpg" />
     <Content Include="Content\images\ui-icons_444444_256x240.png" />
     <Content Include="Content\images\ui-icons_555555_256x240.png" />
     <Content Include="Content\images\ui-icons_777620_256x240.png" />
@@ -457,6 +460,7 @@
     <Content Include="Resources\Mails\SendQmReceived.msg" />
     <None Include="Scripts\jquery-3.1.1.intellisense.js" />
     <Content Include="Scripts\Cruise\index.js" />
+    <Content Include="Scripts\Email\ConfirmQM.js" />
     <Content Include="Scripts\fileinput.js" />
     <Content Include="Scripts\fileinput.min.js" />
     <Content Include="Scripts\jquery-3.1.1.js" />
@@ -589,6 +593,8 @@
     <Content Include="Views\Report\QmTreatment.cshtml" />
     <Content Include="Views\CruiseAssignment\_Edit.cshtml" />
     <Content Include="Views\EmailTemplate\ConfirmQM.cshtml" />
+    <Content Include="Views\ConfirmQM\ConfirmQM.cshtml" />
+    <Content Include="Views\ConfirmQM\CruiseCanceled.cshtml" />
     <None Include="Web.Dev.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -675,7 +681,9 @@
       <CustomToolNamespace>Ponant.Medical.Shore.Resources</CustomToolNamespace>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Views\Email\" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
