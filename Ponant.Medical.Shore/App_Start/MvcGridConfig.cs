@@ -63,8 +63,6 @@
                         .WithHeaderText("Shore access");
                     cols.Add("Role")
                         .WithValueExpression(p => p.Role);
-                    cols.Add("Ship")
-                        .WithValueExpression(p => p.Ship);
                     cols.Add("LogoName")
                         .WithHtmlEncoding(false)
                         .WithValueExpression(p => p.LogoName.GetUserLogosLink(p.Id))
@@ -116,8 +114,6 @@
                         .WithHeaderText("Shore access");
                     cols.Add("Role")
                         .WithValueExpression(p => p.Role);
-                    cols.Add("Ship")
-                        .WithValueExpression(p => p.Ship);
                     cols.Add("LogoName")
                         .WithHtmlEncoding(false)
                         .WithValueExpression(p => p.LogoName.GetUserLogosLink(p.Id))
