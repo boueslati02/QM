@@ -58,8 +58,8 @@
                     cols.Add("Enabled")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(p => "text-center")
-                        .WithValueExpression(p => p.Enabled ? "enabled" : "disabled")
-                        .WithValueTemplate("<span class='circle {Value}' title='{Value}'></span>")
+                        .WithValueExpression(p => p.Enabled ? "Actif" : "Désactivé")
+                        .WithValueTemplate("{Value}")
                         .WithHeaderText("Shore access");
                     cols.Add("Role")
                         .WithValueExpression(p => p.Role);
@@ -109,8 +109,8 @@
                     cols.Add("Enabled")
                         .WithHtmlEncoding(false)
                         .WithCellCssClassExpression(p => "text-center")
-                        .WithValueExpression(p => p.Enabled ? "enabled" : "disabled")
-                        .WithValueTemplate("<span class='circle {Value}' title='{Value}'></span>")
+                        .WithValueExpression(p => p.Enabled ? "Actif" : "Désactivé")
+                        .WithValueTemplate("{Value}")
                         .WithHeaderText("Shore access");
                     cols.Add("Role")
                         .WithValueExpression(p => p.Role);
