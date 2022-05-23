@@ -148,5 +148,45 @@ namespace Ponant.Medical.Shore.Models
             
             
         }
+        public void SendConfirmMail(UserToken userToken)
+        {
+            try
+            {
+                MailMessage mail = new MailMessage();
+                string body = string.Empty;
+                Lov lov = _shoreEntities.Lov.Where(l => l.Name.Contains(userToken.Language)).FirstOrDefault();
+                string SujectText = "Confirm Medical Question";
+                body = "{FirstName} {LastName} <br> Thank you for confirming your cruise QM {CruiseNumber} <br> Sincerely.";
+                if (userToken.Language.ToUpper().Contains("FRANC"))
+                {
+                    SujectText = "Confirmation questionnaire médicale";
+                    body = "{FirstName} {LastName} <br> Merci d’avoir confirmé votre croisière QM {CruiseNumber} <br> Cordialement.";
+                }
+                else if (userToken.Language.ToUpper().Contains("ALLEMA"))
+                {
+                    SujectText = "Medizinische Frage bestätigen";
+                    body = "{FirstName} {LastName} <br> Vielen Dank für die Bestätigung Ihrer Kreuzfahrt QM {CruiseNumber} <br> Mit freundlichen Grüßen.";
+                }
+                body = body.Replace("{FirstName}", userToken.FirstName);
+                body = body.Replace("{LastName}", userToken.LastName);
+                body = body.Replace("{CruiseNumber}", userToken.CruiseNumber);
+                mail.To.Add(userToken.Email);
+                mail.From = new MailAddress("boueslati-ext@ponant.com");
+                mail.Subject = SujectText;
+                mail.Body = body;
+                mail.IsBodyHtml = true;
+                SmtpClient smtp = new SmtpClient();
+                smtp.Host = "smtp.outlook.com";
+                smtp.Port = 587;
+                smtp.UseDefaultCredentials = false;
+                smtp.Credentials = new System.Net.NetworkCredential("boueslati-ext@ponant.com", "6azerty*");
+                smtp.EnableSsl = true;
+                smtp.Send(mail);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
     }
 }

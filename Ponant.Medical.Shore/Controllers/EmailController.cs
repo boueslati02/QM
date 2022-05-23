@@ -65,8 +65,16 @@ namespace Ponant.Medical.Shore.Controllers
             string DecryptToken = _sendEmail.DecryptString(token);
             UserToken DescryptUser = JsonConvert.DeserializeObject<UserToken>(DecryptToken);
             Passenger passenger = _shoreEntities.Passenger.Where(p => p.Number.ToString() == DescryptUser.PassengerNo).FirstOrDefault();
-            _sendEmail.ValidQM(passenger.Id);
-            return Json(true);
+            if (_sendEmail.ValidQM(passenger.Id))
+            {
+                _sendEmail.SendConfirmMail(DescryptUser);
+                return Json(true);
+            }
+            else
+            {
+                return Json(false);
+            }
+            
         }
 
 
