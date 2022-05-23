@@ -144,6 +144,7 @@
     <Compile Include="Shore\Models\LovBoard.cs" />
     <Compile Include="Shore\Models\PassengerCruise.cs" />
     <Compile Include="Shore\Models\UserBoard.cs" />
+    <Compile Include="Shore\Models\UserToken.cs" />
     <Compile Include="Shore\Models\vPassengerBoard.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Shore\Passenger.cs">

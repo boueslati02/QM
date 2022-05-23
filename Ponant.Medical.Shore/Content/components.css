@@ -11,3 +11,27 @@
         .multiselect-container label:hover {
             color: white !important;
         }
+
+.CanceledCruise {
+    background-image: url("../Content/images/ponant-navires-2.jpg");
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+}
+.CanceledCruise p {
+    top: 40%;
+    position: relative;
+    font-size: 50px;
+    text-align: center;
+    color: white;
+    font-weight: 900;
+}
+#SuccessMessage{
+    display: inline-block;
+    margin: 30px auto;
+}

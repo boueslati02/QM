@@ -1,0 +1,31 @@
+﻿
+@{
+    ViewBag.Title = "ConfirmQM";
+}
+<div class="container">
+    <div class="row text-center">
+        @if (ViewBag.DescryptUser != null)
+        {
+            <b>@ViewBag.DescryptUser.FirstName @ViewBag.DescryptUser.LastName</b>
+            @Html.Raw(ViewBag.Language.TextFormatWebSite)
+        }
+
+        <form name="AcceptQM" id="AcceptQM" type="post">
+            <textarea class="hidden" name="Token">@ViewBag.Token</textarea>
+            <div class="form-check" style="margin-bottom: 20px" id="CheckBoxConfirmQM">
+                <input class="form-check-input" type="checkbox" name="ConfirmQM" id="flexCheckChecked">
+                <label class="form-check-label" for="flexCheckChecked">
+                    Accept
+                </label>
+            </div>
+            <a href="#" class="btn btn-success btn-lg" id="ConfirmQM" disabled>Confirm</a>
+        </form>
+        <div class="col-lg-12">
+            <div class="alert alert-success hidden" role="alert" id="SuccessMessage">
+                Thank you for your validation of the medical questionnaire
+            </div>
+        </div>
+    </div>
+</div>
+
+
