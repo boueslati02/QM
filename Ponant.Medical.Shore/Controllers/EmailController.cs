@@ -20,42 +20,47 @@ namespace Ponant.Medical.Shore.Controllers
         // GET: Email
         public ActionResult ValidQM()
         {
-            string token = HttpContext.Request.QueryString["token"];
-            string DecryptToken = _sendEmail.DecryptString(token);
-            UserToken DescryptUser = JsonConvert.DeserializeObject<UserToken>(DecryptToken);
-            Cruise cruise = _shoreEntities.Cruise.Find(6);
-            if(cruise == null)
+            try
             {
-                ViewBag.Message = "The cruise is cancelled";
-                return View("~/Views/ConfirmQM/CruiseCanceled.cshtml");
-            }else
-            {
-                int result = DateTime.Compare(cruise.SailingDate, DateTime.Now);
-                if (result < 0)
+                string token = HttpContext.Request.QueryString["token"];
+                string DecryptToken = _sendEmail.DecryptString(token);
+                UserToken DescryptUser = JsonConvert.DeserializeObject<UserToken>(DecryptToken);
+                Cruise cruise = _shoreEntities.Cruise.Find(6);
+                if (cruise == null)
                 {
-                    ViewBag.Message = "Cruise already passed";
+                    ViewBag.Message = "The cruise is cancelled";
                     return View("~/Views/ConfirmQM/CruiseCanceled.cshtml");
                 }
                 else
                 {
-                    Passenger passenger = _shoreEntities.Passenger.Where(p => p.Number.ToString() == DescryptUser.PassengerNo).FirstOrDefault();
-                    if (passenger.IdAdvice == 44)
+                    int result = DateTime.Compare(cruise.SailingDate, DateTime.Now);
+                    if (result < 0)
                     {
-                        ViewBag.Message = "You have already validated your medical questionnaire";
+                        ViewBag.Message = "Cruise already passed";
                         return View("~/Views/ConfirmQM/CruiseCanceled.cshtml");
                     }
                     else
                     {
-                        ViewBag.Token = token.Replace(" ", "+");
-                        ViewBag.DescryptUser = DescryptUser;
-                        ViewBag.Language = _shoreEntities.Language.Where(l => l.Id == 46).FirstOrDefault();
-                        return View("~/Views/ConfirmQM/ConfirmQM.cshtml");
+                        Passenger passenger = _shoreEntities.Passenger.Where(p => p.Number.ToString() == DescryptUser.PassengerNo).FirstOrDefault();
+                        if (passenger.IdAdvice == 44)
+                        {
+                            ViewBag.Message = "You have already validated your medical questionnaire";
+                            return View("~/Views/ConfirmQM/CruiseCanceled.cshtml");
+                        }
+                        else
+                        {
+                            ViewBag.Token = token.Replace(" ", "+");
+                            ViewBag.DescryptUser = DescryptUser;
+                            ViewBag.Language = _shoreEntities.Language.Where(l => l.Id == 46).FirstOrDefault();
+                            return View("~/Views/ConfirmQM/ConfirmQM.cshtml");
+                        }
                     }
                 }
-            }
-            
-            
-            
+            }catch(Exception ex)
+            {
+                ViewBag.Message = "We are experiencing a service outage regarding . Our team is currently working on restoring the service. We apologize for any inconvenience";
+                return View("~/Views/ConfirmQM/CruiseCanceled.cshtml");
+            }            
         }
         [HttpPost]
         public JsonResult ChangeStatusPassager()
