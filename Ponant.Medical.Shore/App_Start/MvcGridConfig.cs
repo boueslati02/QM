@@ -1432,10 +1432,6 @@
                 bool userAutorize = HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_IT_ADMINISTRATOR) || HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_BOOKING_ADMINISTRATOR)
                  || HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_DOCTOR) || HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_MEDICAL) || HttpContext.Current.User.IsInRole(Constants.ROLE_NAME_MEDICAL_ADMINISTRATOR);
 
-                if (userAutorize)
-                {
-                    result += "<a class='action glyphicon glyphicon glyphicon-lock' href='/Cruise/Unlock/{0}' title='Unlock this cruise' onclick='return confirm(\"Are you sure you want to unlock this cruise ?\")'></a>";
-                }
             }
             result = string.Format(result, idCruise);
             return result;
