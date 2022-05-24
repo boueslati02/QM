@@ -42,6 +42,7 @@ namespace Ponant.Medical.Shore.Controllers
         [HttpGet]
         public ActionResult _Create()
         {
+            ViewBag.Cruises = _shoreEntities.Cruise.ToList();
             return PartialView(new CreateAgencyAccessRightViewModel());
         }
 
@@ -121,7 +122,7 @@ namespace Ponant.Medical.Shore.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-
+            ViewBag.Cruises = _shoreEntities.Cruise.ToList();
             EditAgencyAccessRightViewModel model = _agencyAccessRightClass.GetAgencyAccessRight(id.Value);
             return PartialView(model);
         }
