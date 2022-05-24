@@ -35,3 +35,7 @@
     display: inline-block;
     margin: 30px auto;
 }
+.select2-container {
+    width: 100% !important;
+    max-width: 280px;
+}
